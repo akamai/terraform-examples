@@ -1,0 +1,15 @@
+{
+  "name": "PATCH",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "allowPatch",
+      "options": {
+        "enabled": false
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Allow use of the PATCH HTTP request method."
+}

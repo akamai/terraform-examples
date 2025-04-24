@@ -1,0 +1,6 @@
+ruleName,matchURL,useRelativeUrl,redirectURL,statusCode
+/test,/test,relative_url,/test2,301
+test2,/test2,,https://www.google.com,302
+another rule,/testtesttesttest,relative_url,/test3,301
+another rule2,/testtesttesttest2,relative_url,/test4,301
+

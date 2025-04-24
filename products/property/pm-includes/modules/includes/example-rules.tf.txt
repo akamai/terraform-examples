@@ -1,0 +1,41 @@
+resource "akamai_cp_code" "cp_code" {
+  name        = var.include_name
+  contract_id = var.contract_id
+  group_id    = var.group_id
+  product_id  = var.product_id
+}
+
+data "akamai_property_rules_builder" "test_include_rule_default" {
+  rules_v2024_08_13 {
+    name      = "default"
+    is_secure = false
+    behavior {
+      origin {
+        cache_key_hostname               = "ORIGIN_HOSTNAME"
+        compress                         = true
+        custom_valid_cn_values           = ["{{Origin Hostname}}", "{{Forward Host Header}}", ]
+        enable_true_client_ip            = true
+        forward_host_header              = "ORIGIN_HOSTNAME"
+        hostname                         = "origin.example.org"
+        http_port                        = 80
+        https_port                       = 443
+        origin_certificate               = ""
+        origin_certs_to_honor            = "STANDARD_CERTIFICATE_AUTHORITIES"
+        origin_sni                       = true
+        origin_type                      = "CUSTOMER"
+        ports                            = ""
+        standard_certificate_authorities = ["akamai-permissive", ]
+        true_client_ip_client_setting    = false
+        true_client_ip_header            = "True-Client-IP"
+        verification_mode                = "CUSTOM"
+      }
+    }
+    behavior {
+      cp_code {
+        value {
+          id = akamai_cp_code.cp_code.id
+        }
+      }
+    }
+  }
+}

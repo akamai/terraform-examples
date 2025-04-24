@@ -1,0 +1,15 @@
+{
+  "name": "Script management",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "scriptManagement",
+      "options": {
+        "enabled": false
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Enable Script Management to minimize performance and availability impacts from third-party JavaScripts."
+}

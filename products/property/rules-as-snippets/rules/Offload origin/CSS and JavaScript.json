@@ -1,0 +1,29 @@
+{
+  "name": "CSS and JavaScript",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "caching",
+      "options": {
+        "behavior": "MAX_AGE",
+        "mustRevalidate": false,
+        "ttl": "7d"
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "name": "fileExtension",
+      "options": {
+        "matchCaseSensitive": false,
+        "matchOperator": "IS_ONE_OF",
+        "values": [
+          "css",
+          "js"
+        ]
+      }
+    }
+  ],
+  "criteriaMustSatisfy": "any",
+  "comments": "Override the default caching behavior for CSS and JavaScript"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "HSTS",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "httpStrictTransportSecurity",
+      "options": {
+        "enable": false
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Require all browsers to connect to your site using HTTPS."
+}

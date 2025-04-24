@@ -1,0 +1,46 @@
+{
+  "name": "HTML pages",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "caching",
+      "options": {
+        "behavior": "NO_STORE"
+      }
+    },
+    {
+      "name": "cacheKeyQueryParams",
+      "options": {
+        "behavior": "IGNORE",
+        "exactMatch": true,
+        "parameters": [
+          "gclid",
+          "fbclid",
+          "utm_source",
+          "utm_campaign",
+          "utm_medium",
+          "utm_content"
+        ]
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "name": "fileExtension",
+      "options": {
+        "matchCaseSensitive": false,
+        "matchOperator": "IS_ONE_OF",
+        "values": [
+          "html",
+          "htm",
+          "php",
+          "jsp",
+          "aspx",
+          "EMPTY_STRING"
+        ]
+      }
+    }
+  ],
+  "criteriaMustSatisfy": "all",
+  "comments": "Override the default caching behavior for HTML pages cached on edge servers."
+}

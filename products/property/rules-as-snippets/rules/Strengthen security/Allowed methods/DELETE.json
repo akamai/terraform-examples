@@ -1,0 +1,15 @@
+{
+  "name": "DELETE",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "allowDelete",
+      "options": {
+        "enabled": false
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Allow use of the DELETE HTTP request method."
+}

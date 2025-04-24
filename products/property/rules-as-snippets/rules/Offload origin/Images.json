@@ -1,0 +1,36 @@
+{
+  "name": "Images",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "caching",
+      "options": {
+        "behavior": "MAX_AGE",
+        "mustRevalidate": false,
+        "ttl": "30d"
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "name": "fileExtension",
+      "options": {
+        "matchCaseSensitive": false,
+        "matchOperator": "IS_ONE_OF",
+        "values": [
+          "jpg",
+          "jpeg",
+          "png",
+          "gif",
+          "webp",
+          "jp2",
+          "ico",
+          "svg",
+          "svgz"
+        ]
+      }
+    }
+  ],
+  "criteriaMustSatisfy": "any",
+  "comments": "Override the default caching behavior for images."
+}

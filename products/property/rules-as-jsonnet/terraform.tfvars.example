@@ -1,0 +1,9 @@
+group_id       = 123456
+contract_id    = "1-2AB34C"
+property_name  = "myproperty"
+hostname       = "www.example.com"
+default_origin = "origin.example.com"
+config_section = "default"
+email          = "mail@example.com"
+activate_latest_on_production = false
+activate_latest_on_staging = true

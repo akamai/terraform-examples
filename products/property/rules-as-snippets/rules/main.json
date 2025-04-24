@@ -1,0 +1,55 @@
+{
+  "rules": {
+    "name": "default",
+    "children": [
+      "#include:Augment insights.json",
+      "#include:Accelerate delivery.json",
+      "#include:Offload origin.json",
+      "#include:Strengthen security.json",
+      "#include:Increase availability.json",
+      "#include:Minimize payload.json"
+    ],
+    "behaviors": [
+      {
+        "name": "origin",
+        "options": {
+          "cacheKeyHostname": "REQUEST_HOST_HEADER",
+          "compress": true,
+          "enableTrueClientIp": true,
+          "forwardHostHeader": "ORIGIN_HOSTNAME",
+          "hostname": "${env.default_origin}",
+          "httpPort": 80,
+          "httpsPort": 443,
+          "ipVersion": "IPV4",
+          "originCertificate": "",
+          "originSni": true,
+          "originType": "CUSTOMER",
+          "ports": "",
+          "trueClientIpClientSetting": false,
+          "trueClientIpHeader": "True-Client-IP",
+          "verificationMode": "PLATFORM_SETTINGS",
+          "minTlsVersion": "DYNAMIC",
+          "tlsVersionTitle": ""
+        }
+      },
+      {
+        "name": "http3",
+        "options": {
+          "enable": true
+        }
+      },
+      {
+        "name": "autoDomainValidation",
+        "options": {
+          "autodv": ""
+        }
+      }
+    ],
+    "uuid": "default",
+    "options": {
+      "is_secure": false
+    },
+    "comments": "The Default Rule template contains all the necessary and recommended behaviors. Rules are evaluated from top to bottom and the last matching rule wins.",
+    "variables": "#include:pmVariables.json"
+  }
+}

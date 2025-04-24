@@ -1,0 +1,39 @@
+{
+  "name": "Obfuscate backend info",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "modifyOutgoingResponseHeader",
+      "options": {
+        "action": "DELETE",
+        "customHeaderName": "X-Powered-By",
+        "standardDeleteHeaderName": "OTHER"
+      }
+    },
+    {
+      "name": "modifyOutgoingResponseHeader",
+      "options": {
+        "action": "DELETE",
+        "customHeaderName": "Server",
+        "standardDeleteHeaderName": "OTHER"
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "name": "requestHeader",
+      "options": {
+        "headerName": "X-Akamai-Debug",
+        "matchCaseSensitiveValue": true,
+        "matchOperator": "IS_NOT_ONE_OF",
+        "matchWildcardName": false,
+        "matchWildcardValue": false,
+        "values": [
+          "true"
+        ]
+      }
+    }
+  ],
+  "criteriaMustSatisfy": "all",
+  "comments": "Do not expose back-end information unless the request contains an additional secret header. Regularly change the criteria to use a specific unique value for the secret header."
+}

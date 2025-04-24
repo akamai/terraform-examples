@@ -1,0 +1,27 @@
+{
+  "name": "GraphQL",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "graphqlCaching",
+      "options": {
+        "enabled": false
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "name": "path",
+      "options": {
+        "matchCaseSensitive": false,
+        "matchOperator": "MATCHES_ONE_OF",
+        "normalize": false,
+        "values": [
+          "/graphql"
+        ]
+      }
+    }
+  ],
+  "criteriaMustSatisfy": "all",
+  "comments": "Define when your GraphQL queries should be cached."
+}

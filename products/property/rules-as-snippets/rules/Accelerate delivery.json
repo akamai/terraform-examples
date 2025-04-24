@@ -1,0 +1,13 @@
+{
+  "name": "Accelerate delivery",
+  "children": [
+    "#include:Accelerate delivery/Origin connectivity.json",
+    "#include:Accelerate delivery/Protocol optimizations.json",
+    "#include:Accelerate delivery/Prefetching.json",
+    "#include:Accelerate delivery/Adaptive acceleration.json"
+  ],
+  "behaviors": [],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Control the settings related to improving the performance of delivering objects to your users."
+}

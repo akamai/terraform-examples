@@ -1,0 +1,23 @@
+{
+  "name": "Uncacheable objects",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "downstreamCache",
+      "options": {
+        "behavior": "BUST"
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "name": "cacheability",
+      "options": {
+        "matchOperator": "IS_NOT",
+        "value": "CACHEABLE"
+      }
+    }
+  ],
+  "criteriaMustSatisfy": "all",
+  "comments": "Configure the default client caching behavior for uncacheable content at the edge."
+}

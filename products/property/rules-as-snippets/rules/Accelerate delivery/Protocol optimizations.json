@@ -1,0 +1,40 @@
+{
+  "name": "Protocol optimizations",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "enhancedAkamaiProtocol",
+      "options": {
+        "display": ""
+      }
+    },
+    {
+      "name": "http2",
+      "options": {
+        "enabled": ""
+      }
+    },
+    {
+      "name": "allowTransferEncoding",
+      "options": {
+        "enabled": true
+      }
+    },
+    {
+      "name": "sureRoute",
+      "options": {
+        "enableCustomKey": false,
+        "enabled": true,
+        "forceSslForward": false,
+        "raceStatTtl": "30m",
+        "srDownloadLinkTitle": "",
+        "testObjectUrl": "/akamai/testobject.html",
+        "toHostStatus": "INCOMING_HH",
+        "type": "PERFORMANCE"
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Serve your website using modern and fast protocols."
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Augment insights",
+  "children": [
+    "#include:Augment insights/Traffic reporting.json",
+    "#include:Augment insights/mPulse RUM.json",
+    "#include:Augment insights/Geolocation.json",
+    "#include:Augment insights/Log delivery.json"
+  ],
+  "behaviors": [],
+  "uuid": "6daec901-1d12-4716-92ca-66391d6f02cc",
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Control the settings related to monitoring and reporting. This gives you additional visibility into your traffic and audiences."
+}

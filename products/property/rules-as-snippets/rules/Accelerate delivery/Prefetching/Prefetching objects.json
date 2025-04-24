@@ -1,0 +1,17 @@
+{
+  "name": "Prefetching objects",
+  "children": [
+    "#include:Accelerate delivery/Prefetching/Prefetching objects/Bots.json"
+  ],
+  "behaviors": [
+    {
+      "name": "prefetch",
+      "options": {
+        "enabled": true
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Define for which HTML pages prefetching should be enabled."
+}

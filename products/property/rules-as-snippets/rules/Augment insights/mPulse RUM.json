@@ -1,0 +1,21 @@
+{
+  "name": "mPulse RUM",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "mPulse",
+      "options": {
+        "apiKey": "",
+        "bufferSize": "",
+        "configOverride": "",
+        "enabled": true,
+        "loaderVersion": "V12",
+        "requirePci": false,
+        "titleOptional": ""
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Collect and analyze real-user data to monitor the performance of your website."
+}

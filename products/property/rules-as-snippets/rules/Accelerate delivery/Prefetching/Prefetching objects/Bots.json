@@ -1,0 +1,29 @@
+{
+  "name": "Bots",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "prefetch",
+      "options": {
+        "enabled": false
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "name": "userAgent",
+      "options": {
+        "matchCaseSensitive": false,
+        "matchOperator": "IS_ONE_OF",
+        "matchWildcard": true,
+        "values": [
+          "*bot*",
+          "*crawl*",
+          "*spider*"
+        ]
+      }
+    }
+  ],
+  "criteriaMustSatisfy": "all",
+  "comments": "Disable prefetching for specific clients identifying themselves as bots and crawlers. This avoids requesting unnecessary resources from the origin."
+}

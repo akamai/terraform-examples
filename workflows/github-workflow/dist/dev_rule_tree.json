@@ -1,0 +1,189 @@
+{
+  "name": "default",
+  "children": [
+    {
+      "name": "Redirect to HTTPS",
+      "children": [],
+      "behaviors": [
+        {
+          "name": "redirect",
+          "options": {
+            "destinationHostname": "SAME_AS_REQUEST",
+            "destinationPath": "SAME_AS_REQUEST",
+            "destinationProtocol": "HTTPS",
+            "mobileDefaultChoice": "DEFAULT",
+            "queryString": "APPEND",
+            "responseCode": 301
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "name": "requestProtocol",
+          "options": {
+            "value": "HTTP"
+          }
+        }
+      ],
+      "criteriaMustSatisfy": "all",
+      "comments": "Redirect to the same URL on HTTPS protocol, issuing a 301 response code (Moved Permanently). You may change the response code to 302 if needed."
+    },
+    {
+      "name": "Completely Static Content",
+      "children": [],
+      "behaviors": [
+        {
+          "name": "caching",
+          "options": {
+            "behavior": "MAX_AGE",
+            "mustRevalidate": false,
+            "ttl": "100d"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "name": "fileExtension",
+          "options": {
+            "matchCaseSensitive": false,
+            "matchOperator": "IS_ONE_OF",
+            "values": [
+              "css",
+              "gif",
+              "jpg",
+              "js",
+              "png",
+              "pict",
+              "tif",
+              "tiff",
+              "mid",
+              "midi",
+              "ttf",
+              "eot",
+              "woff",
+              "woff2",
+              "otf",
+              "svg",
+              "svgz",
+              "webp",
+              "jxr",
+              "class",
+              "jar",
+              "jp2"
+            ]
+          }
+        },
+        {
+          "name": "path",
+          "options": {
+            "matchCaseSensitive": false,
+            "matchOperator": "MATCHES_ONE_OF",
+            "normalize": false,
+            "values": [
+              "/examplepath/*"
+            ]
+          }
+        },
+        {
+          "name": "path",
+          "options": {
+            "matchCaseSensitive": false,
+            "matchOperator": "DOES_NOT_MATCH_ONE_OF",
+            "normalize": false,
+            "values": [
+              "/examplepath/exception/*"
+            ]
+          }
+        }
+      ],
+      "criteriaMustSatisfy": "any"
+    }
+  ],
+  "behaviors": [
+    {
+      "name": "originCharacteristics",
+      "options": {
+        "accessKeyEncryptedStorage": true,
+        "authenticationMethod": "AWS",
+        "authenticationMethodTitle": "",
+        "awsAccessKeyVersionGuid": "17fc866f-188f-11ef-8e7c-6904be4f8763",
+        "awsHost": "",
+        "awsRegion": "eu-central-1",
+        "awsService": "s3",
+        "country": "GLOBAL_MULTI_GEO",
+        "originLocationTitle": ""
+      }
+    },
+    {
+      "name": "contentCharacteristicsDD",
+      "options": {
+        "catalogSize": "MEDIUM",
+        "contentType": "SOFTWARE",
+        "objectSize": "LESS_THAN_1MB",
+        "optimizeOption": false,
+        "popularityDistribution": "ALL_POPULAR"
+      }
+    },
+    {
+      "name": "clientCharacteristics",
+      "options": {
+        "country": "GLOBAL"
+      }
+    },
+    {
+      "name": "origin",
+      "options": {
+        "cacheKeyHostname": "ORIGIN_HOSTNAME",
+        "compress": true,
+        "enableTrueClientIp": true,
+        "forwardHostHeader": "REQUEST_HOST_HEADER",
+        "hostname": "dev-origin.github-workflow.tf-demo.com",
+        "httpPort": 80,
+        "httpsPort": 443,
+        "ipVersion": "IPV4",
+        "minTlsVersion": "DYNAMIC",
+        "originCertificate": "",
+        "originSni": true,
+        "originType": "CUSTOMER",
+        "ports": "",
+        "tls13Support": false,
+        "tlsVersionTitle": "",
+        "trueClientIpClientSetting": false,
+        "trueClientIpHeader": "True-Client-IP",
+        "verificationMode": "PLATFORM_SETTINGS"
+      }
+    },
+    {
+      "name": "cpCode",
+      "options": {
+        "value": {
+          "description": "Download Delivery Demo CP Code",
+          "id": 1642452,
+          "name": "Download Delivery Demo CP Code",
+          "products": [
+            "prd_Download_Delivery"
+          ]
+        }
+      }
+    },
+    {
+      "name": "cacheKeyQueryParams",
+      "options": {
+        "behavior": "IGNORE_ALL"
+      }
+    },
+    {
+      "name": "dynamicThroughtputOptimization",
+      "options": {
+        "enabled": true
+      }
+    },
+    {
+      "name": "http3",
+      "options": {
+        "enable": true
+      }
+    }
+  ],
+  "options": {}
+}

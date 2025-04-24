@@ -1,0 +1,35 @@
+{
+  "additionalMatchOptions": [
+    {
+      "positiveMatch": false,
+      "type": "NetworkListCondition",
+      "values": [
+        "${nl}"
+      ]
+    },
+    {
+      "positiveMatch": false,
+      "type": "RequestMethodCondition",
+      "values": [
+        "POST"
+      ]
+    }
+  ],
+  "averageThreshold": 12,
+  "burstThreshold": 18,
+  "burstWindow": 5,
+  "clientIdentifier": "ip",
+  "createDate": "2023-02-13T23:36:16Z",
+  "description": "Identify requests forwarded to origin. This allows visibility in the origin traffic and catches requests that should be cached but are not (e.g. due to delivery misconfiguration).",
+  "id": 224316,
+  "matchType": "path",
+  "name": "Forward Requests",
+  "pathMatchType": "Custom",
+  "pathUriPositiveMatch": true,
+  "requestType": "ForwardRequest",
+  "sameActionOnIpv6": true,
+  "type": "WAF",
+  "updateDate": "2023-02-13T23:36:16Z",
+  "useXForwardForHeaders": false,
+  "used": false
+}

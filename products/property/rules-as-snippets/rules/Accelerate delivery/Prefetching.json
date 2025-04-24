@@ -1,0 +1,11 @@
+{
+  "name": "Prefetching",
+  "children": [
+    "#include:Accelerate delivery/Prefetching/Prefetching objects.json",
+    "#include:Accelerate delivery/Prefetching/Prefetchable objects.json"
+  ],
+  "behaviors": [],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Instruct edge servers to retrieve embedded resources before the browser requests them."
+}

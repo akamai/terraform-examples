@@ -1,0 +1,22 @@
+{
+  "name": "Site failover",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "failAction",
+      "options": {
+        "enabled": false
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "name": "originTimeout",
+      "options": {
+        "matchOperator": "ORIGIN_TIMED_OUT"
+      }
+    }
+  ],
+  "criteriaMustSatisfy": "any",
+  "comments": "Specify how edge servers respond when the origin is not available."
+}

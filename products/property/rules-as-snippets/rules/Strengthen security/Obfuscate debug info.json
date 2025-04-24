@@ -1,0 +1,15 @@
+{
+  "name": "Obfuscate debug info",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "cacheTagVisible",
+      "options": {
+        "behavior": "PRAGMA_HEADER"
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Do not expose back-end information unless the request contains the Pragma debug header."
+}

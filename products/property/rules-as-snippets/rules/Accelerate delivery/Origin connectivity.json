@@ -1,0 +1,29 @@
+{
+  "name": "Origin connectivity",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "dnsAsyncRefresh",
+      "options": {
+        "enabled": true,
+        "timeout": "1h"
+      }
+    },
+    {
+      "name": "timeout",
+      "options": {
+        "value": "5s"
+      }
+    },
+    {
+      "name": "readTimeout",
+      "options": {
+        "value": "120s",
+        "firstByteTimeout": "120s"
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Optimize the connection between edge and origin."
+}

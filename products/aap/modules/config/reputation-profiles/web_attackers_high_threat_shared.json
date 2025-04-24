@@ -1,0 +1,8 @@
+{
+  "context": "WEBATCK",
+  "contextReadable": "Web Attackers",
+  "enabled": true,
+  "name": "Web Attackers (High Threat) - Shared",
+  "sharedIpHandling": "SHARED_ONLY",
+  "threshold": 9
+}

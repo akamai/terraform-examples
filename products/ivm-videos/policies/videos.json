@@ -1,0 +1,11 @@
+{
+    "video": true,
+    "breakpoints": {
+        "widths": [
+            854,
+            1280,
+            1920
+        ]
+    },
+    "output": {}
+  }

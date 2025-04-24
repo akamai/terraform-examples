@@ -1,0 +1,8 @@
+{
+  "context": "DOSATCK",
+  "contextReadable": "DoS Attackers",
+  "enabled": true,
+  "name": "DoS Attackers (High Threat) - Shared",
+  "sharedIpHandling": "SHARED_ONLY",
+  "threshold": 9
+}

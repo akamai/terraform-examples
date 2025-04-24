@@ -1,0 +1,3 @@
+# Multi Pipeline Example
+
+This directory shows how you can re-use the same code across multiple environments. Each environment directory contains precisely the same code, except for the .tfvars file. This allows you to make changes to the module source code (which could be a folder inside your repo, or another Git repo entirely), then deploy through your environments by using `terraform plan` and `terraform apply` in each directory in sequence (most likely within a CI/CD pipeline).

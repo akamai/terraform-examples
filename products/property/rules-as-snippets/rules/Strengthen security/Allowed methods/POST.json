@@ -1,0 +1,16 @@
+{
+  "name": "POST",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "allowPost",
+      "options": {
+        "allowWithoutContentLength": false,
+        "enabled": true
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Allow use of the POST HTTP request method."
+}

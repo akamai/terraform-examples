@@ -1,0 +1,36 @@
+{
+  "name": "Simulate failover",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "breakConnection",
+      "options": {
+        "enabled": true
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "name": "contentDeliveryNetwork",
+      "options": {
+        "matchOperator": "IS",
+        "network": "STAGING"
+      }
+    },
+    {
+      "name": "requestHeader",
+      "options": {
+        "headerName": "breakconnection",
+        "matchCaseSensitiveValue": true,
+        "matchOperator": "IS_ONE_OF",
+        "matchWildcardName": false,
+        "matchWildcardValue": false,
+        "values": [
+          "Your-Secret-Here"
+        ]
+      }
+    }
+  ],
+  "criteriaMustSatisfy": "all",
+  "comments": "Simulate an origin connection problem and test the site failover configuration on the CDN staging network."
+}

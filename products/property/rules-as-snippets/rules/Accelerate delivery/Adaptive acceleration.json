@@ -1,0 +1,8 @@
+{
+  "name": "Adaptive acceleration",
+  "children": [],
+  "behaviors": [],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Automatically and continuously apply performance optimizations to your website using machine learning."
+}

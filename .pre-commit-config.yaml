@@ -1,0 +1,65 @@
+repos:
+  - repo: local
+    hooks:
+      - id: copy-terraform-docs-config
+        name: Copy terraform-docs config to module folders
+        entry: >
+          pwsh -NoProfile -Command "
+          Get-ChildItem -Recurse -Include *.tf |
+            Select-Object -ExpandProperty Directory |
+            Sort-Object -Unique |
+            Where-Object {
+              $_ -notmatch '^\.$' -and
+              $_ -notmatch '/tools/' -and
+              $_ -notmatch '/snippets/'
+            } |
+            ForEach-Object {
+              Copy-Item -Path ./.terraform-docs.yaml -Destination (Join-Path $_ '.terraform-docs.yaml') -Force
+            }
+          "
+        language: system
+        pass_filenames: false
+
+      - id: terraform-docs
+        name: Generate Terraform docs
+        entry: >
+          pwsh -NoProfile -Command "
+          Get-ChildItem -Recurse -Include *.tf |
+            Select-Object -ExpandProperty Directory |
+            Sort-Object -Unique |
+            Where-Object {
+              $_ -notmatch '/tools/' -and
+              $_ -notmatch '/snippets/'
+            } |
+            ForEach-Object {
+              & terraform-docs $_
+            }
+          "
+        language: system
+        pass_filenames: false
+
+      - id: generate-specific-terraform-docs
+        name: Generate Terraform docs for specific modules
+        entry: >
+          pwsh -NoProfile -Command "
+          $paths = @(
+            './products/client-lists/example',
+            './products/certificates/domain-validation/example',
+            './products/certificates/third-party/example',
+            './products/cloudlets/edge-redirector-csv/example',
+            './products/property/hostname-buckets/example',
+            './products/property/saas-provider/example'
+          );
+          foreach ($path in $paths) {
+            $configPath = Join-Path (Split-Path $path -Parent) '.terraform-docs.yaml';
+            & terraform-docs --output-file=../README.md --config=$configPath $path;
+          }
+          "
+        language: system
+        pass_filenames: false
+
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: "v1.98.1"
+    hooks:
+      - id: terraform_fmt
+        args: [--args=-write=true]

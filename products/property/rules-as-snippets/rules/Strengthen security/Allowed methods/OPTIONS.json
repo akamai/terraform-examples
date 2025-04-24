@@ -1,0 +1,15 @@
+{
+  "name": "OPTIONS",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "allowOptions",
+      "options": {
+        "enabled": true
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Allow use of the OPTIONS HTTP request method."
+}

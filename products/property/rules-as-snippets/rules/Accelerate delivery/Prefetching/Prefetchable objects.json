@@ -1,0 +1,40 @@
+{
+  "name": "Prefetchable objects",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "prefetchable",
+      "options": {
+        "enabled": true
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "name": "fileExtension",
+      "options": {
+        "matchCaseSensitive": false,
+        "matchOperator": "IS_ONE_OF",
+        "values": [
+          "css",
+          "js",
+          "jpg",
+          "jpeg",
+          "jp2",
+          "png",
+          "gif",
+          "svg",
+          "svgz",
+          "webp",
+          "eot",
+          "woff",
+          "woff2",
+          "otf",
+          "ttf"
+        ]
+      }
+    }
+  ],
+  "criteriaMustSatisfy": "all",
+  "comments": "Define which resources should be prefetched."
+}

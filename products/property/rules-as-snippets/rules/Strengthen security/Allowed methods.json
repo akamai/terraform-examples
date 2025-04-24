@@ -1,0 +1,21 @@
+{
+  "name": "Allowed methods",
+  "children": [
+    "#include:Strengthen security/Allowed methods/POST.json",
+    "#include:Strengthen security/Allowed methods/OPTIONS.json",
+    "#include:Strengthen security/Allowed methods/PUT.json",
+    "#include:Strengthen security/Allowed methods/DELETE.json",
+    "#include:Strengthen security/Allowed methods/PATCH.json"
+  ],
+  "behaviors": [
+    {
+      "name": "allHttpInCacheHierarchy",
+      "options": {
+        "enabled": true
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Allow the use of HTTP methods. Consider enabling additional methods under a path match for increased origin security."
+}

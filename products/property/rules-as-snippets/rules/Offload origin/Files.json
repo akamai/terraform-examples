@@ -1,0 +1,31 @@
+{
+  "name": "Files",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "caching",
+      "options": {
+        "behavior": "MAX_AGE",
+        "mustRevalidate": false,
+        "ttl": "7d"
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "name": "fileExtension",
+      "options": {
+        "matchCaseSensitive": false,
+        "matchOperator": "IS_ONE_OF",
+        "values": [
+          "pdf",
+          "doc",
+          "docx",
+          "odt"
+        ]
+      }
+    }
+  ],
+  "criteriaMustSatisfy": "any",
+  "comments": "Override the default caching behavior for files. Files containing Personal Identified Information (PII) should require Edge authentication or not be cached at all."
+}

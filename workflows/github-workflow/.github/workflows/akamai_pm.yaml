@@ -1,0 +1,87 @@
+name: Akamai Property Manager
+on: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment: dev, qa, prod. Default is dev'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+        - dev
+        - qa
+        - prod 
+    push: 
+      branches:
+        - main
+      paths:
+        - '$BASE_DIR/rules.tf'
+
+env:
+  TF_VAR_akamai_client_secret: "${{ secrets.AKAMAI_CREDENTIAL_CLIENT_SECRET }}"
+  TF_VAR_akamai_host: "${{ secrets.AKAMAI_CREDENTIAL_HOST }}"
+  TF_VAR_akamai_access_token: "${{ secrets.AKAMAI_CREDENTIAL_ACCESS_TOKEN }}"
+  TF_VAR_akamai_client_token: "${{ secrets.AKAMAI_CREDENTIAL_CLIENT_TOKEN }}"
+  TF_VAR_akamai_account_key: "${{ secrets.AKAMAI_ACCOUNT_KEY}}"
+  TF_VAR_version_notes: "${{ github.repository }} run #${{ github.run_number }} Commit ${{ github.sha }}"
+  ENV: ${{ inputs.environment }}
+  BASE_DIR: "./workflows/github-workflow"
+
+jobs:
+  tf-property-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Install Python requirements
+      - name: Install Python Dependencies
+        uses: py-actions/py-dependency-install@v4
+        with:
+          path: "${{ env.BASE_DIR }}/scripts/requirements.txt"
+
+      # Get any values required by TF. For example key ID stored in Akamai Cloud Access Manager
+      - name: Get CAM key GUID
+        run: |
+          ls -l
+          export CAM_KEY_ID=$(grep 'cam_key_id' $BASE_DIR/environments/$ENV.tfvars | awk -F'"' '{print $2}')
+          # Get the latest active in production CAM key GUID. 
+          cat environments/$ENV.tfvars
+          echo -e "\n$(python3 $BASE_DIR/scripts/ak_get_cam_key_guid.py $CAM_KEY_ID)" >> $BASE_DIR/environments/$ENV.tfvars
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.0
+      - name: Add Linode S3 Backend for Terraform
+        run: |
+          cat << EOF > $BASE_DIR/backend
+          skip_credentials_validation=true
+          skip_region_validation=true
+          skip_requesting_account_id=true
+          skip_s3_checksum=true
+          bucket="${{ secrets.LINODE_OBJECT_STORAGE_BUCKET }}"
+          key="$ENV-terraform.tfstate"
+          region="us-mia-1"
+          endpoints={ s3 = "https://us-mia-1.linodeobjects.com" }
+          access_key="${{ secrets.LINODE_OBJECT_STORAGE_ACCESS_KEY }}"
+          secret_key="${{ secrets.LINODE_OBJECT_STORAGE_SECRET_KEY }}"
+          EOF
+      - name: Terraform Init
+        run: terraform init -backend-config=$BASE_DIR/backend
+      # The import step is optional and used only once to import existing resources to TF. 
+      # - name: Terraform Import
+      #   run: sh import.sh $ENV
+      - name: Terraform Validate 
+        run: terraform -chdir=$BASE_DIR validate -no-color
+      - name: Terraform Apply Changes 
+        run: |
+          terraform -chdir=$BASE_DIR plan -var-file=./environments/$ENV.tfvars -out=tfplan  
+          terraform -chdir=$BASE_DIR show -json tfplan > $BASE_DIR/tfplan.json
+      - name: Terraform Apply Changes 
+        run: terraform -chdir=$BASE_DIR apply -var-file=./environments/$ENV.tfvars -auto-approve
+      - name: Store Rule Tree as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Rule-Tree
+          path: tfplan.json

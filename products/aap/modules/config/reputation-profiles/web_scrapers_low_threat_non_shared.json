@@ -1,0 +1,8 @@
+{
+  "context": "WEBSCRP",
+  "contextReadable": "Web Scrapers",
+  "enabled": true,
+  "name": "Web Scrapers (Low Threat) - Non-shared",
+  "sharedIpHandling": "NON_SHARED",
+  "threshold": 5
+}

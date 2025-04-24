@@ -1,0 +1,15 @@
+{
+  "name": "PUT",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "allowPut",
+      "options": {
+        "enabled": false
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Allow use of the PUT HTTP request method."
+}

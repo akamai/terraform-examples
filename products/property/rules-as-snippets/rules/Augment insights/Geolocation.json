@@ -1,0 +1,23 @@
+{
+  "name": "Geolocation",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "edgeScape",
+      "options": {
+        "enabled": false
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "name": "requestType",
+      "options": {
+        "matchOperator": "IS",
+        "value": "CLIENT_REQ"
+      }
+    }
+  ],
+  "criteriaMustSatisfy": "all",
+  "comments": "Receive data about a user's geolocation and connection speed in a request header. If you change cached content based on the values of the X-Akamai-Edgescape request header, contact your account representative."
+}

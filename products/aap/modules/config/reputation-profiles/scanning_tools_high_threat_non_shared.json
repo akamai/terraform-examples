@@ -1,0 +1,8 @@
+{
+  "context": "SCANTL",
+  "contextReadable": "Scanning Tools",
+  "enabled": true,
+  "name": "Scanning Tools (High Threat) - Non-shared",
+  "sharedIpHandling": "NON_SHARED",
+  "threshold": 9
+}

@@ -1,0 +1,15 @@
+{
+    "video": false,
+    "breakpoints": {
+        "widths": [
+            720,
+            1080,
+            1366,
+            1920,
+            5000
+        ]
+    },
+    "output": {
+        "perceptualQuality": "mediumHigh"
+    }
+}

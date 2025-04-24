@@ -1,0 +1,7 @@
+group_id       = "123456"
+contract_id    = "1-2AB34C"
+default_origin = "origin.example.com"
+project_name   = "prod"
+hostname       = "www.example.com"
+notes          = "Terraform environment: Prod"
+email          = "devteam@example.com"

@@ -1,0 +1,15 @@
+{
+  "name": "POST responses",
+  "children": [],
+  "behaviors": [
+    {
+      "name": "cachePost",
+      "options": {
+        "enabled": false
+      }
+    }
+  ],
+  "criteria": [],
+  "criteriaMustSatisfy": "all",
+  "comments": "Define when HTTP POST requests should be cached. You should enable it under a criteria match."
+}
