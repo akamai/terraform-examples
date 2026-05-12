@@ -1,0 +1,98 @@
+<!-- BEGIN_TF_DOCS -->
+
+# API Definitions Example (OpenAPI)
+
+This example creates and activates an Akamai API definition by converting an
+OpenAPI 3.0 specification into the Akamai API descriptor format automatically.
+It covers the full lifecycle from definition creation through activation on
+both the Staging and Production networks.
+
+## Workflow
+
+1. `akamai_group` data source resolves the contract and group IDs required by
+   all subsequent resources.
+2. `akamai_apidefinitions_openapi` data source reads `petstore-3.0.yml` and
+   converts it into the JSON payload expected by the Akamai API Definitions
+   API. This conversion happens at plan time with no external API calls.
+3. `akamai_apidefinitions_api` creates the API definition using the converted
+   payload from the data source. Any update to the OpenAPI spec file triggers
+   a new API version.
+4. `akamai_apidefinitions_activation` activates the latest version on
+   **STAGING** and **PRODUCTION** independently, so each network can be
+   managed and rolled back separately.
+
+## OpenAPI Specification File
+
+The API is described in `petstore-3.0.yml`. Any valid OpenAPI 3.0 document
+can be used here. For an alternative that uploads a raw Akamai API JSON
+descriptor directly, see the companion `api/` example which uses
+`akamai_apidefinitions_api` with a hand-crafted `api.json` file.
+
+## ⚠️ ID Prefix Stripping
+
+The Akamai provider returns `contract_id` and `group_id` values prefixed with
+`ctr_` and `grp_` respectively. The `trimprefix()` calls remove these prefixes
+before passing the values to `akamai_apidefinitions_api`, which expects bare
+numeric IDs.
+
+# Usage
+Basic usage of this module is as follows:
+
+```hcl
+module "example" {
+  	 source  = "<module-location>"
+  
+	 # Required variables
+  	 akamai_access_token  = <string>
+  	 akamai_client_secret  = <string>
+  	 akamai_client_token  = <string>
+  	 akamai_host  = <string>
+  
+	 # Optional variables
+  	 akamai_account_key  = <string> | default: ""
+}
+ ```
+
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | >= 9.0.0 |
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [akamai_apidefinitions_activation.api_activation_production](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/apidefinitions_activation) | resource |
+| [akamai_apidefinitions_activation.api_activation_staging](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/apidefinitions_activation) | resource |
+| [akamai_apidefinitions_api.api](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/apidefinitions_api) | resource |
+| [akamai_apidefinitions_openapi.petstore](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/apidefinitions_openapi) | data source |
+| [akamai_group.group](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/group) | data source |
+
+## Modules
+
+No modules.
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_akamai_access_token"></a> [akamai\_access\_token](#input\_akamai\_access\_token) | Akamai access token | `string` | n/a | yes |
+| <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
+| <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
+| <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
+| <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
+
+## Outputs
+
+No outputs.
+
+## Resources
+- [Akamai API Credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials)
+- [Akamai Terraform Provider](https://techdocs.akamai.com/terraform/docs)
+- [Akamai CLI for Terraform](https://github.com/akamai/cli-terraform)
+- [Linode Object Storage](https://www.linode.com/lp/object-storage/)
+- [Akamai Developer Youtube Channel](https://www.youtube.com/c/AkamaiDeveloper)
+- [Akamai Github](https://github.com/akamai)
+<!-- END_TF_DOCS -->

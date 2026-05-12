@@ -1,8 +1,10 @@
-# This example presents a sample workflow for configuring a property that enforces the mTLS Truststore behavior.
-#
-# Before applying this example, make changes to the attribute values according to your needs.
-#
-# A successful operation creates an edge hostname, CP code, and property with the mTLS Truststore behavior enabled, and activates that property on `STAGING` and `PRODUCTION` environments.
+/** This example presents a sample workflow for configuring a property that enforces the mTLS Truststore behavior.
+ *
+ * Before applying this example, make changes to the attribute values according to your needs.
+ *
+ * A successful operation creates an edge hostname, CP code, and property with the mTLS Truststore behavior enabled, and activates that property on `STAGING` and `PRODUCTION` environments.
+*/
+
 
 resource "akamai_edge_hostname" "aka_edgehost" {
   depends_on    = [akamai_cps_third_party_enrollment.enrollment]

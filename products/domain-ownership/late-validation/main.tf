@@ -1,36 +1,40 @@
 /**
-* # Domain Ownership Manager Late Validation Example
-*
-* This module manages an Akamai property with multiple hostnames and automates the
-* DNS-based Domain Ownership Validation required for **DEFAULT DV (Secure by Default)**
-* certificate provisioning.
-*
-* ## Workflow
-*
-* Everything can be applied in a **single `terraform apply`** run. Terraform's
-* dependency graph ensures the correct order of operations:
-*
-* 1. `akamai_property` is created and the `cert_status` ACME challenge data is
-*    populated automatically by the Akamai provider.
-* 2. `akamai_dns_record` CNAME records are created for each `DEFAULT` hostname
-*    using the challenge values from `cert_status`.
-* 3. `akamai_property_domainownership_late_validation` signals Akamai that the
-*    DNS records are in place, gating activation until validation passes.
-* 4. `akamai_property_activation` proceeds once validation is complete.
-*
-* ## ⚠️ Domain Ownership Validation
-*
-* For any hostname using `cert_provisioning_type = "DEFAULT"`, Akamai requires a
-* DNS CNAME record to prove domain ownership before issuing the certificate.
-* The required records are derived from the `cert_status` attribute on the
-* `akamai_property` resource and created automatically via `akamai_dns_record`.
-*
-* The `akamai_property_domainownership_late_validation` resource **must complete
-* successfully before activation**, as it blocks activation until all DEFAULT
-* hostnames are validated. It depends on the DNS records being resolvable by
-* Akamai's validation infrastructure.
-*
+ * # Domain Ownership Manager Late Validation Example
+ *
+ * This module manages an Akamai property with multiple hostnames and automates the
+ * DNS-based Domain Ownership Validation required for **DEFAULT DV (Secure by Default)**
+ * certificate provisioning.
+ *
+ * ## Workflow
+ *
+ * Everything can be applied in a **single `terraform apply`** run. Terraform's
+ * dependency graph ensures the correct order of operations:
+ *
+ * 1. `akamai_property` is created and the `cert_status` ACME challenge data is
+ *    populated automatically by the Akamai provider.
+ * 2. `akamai_dns_record` CNAME records are created for each `DEFAULT` hostname
+ *    using the challenge values from `cert_status`.
+ * 3. `akamai_property_domainownership_late_validation` signals Akamai that the
+ *    DNS records are in place, gating activation until validation passes.
+ * 4. `akamai_property_activation` proceeds once validation is complete.
+ *
+ * ## ⚠️ Domain Ownership Validation
+ *
+ * For any hostname using `cert_provisioning_type = "DEFAULT"`, Akamai requires a
+ * DNS CNAME record to prove domain ownership before issuing the certificate.
+ * The required records are derived from the `cert_status` attribute on the
+ * `akamai_property` resource and created automatically via `akamai_dns_record`.
+ *
+ * The `akamai_property_domainownership_late_validation` resource **must complete
+ * successfully before activation**, as it blocks activation until all DEFAULT
+ * hostnames are validated. It depends on the DNS records being resolvable by
+ * Akamai's validation infrastructure.
+ *
+ * A subsequent `terraform apply --refresh-only` may be needed to update the state of the 
+ * `akamai_property` resource with the latest `cert_status` after validation completes. 
+ * This step only reconciles state and does not trigger any changes to infrastructure.
 */
+
 
 # ===========================================================================
 # Property Resource
@@ -49,6 +53,8 @@ resource "akamai_property" "this" {
       cert_provisioning_type = hostnames.value.cert_provisioning_type
     }
   }
+  rule_format = data.akamai_property_rules_builder.rule_default.rule_format
+  rules       = data.akamai_property_rules_builder.rule_default.json
 }
 
 # ===========================================================================
@@ -85,8 +91,16 @@ resource "akamai_dns_record" "cert_validation" {
   target     = [local.ca_validation_records[each.value].challenge_target]
 }
 
+
 # Wait for Akamai to see the ACME CNAME records and validate all hostnames
 # before attempting activation.
+resource "time_sleep" "wait" {
+  count = var.enable_cert_validation ? 1 : 0
+
+  create_duration = "300s"
+  depends_on      = [akamai_dns_record.cert_validation]
+}
+
 resource "akamai_property_domainownership_late_validation" "this" {
   count = var.enable_cert_validation ? 1 : 0
 
@@ -96,14 +110,15 @@ resource "akamai_property_domainownership_late_validation" "this" {
   version           = akamai_property.this.latest_version
   validation_method = "DNS_CNAME"
 
-  depends_on = [akamai_dns_record.cert_validation]
+  depends_on = [time_sleep.wait]
 }
 
-# NOTE: Be careful when removing this resource as you can disable traffic
 resource "akamai_property_activation" "activation" {
   property_id                    = akamai_property.this.id
   contact                        = var.contact
   version                        = akamai_property.this.latest_version
   network                        = var.activation_network
   auto_acknowledge_rule_warnings = true
+
+  depends_on = [akamai_property_domainownership_late_validation.this]
 }

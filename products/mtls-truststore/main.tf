@@ -1,30 +1,15 @@
-# This example presents a sample workflow for creating an mTLS Truststore CA set with a self-signed certificate and activating it on `STAGING` and `PRODUCTION` environments. 
-#
-# Before applying this example, make changes to the attribute values according to your needs.
-#
-# A successful operation creates a self-signed certificate and a CA set and activates that CA set on `STAGING` and `PRODUCTION` environments.
-#
-# Activated CA Set ID can be used in the `akamai_cps_third_party_enrollment` resource to enable client mutual authentication,
-# together with property rules and the `enforce_mtls_settings` behavior in the `akamai_property_rules_builder` data source.
+/**
+ * ## mTLS Truststore CA Set Workflow Example
+ * This example presents a sample workflow for creating an mTLS Truststore CA set with a self-signed certificate and activating it on `STAGING` and `PRODUCTION` environments. 
+ *
+ * Before applying this example, make changes to the attribute values according to your needs.
+ *
+ * A successful operation creates a self-signed certificate and a CA set and activates that CA set on `STAGING` and `PRODUCTION` environments.
+ *
+ * Activated CA Set ID can be used in the `akamai_cps_third_party_enrollment` resource to enable client mutual authentication,
+ * together with property rules and the `enforce_mtls_settings` behavior in the `akamai_property_rules_builder` data source.
+*/
 
-terraform {
-  required_providers {
-    akamai = {
-      source  = "akamai/akamai"
-      version = ">= 9.0.0"
-    }
-    tls = {
-      source  = "hashicorp/tls"
-      version = "~> 4.0"
-    }
-  }
-  required_version = ">= 1.0"
-}
-
-provider "akamai" {
-  edgerc         = "~/.edgerc"
-  config_section = "default"
-}
 
 resource "tls_private_key" "example_key" {
   algorithm = "RSA"

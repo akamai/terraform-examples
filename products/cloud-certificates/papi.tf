@@ -1,8 +1,11 @@
-# This example presents a sample workflow for configuring a property that uses a Cloud Certificate Manager (CCM) integration.
-#
-# Before applying this example, make changes to the attribute values according to your needs.
-#
-# A successful operation creates a property with a hostname bound to the cloud certificate, and activates that property on the `STAGING` and `PRODUCTION` environments.
+/**
+ * This example presents a sample workflow for configuring a property that uses a Cloud Certificate Manager (CCM) integration.
+ *
+ * Before applying this example, make changes to the attribute values according to your needs.
+ *
+ * A successful operation creates a property with a hostname bound to the cloud certificate, and activates that property on the `STAGING` and `PRODUCTION` environments.
+*/
+
 
 data "akamai_property_rules_template" "rules" {
   template_file = abspath("${path.module}/property-snippets/main.json")
@@ -21,8 +24,8 @@ resource "akamai_property" "test" {
       rsa_cert_id = akamai_cloudcertificates_upload_signed_certificate.upload.certificate_id
     }
   }
-  rule_format = "v2025-07-07"
-  rules       = data.akamai_property_rules_template.rules.json
+  rule_format = data.akamai_property_rules_builder.rule_default.rule_format
+  rules       = data.akamai_property_rules_template.rule_default.json
 }
 
 resource "akamai_property_activation" "test-staging" {

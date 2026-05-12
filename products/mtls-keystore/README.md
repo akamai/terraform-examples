@@ -1,4 +1,4 @@
-# Examples
+# Akamai mTLS KeyStore Examples
 
 This directory contains basic mTLS Keystore examples, including `AKAMAI` and `THIRD-PARTY` client certificates integration workflows. 
 The resources used in these examples are available to all users. 

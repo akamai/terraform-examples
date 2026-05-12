@@ -1,37 +1,23 @@
-# This example presents a sample workflow for a `THIRD-PARTY` client certificate. It creates a basic third-party client certificate using a self-signed certificate, along with
-# a CP code, edge hostname, property, and rules that use the `mtls_origin_keystore` behavior to enforce the mTLS Keystore configuration.
-# Then, the property is activated on the `PRODUCTION` environment.
-#
-# To run this example:
-#
-# 1. Specify the path to your `.edgerc` file and the section header for the set of credentials to use.
-#
-# The defaults here expect the `.edgerc` at your home directory and use the credentials under the heading of `default`.
-#
-# 2. Make changes to the attribute values according to your needs.
-#
-# 3. Open a Terminal or shell instance and initialize the provider with `terraform init`. Then, run `terraform plan` to preview the changes and `terraform apply` to apply your changes.
-#
-# A successful operation creates a third-party client certificate, CP code, edge hostname, property, rules, and property activation.
+/**
+ * # mTLS Keystore with Third-Party Client Certificate Example
+ * 
+ * This example presents a sample workflow for a `THIRD-PARTY` client certificate. It creates a basic third-party client certificate using a self-signed certificate, along with
+ * a CP code, edge hostname, property, and rules that use the `mtls_origin_keystore` behavior to enforce the mTLS Keystore configuration.
+ * Then, the property is activated on the `PRODUCTION` environment.
+ *
+ * To run this example:
+ *
+ * 1. Specify the path to your `.edgerc` file and the section header for the set of credentials to use.
+ *
+ * The defaults here expect the `.edgerc` at your home directory and use the credentials under the heading of `default`.
+ *
+ * 2. Make changes to the attribute values according to your needs.
+ *
+ * 3. Open a Terminal or shell instance and initialize the provider with `terraform init`. Then, run `terraform plan` to preview the changes and `terraform apply` to apply your changes.
+ *
+ * A successful operation creates a third-party client certificate, CP code, edge hostname, property, rules, and property activation.
+*/
 
-terraform {
-  required_providers {
-    akamai = {
-      source  = "akamai/akamai"
-      version = ">= 8.1.0"
-    }
-    tls = {
-      source  = "hashicorp/tls"
-      version = "4.1"
-    }
-  }
-  required_version = ">= 1.0"
-}
-
-provider "akamai" {
-  edgerc         = "~/.edgerc"
-  config_section = "default"
-}
 
 resource "akamai_mtlskeystore_client_certificate_third_party" "third_party_cert" {
   certificate_name    = "Certificate Name"

@@ -1,30 +1,16 @@
-# This example presents a sample CCM workflow that includes creating a self-signed cloud certificate and uploading it.
-# Optionally, provide a PEM-encoded trust chain when uploading the signed certificate.
-#
-# Before applying this example, make changes to the attribute values according to your needs.
-#
-# This workflow generates a self-signed certificate, provisions a cloud certificate, and uploads the signed certificate.
-#
-# Use the certificate ID from the `akamai_cloudcertificates_upload_signed_certificate` resource to bind the signed certificate with the hostname in the `akamai_property` resource.
+/**
+ * # Cloud Certificates
+ *
+ * This example presents a sample CCM workflow that includes creating a self-signed cloud certificate and uploading it.
+ * Optionally, provide a PEM-encoded trust chain when uploading the signed certificate.
+ *
+ * Before applying this example, make changes to the attribute values according to your needs.
+ *
+ * This workflow generates a self-signed certificate, provisions a cloud certificate, and uploads the signed certificate.
+ *
+ * Use the certificate ID from the `akamai_cloudcertificates_upload_signed_certificate` resource to bind the signed certificate with the hostname in the `akamai_property` resource.
+*/
 
-terraform {
-  required_providers {
-    akamai = {
-      source  = "akamai/akamai"
-      version = ">= 9.2.0"
-    }
-    tls = {
-      source  = "hashicorp/tls"
-      version = "~> 4.0"
-    }
-  }
-  required_version = ">= 1.0"
-}
-
-provider "akamai" {
-  edgerc         = "~/.edgerc"
-  config_section = "default"
-}
 
 resource "akamai_cloudcertificates_certificate" "test" {
   base_name      = "example-base-name"

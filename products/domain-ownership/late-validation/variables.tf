@@ -1,11 +1,11 @@
 variable "contract_id" {
   type    = string
-  default = "ctr_1-1NC95D"
+  default = "ctr_1-5C13O8"
 }
 
 variable "group_id" {
   type    = string
-  default = "grp_71960"
+  default = "grp_315963"
 }
 
 variable "property_name" {
@@ -13,14 +13,14 @@ variable "property_name" {
 }
 
 variable "product_id" {
-  type = string
+  type    = string
   default = "prd_Fresca"
 }
 
 variable "contact" {
   type        = list(string)
   description = "List of email addresses to notify on property activation."
-  default = [ "noreply@akamai.com" ]
+  default     = ["noreply@akamai.com"]
 }
 
 variable "hostnames" {

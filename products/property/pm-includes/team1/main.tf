@@ -14,20 +14,20 @@
 
 locals {
   include_name = "new-include"
-  contacts      = ["user@example.org"]
-  contract_id   = "ctr_1-1NC95D"
-  group_id      = "grp_91533"
-  product_id = "prd_Fresca"
+  contacts     = ["user@example.org"]
+  contract_id  = "ctr_1-1NC95D"
+  group_id     = "grp_91533"
+  product_id   = "prd_Fresca"
 }
 
 module "include" {
-  source      = "../modules/includes"
-  contract_id = local.contract_id
-  group_id    = local.group_id
-  contacts    = local.contacts
-  include_name   = local.include_name
-  rule_format = data.akamai_property_rules_builder.test_include_rule_default.rule_format
-  rules       = data.akamai_property_rules_builder.test_include_rule_default.json
+  source       = "../modules/includes"
+  contract_id  = local.contract_id
+  group_id     = local.group_id
+  contacts     = local.contacts
+  include_name = local.include_name
+  rule_format  = data.akamai_property_rules_builder.test_include_rule_default.rule_format
+  rules        = data.akamai_property_rules_builder.test_include_rule_default.json
 }
 
 # It's important to output the include id

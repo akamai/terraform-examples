@@ -1,9 +1,9 @@
 variable "contract_id" {
-  type    = string
+  type = string
 }
 
 variable "group_id" {
-  type    = string
+  type = string
 }
 
 variable "contacts" {

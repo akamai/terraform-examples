@@ -1,22 +1,25 @@
-# This example presents a sample workflow for a third-party enrollment
-# with client mutual authentication enabled by referring to the activated CA set.
-# It fetches the certificate signing request (CSR) for this enrollment, uses a self-signed certificate to sign it, 
-# and then uploads the signed certificate with the `akamai_cps_upload_certificate` resource.
-#
-# Before applying this example, make changes to the attribute values according to your needs.
-# 
-# Make sure to use the activated CA set ID from the `akamai_mtlstruststore_ca_set_activation` resource via the `set_id` attribute, 
-# inside the `network_configuration.client_mutual_authentication` block.
-#
-# A successful operation:
-# - Creates a third-party enrollment and fetches its certificate signing request (CSR).
-# - Uses the `tls_self_signed_cert` and `tls_locally_signed_cert` resources to generate a self-signed certificate and sign the CSR.
-# - Uploads the signed certificate to the CPS with the `akamai_cps_upload_certificate` resource.
-# - Deploys the certificate to the `STAGING` and `PRODUCTION` environments.
-#
-# To seamlessly remove this configuration, you must remove this resource before the `akamai_mtlstruststore_ca_set_activation` resource.
-# If you are referring to the `PRODUCTION` activation resource, you can add the `depends_on` block to ensure the correct order of resource destruction,
-# making sure that the `STAGING` activation is also removed after the enrollment resource removal.
+/**
+ * This example presents a sample workflow for a third-party enrollment
+ * with client mutual authentication enabled by referring to the activated CA set.
+ * It fetches the certificate signing request (CSR) for this enrollment, uses a self-signed certificate to sign it, 
+ * and then uploads the signed certificate with the `akamai_cps_upload_certificate` resource.
+ *
+ * Before applying this example, make changes to the attribute values according to your needs.
+ * 
+ * Make sure to use the activated CA set ID from the `akamai_mtlstruststore_ca_set_activation` resource via the `set_id` attribute, 
+ * inside the `network_configuration.client_mutual_authentication` block.
+ *
+ * A successful operation:
+ * - Creates a third-party enrollment and fetches its certificate signing request (CSR).
+ * - Uses the `tls_self_signed_cert` and `tls_locally_signed_cert` resources to generate a self-signed certificate and sign the CSR.
+ * - Uploads the signed certificate to the CPS with the `akamai_cps_upload_certificate` resource.
+ * - Deploys the certificate to the `STAGING` and `PRODUCTION` environments.
+ *
+ * To seamlessly remove this configuration, you must remove this resource before the `akamai_mtlstruststore_ca_set_activation` resource.
+ * If you are referring to the `PRODUCTION` activation resource, you can add the `depends_on` block to ensure the correct order of resource destruction,
+ * making sure that the `STAGING` activation is also removed after the enrollment resource removal.
+*/
+
 
 resource "akamai_cps_third_party_enrollment" "enrollment" {
   depends_on                            = [akamai_mtlstruststore_ca_set_activation.ca_set_activation_staging]

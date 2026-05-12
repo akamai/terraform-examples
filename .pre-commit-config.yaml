@@ -1,6 +1,11 @@
 repos:
   - repo: local
     hooks:
+      # Hook 1: Seed every .tf-containing folder (except tools/ and snippets/) with the root
+      # .terraform-docs.yaml as the default config. Flat examples (e.g. datastream/, edgedns/)
+      # rely on this copy since they don't have their own config. Parent-level directories for
+      # the modules+example pattern (e.g. products/client-lists/) are NOT affected here because
+      # they contain no .tf files themselves, so their custom .terraform-docs.yaml is preserved.
       - id: copy-terraform-docs-config
         name: Copy terraform-docs config to module folders
         entry: >
@@ -20,6 +25,13 @@ repos:
         language: system
         pass_filenames: false
 
+      # Hook 2: Run terraform-docs in every .tf-containing directory (except tools/ and snippets/).
+      # Covers two cases:
+      #   - Flat examples (e.g. datastream/, edgedns/): all .tf files in one directory; uses the
+      #     default config copied by Hook 1 and generates a README with auto-listed variables.
+      #   - Subdirectories of the modules+example pattern (e.g. client-lists/modules/,
+      #     client-lists/example/): docs are generated here too, but the authoritative parent
+      #     README for these products is produced by Hook 3.
       - id: terraform-docs
         name: Generate Terraform docs
         entry: >
@@ -38,6 +50,14 @@ repos:
         language: system
         pass_filenames: false
 
+      # Hook 3: Handle examples that follow a modules/ + example/ folder pattern.
+      # For each listed path (always an example/ subdirectory), terraform-docs is invoked with:
+      #   --config  -> the parent directory's custom .terraform-docs.yaml, which pulls the doc
+      #                header from modules/main.tf and embeds the example code via include.
+      #   --output-file=../README.md -> writes the result to the parent directory's README,
+      #                not into the example/ folder itself.
+      # To add a new modules+example product, append its example/ path to the $paths array
+      # and ensure the parent directory has a custom .terraform-docs.yaml.
       - id: generate-specific-terraform-docs
         name: Generate Terraform docs for specific modules
         entry: >

@@ -1,12 +1,15 @@
-# This example presents a sample workflow for building property rules with the mTLS Truststore behavior enabled.
-#
-# Before applying this example, make changes to the attribute values according to your needs.
-# To configure base settings for mTLS Truststore, use the `enforce_mtls_settings` behavior and the `request_header` criterion.
-# For more custom settings, add additional features to your rules, including the `client_certificate` criterion, and the `client_certificate_auth` and `log_custom` behaviors.
-#
-# A successful operation creates property rules with the mTLS Truststore behavior enabled.
-#
-# You can use the created rules to enforce mTLS Truststore settings on the property.
+/**
+ * This example presents a sample workflow for building property rules with the mTLS Truststore behavior enabled.
+ *
+ * Before applying this example, make changes to the attribute values according to your needs.
+ * To configure base settings for mTLS Truststore, use the `enforce_mtls_settings` behavior and the `request_header` criterion.
+ * For more custom settings, add additional features to your rules, including the `client_certificate` criterion, and the `client_certificate_auth` and `log_custom` behaviors.
+ *
+ * A successful operation creates property rules with the mTLS Truststore behavior enabled.
+ *
+ * You can use the created rules to enforce mTLS Truststore settings on the property.
+*/
+
 
 data "akamai_property_rules_builder" "full_mtls_workflow_rule_default" {
   rules_v2024_02_12 {

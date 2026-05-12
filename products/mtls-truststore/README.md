@@ -1,4 +1,4 @@
-# Examples
+# Akamai mTLS Truststore Example
 
 This directory contains a basic mTLS Truststore workflow, including setting up CPS and PAPI integrations. The resources used in these examples are available to all users. 
 However, if any of the write examples do not work for you, contact your account administrator about your privilege level.
@@ -19,7 +19,97 @@ Each example file contains calls to the Certificate Provisioning System (CPS) su
 
 | Asset                                   | Description                                                                                                                                                                                                                                                                                                                                 |
 |--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [mTLS Truststore](./mtls.tf)               | Creates a self-signed certificate used to create and activate a CA set on `STAGING` and `PRODUCTION` environments.                                                                                                                                                                                                                              |
+| [mTLS Truststore](./main.tf)               | Creates a self-signed certificate used to create and activate a CA set on `STAGING` and `PRODUCTION` environments.                                                                                                                                                                                                                              |
 | [CPS](./cps.tf)                            | Creates a third-party enrollment with `client_mutual_authentication` enabled, referencing the activated CA set and fetching its CSRs. After self-signing the selected certificate signing request (CSR), it uses the `akamai_cps_upload_certificate` resource to deploy the signed certificate.      |
 | [Rules](./rules.tf)                        | Creates property rules with the `enforce_mtls_settings` behavior, referring to the activated CA set.                                                                                                                                                                                                                                        |
 | [PAPI](./papi.tf)                          | Creates an edge hostname, CP code, and property, and activates that property on `STAGING` and `PRODUCTION` environments, enforcing the mTLS Truststore configuration.                                                                                                                                                                                                    |
+
+<!-- BEGIN_TF_DOCS -->
+
+## mTLS Truststore CA Set Workflow Example
+This example presents a sample workflow for creating an mTLS Truststore CA set with a self-signed certificate and activating it on `STAGING` and `PRODUCTION` environments.
+
+Before applying this example, make changes to the attribute values according to your needs.
+
+A successful operation creates a self-signed certificate and a CA set and activates that CA set on `STAGING` and `PRODUCTION` environments.
+
+Activated CA Set ID can be used in the `akamai_cps_third_party_enrollment` resource to enable client mutual authentication,
+together with property rules and the `enforce_mtls_settings` behavior in the `akamai_property_rules_builder` data source.
+
+# Usage
+Basic usage of this module is as follows:
+
+```hcl
+module "example" {
+  	 source  = "<module-location>"
+  
+	 # Required variables
+  	 akamai_access_token  = <string>
+  	 akamai_client_secret  = <string>
+  	 akamai_client_token  = <string>
+  	 akamai_host  = <string>
+  
+	 # Optional variables
+  	 akamai_account_key  = <string> | default: ""
+}
+ ```
+
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | >= 9.0.0 |
+| <a name="requirement_tls"></a> [tls](#requirement\_tls) | ~> 4.0 |
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [akamai_cp_code.cp_code](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/cp_code) | resource |
+| [akamai_cps_third_party_enrollment.enrollment](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/cps_third_party_enrollment) | resource |
+| [akamai_cps_upload_certificate.upload_cert](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/cps_upload_certificate) | resource |
+| [akamai_edge_hostname.aka_edgehost](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/edge_hostname) | resource |
+| [akamai_mtlstruststore_ca_set.test_ca_set](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/mtlstruststore_ca_set) | resource |
+| [akamai_mtlstruststore_ca_set_activation.ca_set_activation_production](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/mtlstruststore_ca_set_activation) | resource |
+| [akamai_mtlstruststore_ca_set_activation.ca_set_activation_staging](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/mtlstruststore_ca_set_activation) | resource |
+| [akamai_property.property](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/property) | resource |
+| [akamai_property_activation.property_activate_production](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/property_activation) | resource |
+| [akamai_property_activation.property_activate_staging](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/property_activation) | resource |
+| [tls_locally_signed_cert.signed_certificate](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/locally_signed_cert) | resource |
+| [tls_private_key.cps_key](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
+| [tls_private_key.example_key](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
+| [tls_self_signed_cert.ca_certificate](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert) | resource |
+| [tls_self_signed_cert.cps_certificate](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert) | resource |
+| [akamai_cps_csr.cps_csr](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/cps_csr) | data source |
+| [akamai_mtlstruststore_ca_set.ca_set](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/mtlstruststore_ca_set) | data source |
+| [akamai_property_rules_builder.full_mtls_workflow_rule_default](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/property_rules_builder) | data source |
+| [akamai_property_rules_builder.full_mtls_workflow_rule_m_tls_settings_enforcement_base](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/property_rules_builder) | data source |
+| [akamai_property_rules_builder.full_mtls_workflow_rule_m_tls_settings_enforcement_custom](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/property_rules_builder) | data source |
+
+## Modules
+
+No modules.
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_akamai_access_token"></a> [akamai\_access\_token](#input\_akamai\_access\_token) | Akamai access token | `string` | n/a | yes |
+| <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
+| <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
+| <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
+| <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
+
+## Outputs
+
+No outputs.
+
+## Resources
+- [Akamai API Credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials)
+- [Akamai Terraform Provider](https://techdocs.akamai.com/terraform/docs)
+- [Akamai CLI for Terraform](https://github.com/akamai/cli-terraform)
+- [Linode Object Storage](https://www.linode.com/lp/object-storage/)
+- [Akamai Developer Youtube Channel](https://www.youtube.com/c/AkamaiDeveloper)
+- [Akamai Github](https://github.com/akamai)
+<!-- END_TF_DOCS -->
