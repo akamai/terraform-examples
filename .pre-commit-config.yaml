@@ -15,8 +15,8 @@ repos:
             Sort-Object -Unique |
             Where-Object {
               $_ -notmatch '^\.$' -and
-              $_ -notmatch '/tools/' -and
-              $_ -notmatch '/snippets/'
+              $_ -notmatch '/tools(/|$)' -and
+              $_ -notmatch '/snippets(/|$)'
             } |
             ForEach-Object {
               Copy-Item -Path ./.terraform-docs.yaml -Destination (Join-Path $_ '.terraform-docs.yaml') -Force
@@ -40,8 +40,8 @@ repos:
             Select-Object -ExpandProperty Directory |
             Sort-Object -Unique |
             Where-Object {
-              $_ -notmatch '/tools/' -and
-              $_ -notmatch '/snippets/'
+              $_ -notmatch '/tools(/|$)' -and
+              $_ -notmatch '/snippets(/|$)'
             } |
             ForEach-Object {
               & terraform-docs $_
