@@ -16,14 +16,13 @@ module "example" {
   	 akamai_client_token  = <string>
   	 akamai_host  = <string>
   	 contract_id  = <string>
-  	 group_id  = <string>
+  	 enhanced_tls  = <bool>
   	 hostname  = <string>
   
 	 # Optional variables
   	 akamai_account_key  = <string> | default: ""
-  	 enhanced_tls  = <bool> | default: false
-  	 ip_behavior  = <string> | default: "IPV6_COMPLIANCE"
-  	 product_id  = <string> | default: "Fresca"
+  	 config_section  = <string> | default: "default"
+  	 edgerc_path  = <string> | default: "~/.edgerc"
 }
  ```
 
@@ -32,7 +31,7 @@ module "example" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 7.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
@@ -53,13 +52,12 @@ No modules.
 | <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
 | <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
 | <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
-| <a name="input_contract_id"></a> [contract\_id](#input\_contract\_id) | Contract ID for property/config creation | `string` | n/a | yes |
-| <a name="input_group_id"></a> [group\_id](#input\_group\_id) | Group ID for property/config creation | `string` | n/a | yes |
-| <a name="input_hostname"></a> [hostname](#input\_hostname) | Hostname to include in configs/properties | `string` | n/a | yes |
+| <a name="input_contract_id"></a> [contract\_id](#input\_contract\_id) | Contract ID for certificate creation | `string` | n/a | yes |
+| <a name="input_enhanced_tls"></a> [enhanced\_tls](#input\_enhanced\_tls) | Whether to deploy the certificate on the enhanced TLS network | `bool` | n/a | yes |
+| <a name="input_hostname"></a> [hostname](#input\_hostname) | Hostname to include in the certificate | `string` | n/a | yes |
 | <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
-| <a name="input_enhanced_tls"></a> [enhanced\_tls](#input\_enhanced\_tls) | n/a | `bool` | `false` | no |
-| <a name="input_ip_behavior"></a> [ip\_behavior](#input\_ip\_behavior) | n/a | `string` | `"IPV6_COMPLIANCE"` | no |
-| <a name="input_product_id"></a> [product\_id](#input\_product\_id) | n/a | `string` | `"Fresca"` | no |
+| <a name="input_config_section"></a> [config\_section](#input\_config\_section) | EdgeRC section. Change this to switch between accounts, assuming your section has an account\_id member | `string` | `"default"` | no |
+| <a name="input_edgerc_path"></a> [edgerc\_path](#input\_edgerc\_path) | Path to .edgerc file. Defaults to ~/.edgerc | `string` | `"~/.edgerc"` | no |
 
 ## Outputs
 

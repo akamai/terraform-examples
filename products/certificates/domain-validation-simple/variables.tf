@@ -1,29 +1,14 @@
 variable "hostname" {
   type        = string
-  description = "Hostname to include in configs/properties"
+  description = "Hostname to include in the certificate"
 }
 
 variable "contract_id" {
   type        = string
-  description = "Contract ID for property/config creation"
-}
-
-variable "group_id" {
-  type        = string
-  description = "Group ID for property/config creation"
+  description = "Contract ID for certificate creation"
 }
 
 variable "enhanced_tls" {
-  type    = bool
-  default = false
-}
-
-variable "product_id" {
-  type    = string
-  default = "Fresca"
-}
-
-variable "ip_behavior" {
-  type    = string
-  default = "IPV6_COMPLIANCE"
+  type        = bool
+  description = "Whether to deploy the certificate on the enhanced TLS network"
 }

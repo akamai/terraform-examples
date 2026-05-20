@@ -25,7 +25,7 @@ module "enrollment" {
   common_name   = local.common_name
   sans          = local.sans
   admin_contact = local.contact_details
-  tech_contact  = merge(local.contact_details, { email = "example@example.org" }) # Override the tech contact
+  tech_contact  = merge(local.contact_details, { email = "noreply@akamai.com" }) # Override the tech contact
   organization  = local.contact_details
 }
 
