@@ -27,37 +27,37 @@ this repo, in the tools/authentication directory.
 
 */
 
-# provider "akamai" {
-#   config {
-#     client_secret = var.akamai_client_secret
-#     host          = var.akamai_host
-#     access_token  = var.akamai_access_token
-#     client_token  = var.akamai_client_token
-#     account_key   = var.akamai_account_key
-#   }
-# }
+provider "akamai" {
+  config {
+    client_secret = var.akamai_client_secret
+    host          = var.akamai_host
+    access_token  = var.akamai_access_token
+    client_token  = var.akamai_client_token
+    account_key   = var.akamai_account_key
+  }
+}
 
-# variable "akamai_client_secret" {
-#   type        = string
-#   description = "Akamai client secret"
-# }
-# variable "akamai_host" {
-#   type        = string
-#   description = "Akamai host"
-# }
-# variable "akamai_access_token" {
-#   type        = string
-#   description = "Akamai access token"
-# }
-# variable "akamai_client_token" {
-#   type        = string
-#   description = "Akamai client token"
-# }
-# variable "akamai_account_key" {
-#   type        = string
-#   description = "Akamai account key (optional)"
-#   default     = ""
-# }
+variable "akamai_client_secret" {
+  type        = string
+  description = "Akamai client secret"
+}
+variable "akamai_host" {
+  type        = string
+  description = "Akamai host"
+}
+variable "akamai_access_token" {
+  type        = string
+  description = "Akamai access token"
+}
+variable "akamai_client_token" {
+  type        = string
+  description = "Akamai client token"
+}
+variable "akamai_account_key" {
+  type        = string
+  description = "Akamai account key (optional)"
+  default     = ""
+}
 
 
 /*
@@ -72,19 +72,19 @@ Once you have done so, comment out the environment variables section above, and 
 
 */
 
-provider "akamai" {
-  edgerc         = var.edgerc_path
-  config_section = var.config_section
-}
+# provider "akamai" {
+#   edgerc         = var.edgerc_path
+#   config_section = var.config_section
+# }
 
-variable "edgerc_path" {
-  type        = string
-  default     = "~/.edgerc"
-  description = "Path to .edgerc file. Defaults to ~/.edgerc"
-}
+# variable "edgerc_path" {
+#   type        = string
+#   default     = "~/.edgerc"
+#   description = "Path to .edgerc file. Defaults to ~/.edgerc"
+# }
 
-variable "config_section" {
-  type        = string
-  default     = "tf"
-  description = "EdgeRC section. Change this to switch between accounts, assuming your section has an account_id member"
-}
+# variable "config_section" {
+#   type        = string
+#   default     = "default"
+#   description = "EdgeRC section. Change this to switch between accounts, assuming your section has an account_id member"
+# }

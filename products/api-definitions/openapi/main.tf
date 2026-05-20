@@ -37,8 +37,8 @@
 
 
 data "akamai_group" "group" {
-  group_name  = "Group-1"
-  contract_id = "Contract-1"
+  group_name  = var.group_name
+  contract_id = var.contract_id
 }
 
 data "akamai_apidefinitions_openapi" "petstore" {
@@ -55,8 +55,8 @@ resource "akamai_apidefinitions_activation" "api_activation_staging" {
   api_id                    = akamai_apidefinitions_api.api.id
   version                   = akamai_apidefinitions_api.api.latest_version
   network                   = "STAGING"
-  notification_recipients   = ["user@example.com"]
-  notes                     = "Notes"
+  notification_recipients   = var.emails
+  notes                     = var.notes
   auto_acknowledge_warnings = true
 }
 
@@ -64,7 +64,7 @@ resource "akamai_apidefinitions_activation" "api_activation_production" {
   api_id                    = akamai_apidefinitions_api.api.id
   version                   = akamai_apidefinitions_api.api.latest_version
   network                   = "PRODUCTION"
-  notification_recipients   = ["user@example.com"]
-  notes                     = "Notes"
+  notification_recipients   = var.emails
+  notes                     = var.notes
   auto_acknowledge_warnings = true
 }
