@@ -97,17 +97,6 @@ resource "akamai_botman_akamai_bot_category_action" "default_social_media_or_blo
   )
 }
 
-resource "akamai_botman_akamai_bot_category_action" "default_automated_shopping_cart_and_sniper_bots_75493431-b41a-492c-8324-f12158783ce1" {
-  config_id          = akamai_appsec_configuration.config.config_id
-  security_policy_id = akamai_appsec_security_policy.policy.security_policy_id
-  category_id        = "75493431-b41a-492c-8324-f12158783ce1"
-  akamai_bot_category_action = jsonencode(
-    {
-      "action" : "monitor"
-    }
-  )
-}
-
 resource "akamai_botman_akamai_bot_category_action" "default_web_archiver_bots_831ef84a-c2bb-4b0d-b90d-bcd16793b830" {
   config_id          = akamai_appsec_configuration.config.config_id
   security_policy_id = akamai_appsec_security_policy.policy.security_policy_id

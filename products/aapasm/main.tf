@@ -3,6 +3,7 @@
 * 
 * This module will create an AAP/ASM config with input variables to control the following features:
 * 
+* - Bot Management
 * - SIEM
 * - Client Reputation
 * - Slow Post Detection

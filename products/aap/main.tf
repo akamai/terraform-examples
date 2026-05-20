@@ -9,7 +9,7 @@
 * 
 * > Note: This module should only be used if you have the simple "App & API Protector" product on contract, rather than the more feature-rich "App & API Protector with Advanced Security Module" (which most customers have). If you are uncertain which one you have, you probably want AAPASM.
 *
-* > Note: By default AAP creates a new policy, rate policies and network lists. However, this module will create such resources with best practice settings. A cleanup may be necessary afterwards to remove any unwanted/duplicated resources.
+* > Note: By default AAP creates a new policy, rate policies and network lists. However, this module will create all new resources. A cleanup may be necessary afterwards to remove any unwanted/duplicated resources.
 */
 
 module "config" {
