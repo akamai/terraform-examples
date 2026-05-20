@@ -4,6 +4,7 @@
 
 This module will create an AAP/ASM config with input variables to control the following features:
 
+- Bot Management
 - SIEM
 - Client Reputation
 - Slow Post Detection
@@ -49,7 +50,7 @@ module "example" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 7.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 

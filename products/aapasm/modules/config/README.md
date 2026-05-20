@@ -36,7 +36,7 @@ module "example" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 7.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
@@ -270,14 +270,12 @@ module "example" {
 | [akamai_appsec_rule.policy_aseweb_attackxss_973312](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/appsec_rule) | resource |
 | [akamai_appsec_rule.policy_aseweb_attackxss_973335](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/appsec_rule) | resource |
 | [akamai_appsec_security_policy.policy](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/appsec_security_policy) | resource |
-| [akamai_appsec_selected_hostnames.hostnames](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/appsec_selected_hostnames) | resource |
 | [akamai_appsec_siem_settings.siem](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/appsec_siem_settings) | resource |
 | [akamai_appsec_slow_post.policy](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/appsec_slow_post) | resource |
 | [akamai_appsec_slowpost_protection.policy](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/appsec_slowpost_protection) | resource |
 | [akamai_appsec_waf_mode.policy](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/appsec_waf_mode) | resource |
 | [akamai_appsec_waf_protection.policy](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/appsec_waf_protection) | resource |
 | [akamai_botman_akamai_bot_category_action.default_academic_or_research_bots_0c508e1d-73a4-4366-9e48-3c4a080f1c5d](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/botman_akamai_bot_category_action) | resource |
-| [akamai_botman_akamai_bot_category_action.default_automated_shopping_cart_and_sniper_bots_75493431-b41a-492c-8324-f12158783ce1](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/botman_akamai_bot_category_action) | resource |
 | [akamai_botman_akamai_bot_category_action.default_business_intelligence_bots_8a70d29c-a491-4583-9768-7deea2f379c1](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/botman_akamai_bot_category_action) | resource |
 | [akamai_botman_akamai_bot_category_action.default_ecommerce_search_engine_bots_47bcfb70-f3f5-458b-8f7c-1773b14bc6a4](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/botman_akamai_bot_category_action) | resource |
 | [akamai_botman_akamai_bot_category_action.default_enterprise_data_aggregator_bots_50395ad2-2673-41a4-b317-9b70742fd40f](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/botman_akamai_bot_category_action) | resource |
