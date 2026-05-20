@@ -110,7 +110,7 @@
     ]
   },
   "matchType": "path",
-  "name": "Page View Requests",
+  "name": "Page View Requests - NEW",
   "pathMatchType": "Custom",
   "pathUriPositiveMatch": true,
   "requestType": "ClientRequest",

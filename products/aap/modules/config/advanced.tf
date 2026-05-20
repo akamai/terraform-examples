@@ -29,7 +29,7 @@ resource "akamai_appsec_advanced_settings_pragma_header" "pragma_header" {
           "positiveMatch" : true,
           "header" : "",
           "value" : [
-            "177860_IPBLOCKLISTEXCEPTION"
+            var.pragma_exceptions_id
           ],
           "name" : "",
           "valueCase" : false,

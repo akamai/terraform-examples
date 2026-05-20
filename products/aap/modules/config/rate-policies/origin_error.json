@@ -37,7 +37,7 @@
   "clientIdentifier": "ip",
   "description": "An excessive error rate from the origin could indicate malicious activity by a bot scanning the site or a publishing error. In both cases, this would increase the origin traffic and could potentially destabilize it.",
   "matchType": "path",
-  "name": "Origin Error",
+  "name": "Origin Error - NEW",
   "pathMatchType": "Custom",
   "pathUriPositiveMatch": true,
   "requestType": "ForwardResponse",

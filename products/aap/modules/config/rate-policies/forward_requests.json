@@ -23,7 +23,7 @@
   "description": "Identify requests forwarded to origin. This allows visibility in the origin traffic and catches requests that should be cached but are not (e.g. due to delivery misconfiguration).",
   "id": 224316,
   "matchType": "path",
-  "name": "Forward Requests",
+  "name": "Forward Requests - NEW",
   "pathMatchType": "Custom",
   "pathUriPositiveMatch": true,
   "requestType": "ForwardRequest",

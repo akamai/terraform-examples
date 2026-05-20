@@ -22,7 +22,7 @@
   "clientIdentifier": "ip",
   "description": "Mitigating HTTP flood attacks using POST and PUT requests.",
   "matchType": "path",
-  "name": "POST and PUT Requests",
+  "name": "POST and PUT Requests - NEW",
   "pathMatchType": "Custom",
   "pathUriPositiveMatch": true,
   "requestType": "ClientRequest",
