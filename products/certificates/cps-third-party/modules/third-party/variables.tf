@@ -1,6 +1,6 @@
 variable "config_section" {
   type        = string
-  description = "Account ID. Used for multi account tenant only"
+  description = "Section within the .edgerc file to use for authentication. Used for the ACME certificate DNS challenges."
 }
 
 variable "contract_id" {

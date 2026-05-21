@@ -14,6 +14,10 @@ module "example" {
   	 akamai_client_secret  = <string>
   	 akamai_client_token  = <string>
   	 akamai_host  = <string>
+  	 contract_id  = <string>
+  	 dns_zone  = <string>
+  	 enhanced_tls  = <bool>
+  	 hostname  = <string>
   
 	 # Optional variables
   	 akamai_account_key  = <string> | default: ""
@@ -47,6 +51,10 @@ No resources.
 | <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
 | <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
 | <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
+| <a name="input_contract_id"></a> [contract\_id](#input\_contract\_id) | Contract ID for certificate creation | `string` | n/a | yes |
+| <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | DNS zone for the hostname | `string` | n/a | yes |
+| <a name="input_enhanced_tls"></a> [enhanced\_tls](#input\_enhanced\_tls) | Whether to deploy the certificate on the enhanced TLS network | `bool` | n/a | yes |
+| <a name="input_hostname"></a> [hostname](#input\_hostname) | Hostname to include in the certificate | `string` | n/a | yes |
 | <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
 
 ## Outputs

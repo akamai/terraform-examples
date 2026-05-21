@@ -15,7 +15,6 @@ variable "sans" {
 
 variable "secure_network" {
   type        = string
-  default     = "standard-tls"
   description = "The network to assign to. Can be either \"standard-tls\" or \"enhanced-tls\""
   validation {
     condition     = var.secure_network == "standard-tls" || var.secure_network == "enhanced-tls"

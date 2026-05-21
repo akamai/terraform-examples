@@ -16,12 +16,14 @@ locals {
 }
 
 module "example" {
-  source        = "../modules/third-party"
-  contract_id   = "AK12345"
-  common_name   = "www.example.org"
-  sans          = ["www.example.com", "www.example.net"]
-  tech_contact  = local.contact_details
-  admin_contact = local.contact_details
-  organization  = local.contact_details
+  source         = "../modules/third-party"
+  config_section = var.config_section
+  contract_id    = var.contract_id
+  common_name    = var.common_name
+  sans           = var.sans
+  secure_network = var.secure_network
+  tech_contact   = merge(local.contact_details, { email = "noreply@akamai.com" }) # Override the tech contact
+  admin_contact  = local.contact_details
+  organization   = local.contact_details
 }
 

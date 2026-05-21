@@ -19,6 +19,8 @@ resource "acme_registration" "reg" {
 resource "acme_certificate" "rsa_certificate" {
   account_key_pem         = acme_registration.reg.account_key_pem
   certificate_request_pem = chomp(data.akamai_cps_csr.csr.csr_rsa)
+  # Uncomment the line below to have Terraform wait after creating the DNS record for the challenge, before asking the ACME server to validate it. This can help with propagation issues in some DNS providers.
+  #propagation_wait = 300
 
   # Update this if you're not using Akamai EdgeDNS
   dns_challenge {

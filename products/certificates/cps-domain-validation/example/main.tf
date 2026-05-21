@@ -13,25 +13,26 @@ locals {
     postal_code      = "TST123"
     country_code     = "GB"
   }
-  contract_id = "ctr_1-1NC95D"
-  common_name = "test999.example.org"
-  sans        = ["test998.example.org"]
-
+  contract_id    = var.contract_id
+  common_name    = var.hostname
+  sans           = [var.hostname]
+  secure_network = (var.enhanced_tls == true) ? "enhanced-tls" : "standard-tls"
 }
 
 module "enrollment" {
-  source        = "../modules/enrollment"
-  contract_id   = local.contract_id
-  common_name   = local.common_name
-  sans          = local.sans
-  admin_contact = local.contact_details
-  tech_contact  = merge(local.contact_details, { email = "noreply@akamai.com" }) # Override the tech contact
-  organization  = local.contact_details
+  source         = "../modules/enrollment"
+  contract_id    = local.contract_id
+  common_name    = local.common_name
+  sans           = local.sans
+  secure_network = local.secure_network
+  admin_contact  = local.contact_details
+  tech_contact   = merge(local.contact_details, { email = "noreply@akamai.com" }) # Override the tech contact
+  organization   = local.contact_details
 }
 
 module "dns" {
   source     = "../modules/dns"
-  zone       = "example.org"
+  zone       = var.dns_zone
   challenges = module.enrollment.dns_challenges
   hostnames  = module.enrollment.hostnames
 }
