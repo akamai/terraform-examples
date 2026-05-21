@@ -32,6 +32,9 @@ variable "policy_name" {
 
 variable "env" {
   type        = string
-  default     = "staging"
   description = "The environment to which this should be deployed"
+  validation {
+    condition     = var.env == "staging" || var.env == "production"
+    error_message = "env must be either 'staging' or 'production'."
+  }
 }

@@ -36,6 +36,10 @@ module "example" {
   	 akamai_client_secret  = <string>
   	 akamai_client_token  = <string>
   	 akamai_host  = <string>
+  	 cloudlet_code  = <string>
+  	 description  = <string>
+  	 group_id  = <string>
+  	 name  = <string>
   
 	 # Optional variables
   	 akamai_account_key  = <string> | default: ""
@@ -47,8 +51,8 @@ module "example" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | >= 7.0.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
@@ -70,6 +74,10 @@ No modules.
 | <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
 | <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
 | <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
+| <a name="input_cloudlet_code"></a> [cloudlet\_code](#input\_cloudlet\_code) | Cloudlet Type. Allowed values for shared policies: AP AS ER FR CD IG | `string` | n/a | yes |
+| <a name="input_description"></a> [description](#input\_description) | Cloudlet version description | `string` | n/a | yes |
+| <a name="input_group_id"></a> [group\_id](#input\_group\_id) | Group ID for the Cloudlet policy | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | Cloudlet Policy Name | `string` | n/a | yes |
 | <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
 | <a name="input_env"></a> [env](#input\_env) | n/a | `string` | `"staging"` | no |
 

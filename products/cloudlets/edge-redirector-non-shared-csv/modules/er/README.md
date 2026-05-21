@@ -16,11 +16,9 @@ module "example" {
 	 # Required variables
   	 associated_properties  = <list(string)>
   	 csv  = <string>
+  	 env  = <string>
   	 group_id  = <string>
   	 policy_name  = <string>
-  
-	 # Optional variables
-  	 env  = <string> | default: "staging"
 }
  ```
 
@@ -29,7 +27,7 @@ module "example" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 7.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
@@ -49,9 +47,9 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_associated_properties"></a> [associated\_properties](#input\_associated\_properties) | The properties that are associated with this cloudlet policy | `list(string)` | n/a | yes |
 | <a name="input_csv"></a> [csv](#input\_csv) | The CSV file is similar to one that you'd download from Control Center GUI and should have the following headings:-<pre>ruleName,matchURL,useRelativeUrl,redirectURL,statusCode</pre>In addition, it should be passed to the module as follows:-<pre>csv = file(\"redirects.csv\")</pre> | `string` | n/a | yes |
+| <a name="input_env"></a> [env](#input\_env) | The environment to which this should be deployed | `string` | n/a | yes |
 | <a name="input_group_id"></a> [group\_id](#input\_group\_id) | The group id that contains your cloudlet | `string` | n/a | yes |
 | <a name="input_policy_name"></a> [policy\_name](#input\_policy\_name) | The name of the cloudlet policy | `string` | n/a | yes |
-| <a name="input_env"></a> [env](#input\_env) | The environment to which this should be deployed | `string` | `"staging"` | no |
 
 ## Outputs
 
