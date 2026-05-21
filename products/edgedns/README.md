@@ -57,7 +57,8 @@ module "example" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 7.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
+| <a name="requirement_time"></a> [time](#requirement\_time) | ~> 0.12 |
 
 ## Resources
 
@@ -73,7 +74,6 @@ module "example" {
 | [akamai_dns_record.origin_CNAME](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/dns_record) | resource |
 | [akamai_dns_record.secure_CNAME](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/dns_record) | resource |
 | [akamai_dns_record.shop_CNAME](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/dns_record) | resource |
-| [akamai_dns_record.tld_AKAMAITLC](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/dns_record) | resource |
 | [akamai_dns_record.tld_CAA](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/dns_record) | resource |
 | [akamai_dns_record.tld_NS](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/dns_record) | resource |
 | [akamai_dns_record.tld_SOA](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/dns_record) | resource |
@@ -81,6 +81,7 @@ module "example" {
 | [akamai_dns_record.vpn_A](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/dns_record) | resource |
 | [akamai_dns_record.www_CNAME](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/dns_record) | resource |
 | [akamai_dns_zone.tld](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/dns_zone) | resource |
+| [time_sleep.zone_propagation](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 
 ## Modules
 

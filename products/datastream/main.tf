@@ -91,18 +91,17 @@ resource "akamai_datastream" "my_datastream" {
     2050, #Security rules
     3000, #EdgeWorkers usage
     3001, #EdgeWorkers execution
-    2051, #Midgress status
   ]
   group_id    = local.group_id
   properties  = local.property_ids
   stream_name = var.stream_name
-  sumologic_connector {
-    collector_code = var.sumologic_connector_code
-    content_type   = "application/json"
-    display_name   = "tf-demo-logs"
-    endpoint       = "https://endpoint2.collection.us2.sumologic.com/receiver/v1/http"
-    compress_logs  = true
+
+  datadog_connector {
+    display_name = var.datadog_connector.display_name
+    endpoint     = var.datadog_connector.endpoint
+    auth_token   = var.datadog_connector.auth_token
   }
+
   notification_emails = var.notification_emails
   collect_midgress    = true
 }

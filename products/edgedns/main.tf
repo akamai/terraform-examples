@@ -17,16 +17,13 @@ resource "akamai_dns_zone" "tld" {
   end_customer_id          = ""
 }
 
-
-resource "akamai_dns_record" "tld_AKAMAITLC" {
-  zone       = var.zone
-  name       = var.zone
-  recordtype = "AKAMAITLC"
-  target     = []
-  ttl        = 1800
+resource "time_sleep" "zone_propagation" {
+  depends_on      = [akamai_dns_zone.tld]
+  create_duration = "60s"
 }
 
 resource "akamai_dns_record" "tld_CAA" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = var.zone
   recordtype = "CAA"
@@ -35,6 +32,7 @@ resource "akamai_dns_record" "tld_CAA" {
 }
 
 resource "akamai_dns_record" "tld_NS" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = var.zone
   recordtype = "NS"
@@ -43,6 +41,7 @@ resource "akamai_dns_record" "tld_NS" {
 }
 
 resource "akamai_dns_record" "tld_SOA" {
+  depends_on    = [time_sleep.zone_propagation]
   zone          = var.zone
   email_address = "hostmaster.example.com."
   expiry        = 604800
@@ -57,6 +56,7 @@ resource "akamai_dns_record" "tld_SOA" {
 }
 
 resource "akamai_dns_record" "tld_TXT" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = var.zone
   recordtype = "TXT"
@@ -65,6 +65,7 @@ resource "akamai_dns_record" "tld_TXT" {
 }
 
 resource "akamai_dns_record" "_dnsauth_TXT" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = "_dnsauth.${var.zone}"
   recordtype = "TXT"
@@ -73,6 +74,7 @@ resource "akamai_dns_record" "_dnsauth_TXT" {
 }
 
 resource "akamai_dns_record" "autodiscover_CNAME" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = "autodiscover.${var.zone}"
   recordtype = "CNAME"
@@ -81,6 +83,7 @@ resource "akamai_dns_record" "autodiscover_CNAME" {
 }
 
 resource "akamai_dns_record" "kibana_A" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = "kibana.${var.zone}"
   recordtype = "A"
@@ -89,6 +92,7 @@ resource "akamai_dns_record" "kibana_A" {
 }
 
 resource "akamai_dns_record" "origin-blue_CNAME" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = "origin-blue.${var.zone}"
   recordtype = "CNAME"
@@ -97,6 +101,7 @@ resource "akamai_dns_record" "origin-blue_CNAME" {
 }
 
 resource "akamai_dns_record" "origin-demo_CNAME" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = "origin-demo.${var.zone}"
   recordtype = "CNAME"
@@ -105,6 +110,7 @@ resource "akamai_dns_record" "origin-demo_CNAME" {
 }
 
 resource "akamai_dns_record" "origin_CNAME" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = "origin.${var.zone}"
   recordtype = "CNAME"
@@ -113,6 +119,7 @@ resource "akamai_dns_record" "origin_CNAME" {
 }
 
 resource "akamai_dns_record" "origin1_A" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = "origin1.${var.zone}"
   recordtype = "A"
@@ -121,6 +128,7 @@ resource "akamai_dns_record" "origin1_A" {
 }
 
 resource "akamai_dns_record" "secure_CNAME" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = "secure.${var.zone}"
   recordtype = "CNAME"
@@ -129,6 +137,7 @@ resource "akamai_dns_record" "secure_CNAME" {
 }
 
 resource "akamai_dns_record" "shop_CNAME" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = "shop.${var.zone}"
   recordtype = "CNAME"
@@ -137,6 +146,7 @@ resource "akamai_dns_record" "shop_CNAME" {
 }
 
 resource "akamai_dns_record" "vpn_A" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = "vpn.${var.zone}"
   recordtype = "A"
@@ -145,6 +155,7 @@ resource "akamai_dns_record" "vpn_A" {
 }
 
 resource "akamai_dns_record" "www_CNAME" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = "www.${var.zone}"
   recordtype = "CNAME"
@@ -153,6 +164,7 @@ resource "akamai_dns_record" "www_CNAME" {
 }
 
 resource "akamai_dns_record" "_sipfederationtls__tcp__tcp_SRV" {
+  depends_on = [time_sleep.zone_propagation]
   zone       = var.zone
   name       = "_sipfederationtls._tcp.example.com._tcp.${var.zone}"
   port       = 5061

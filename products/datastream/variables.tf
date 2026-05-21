@@ -1,5 +1,3 @@
-variable "sumologic_connector_code" {}
-
 # -------------------------------------------------
 # Common Variables 
 # -------------------------------------------------
@@ -22,4 +20,13 @@ variable "properties" {
 variable "notification_emails" {
   description = "List of Notification Emails"
   type        = list(string)
+}
+
+variable "datadog_connector" {
+  description = "Datadog Connector settings"
+  type = object({
+    display_name = string
+    endpoint     = string
+    auth_token   = string
+  })
 }
