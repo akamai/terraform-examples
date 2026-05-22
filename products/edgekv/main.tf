@@ -28,12 +28,6 @@ resource "akamai_edgekv_group_items" "countries_group" {
   depends_on = [akamai_edgekv.edgekv]
 }
 
-data "akamai_edgekv_group_items" "countries_group" {
-  namespace_name = var.namespace_name
-  network        = var.network
-  group_name     = var.ekv_group_name_1
-}
-
 # Create a new group within the namespace and add items
 resource "akamai_edgekv_group_items" "translations_group" {
   namespace_name = var.namespace_name
@@ -42,10 +36,4 @@ resource "akamai_edgekv_group_items" "translations_group" {
   items          = local.items_translations
 
   depends_on = [akamai_edgekv.edgekv]
-}
-
-data "akamai_edgekv_group_items" "translations_group" {
-  namespace_name = var.namespace_name
-  network        = var.network
-  group_name     = var.ekv_group_name_2
 }

@@ -44,8 +44,6 @@ module "example" {
 | [akamai_edgekv_group_items.countries_group](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/edgekv_group_items) | resource |
 | [akamai_edgekv_group_items.translations_group](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/edgekv_group_items) | resource |
 | [akamai_contract.contract](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/contract) | data source |
-| [akamai_edgekv_group_items.countries_group](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/edgekv_group_items) | data source |
-| [akamai_edgekv_group_items.translations_group](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/edgekv_group_items) | data source |
 
 ## Modules
 
@@ -69,10 +67,7 @@ No modules.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_countries"></a> [countries](#output\_countries) | Map of items for the countries group |
-| <a name="output_languages"></a> [languages](#output\_languages) | Map of items for the languages group |
+No outputs.
 
 ## Resources
 - [Akamai API Credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials)
