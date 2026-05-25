@@ -12,8 +12,8 @@ resource "akamai_networklist_network_list" "ip_block_list" {
   type        = "IP"
   description = "IP block list for config ${var.prefix}"
   mode        = "APPEND"
-  contract_id = data.akamai_contract.contract.id
-  group_id    = trim(data.akamai_contract.contract.group_id, "_grp")
+  contract_id = trimprefix(data.akamai_contract.contract.id, "ctr_")
+  group_id    = trimprefix(data.akamai_contract.contract.group_id, "grp_")
   list        = var.ip_block_list
 }
 
@@ -22,8 +22,8 @@ resource "akamai_networklist_network_list" "ip_block_list_exceptions" {
   type        = "IP"
   description = "Block list exceptions for config ${var.prefix}"
   mode        = "APPEND"
-  contract_id = data.akamai_contract.contract.id
-  group_id    = trim(data.akamai_contract.contract.group_id, "_grp")
+  contract_id = trimprefix(data.akamai_contract.contract.id, "ctr_")
+  group_id    = trimprefix(data.akamai_contract.contract.group_id, "grp_")
   list        = var.ip_block_list_exceptions
 }
 
@@ -32,8 +32,8 @@ resource "akamai_networklist_network_list" "geo_block_list" {
   type        = "GEO"
   description = "Geo block list for config ${var.prefix}"
   mode        = "APPEND"
-  contract_id = data.akamai_contract.contract.id
-  group_id    = trim(data.akamai_contract.contract.group_id, "_grp")
+  contract_id = trimprefix(data.akamai_contract.contract.id, "ctr_")
+  group_id    = trimprefix(data.akamai_contract.contract.group_id, "grp_")
   list        = var.geo_block_list
 }
 
@@ -42,8 +42,8 @@ resource "akamai_networklist_network_list" "security_bypass_list" {
   type        = "IP"
   description = "Block list exceptions for config ${var.prefix}"
   mode        = "APPEND"
-  contract_id = data.akamai_contract.contract.id
-  group_id    = trim(data.akamai_contract.contract.group_id, "_grp")
+  contract_id = trimprefix(data.akamai_contract.contract.id, "ctr_")
+  group_id    = trimprefix(data.akamai_contract.contract.group_id, "grp_")
   list        = var.security_bypass_list
 }
 
@@ -52,8 +52,8 @@ resource "akamai_networklist_network_list" "rate_bypass_list" {
   type        = "IP"
   description = "Rate Control Bypass List for config ${var.prefix}"
   mode        = "APPEND"
-  contract_id = data.akamai_contract.contract.id
-  group_id    = trim(data.akamai_contract.contract.group_id, "_grp")
+  contract_id = trimprefix(data.akamai_contract.contract.id, "ctr_")
+  group_id    = trimprefix(data.akamai_contract.contract.group_id, "grp_")
   list        = var.rate_bypass_list
 }
 
@@ -62,8 +62,8 @@ resource "akamai_networklist_network_list" "pragma_exceptions" {
   type        = "IP"
   description = "Pragma header removal exceptions for config ${var.prefix}"
   mode        = "APPEND"
-  contract_id = data.akamai_contract.contract.id
-  group_id    = trim(data.akamai_contract.contract.group_id, "_grp")
+  contract_id = trimprefix(data.akamai_contract.contract.id, "ctr_")
+  group_id    = trimprefix(data.akamai_contract.contract.group_id, "grp_")
   list        = var.pragma_exceptions
 }
 
