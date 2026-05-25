@@ -30,9 +30,17 @@ module "example" {
   	 akamai_client_secret  = <string>
   	 akamai_client_token  = <string>
   	 akamai_host  = <string>
+  	 certificate_name  = <string>
+  	 edge_hostname  = <string>
+  	 emails  = <list(string)>
+  	 group_name  = <string>
+  	 hostname  = <string>
+  	 property_name  = <string>
   
 	 # Optional variables
   	 akamai_account_key  = <string> | default: ""
+  	 network  = <string> | default: "STAGING"
+  	 product_id  = <string> | default: "prd_Fresca"
 }
  ```
 
@@ -40,16 +48,14 @@ module "example" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | >= 8.1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.1 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [akamai_cp_code.cp_code](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/cp_code) | resource |
-| [akamai_edge_hostname.hostname](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/edge_hostname) | resource |
 | [akamai_mtlskeystore_client_certificate_third_party.third_party_cert](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/mtlskeystore_client_certificate_third_party) | resource |
 | [akamai_mtlskeystore_client_certificate_upload.upload](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/mtlskeystore_client_certificate_upload) | resource |
 | [akamai_property.property](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/property) | resource |
@@ -57,6 +63,7 @@ module "example" {
 | [tls_locally_signed_cert.signed_cert](https://registry.terraform.io/providers/hashicorp/tls/4.1/docs/resources/locally_signed_cert) | resource |
 | [tls_private_key.key](https://registry.terraform.io/providers/hashicorp/tls/4.1/docs/resources/private_key) | resource |
 | [tls_self_signed_cert.cert](https://registry.terraform.io/providers/hashicorp/tls/4.1/docs/resources/self_signed_cert) | resource |
+| [akamai_contract.contract](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/contract) | data source |
 | [akamai_mtlskeystore_client_certificate.third_party_ds](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/mtlskeystore_client_certificate) | data source |
 | [akamai_property_rules_builder.keystore](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/property_rules_builder) | data source |
 | [akamai_property_rules_builder.rule_default](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/property_rules_builder) | data source |
@@ -73,7 +80,15 @@ No modules.
 | <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
 | <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
 | <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
+| <a name="input_certificate_name"></a> [certificate\_name](#input\_certificate\_name) | The name of the client certificate to be created in the Akamai mTLS keystore. | `string` | n/a | yes |
+| <a name="input_edge_hostname"></a> [edge\_hostname](#input\_edge\_hostname) | The hostname for the Akamai property. Include the edgekey.net or edgesuite.net suffix. | `string` | n/a | yes |
+| <a name="input_emails"></a> [emails](#input\_emails) | A list of email addresses to notify when changes are made to the GTM domain. | `list(string)` | n/a | yes |
+| <a name="input_group_name"></a> [group\_name](#input\_group\_name) | The name of the Akamai group. | `string` | n/a | yes |
+| <a name="input_hostname"></a> [hostname](#input\_hostname) | The hostname for the Akamai property. | `string` | n/a | yes |
+| <a name="input_property_name"></a> [property\_name](#input\_property\_name) | The name of the Akamai property. | `string` | n/a | yes |
 | <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
+| <a name="input_network"></a> [network](#input\_network) | The network to which the property should be activated. Valid values are STAGING or PRODUCTION. | `string` | `"STAGING"` | no |
+| <a name="input_product_id"></a> [product\_id](#input\_product\_id) | n/a | `string` | `"prd_Fresca"` | no |
 
 ## Outputs
 

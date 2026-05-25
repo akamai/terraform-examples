@@ -12,28 +12,20 @@
 
 
 data "akamai_property_rules_builder" "full_mtls_workflow_rule_default" {
-  rules_v2024_02_12 {
+  rules_v2026_02_16 {
     name      = "default"
     is_secure = false
-    behavior {
-      origin_characteristics {
-        authentication_method       = "AUTOMATIC"
-        authentication_method_title = ""
-        country                     = "UNKNOWN"
-        origin_location_title       = ""
-      }
-    }
+    comments  = "The Default Rule template contains all the necessary and recommended behaviors. Rules are evaluated from top to bottom and the last matching rule wins."
     behavior {
       origin {
         cache_key_hostname            = "ORIGIN_HOSTNAME"
         compress                      = true
         enable_true_client_ip         = true
         forward_host_header           = "REQUEST_HOST_HEADER"
-        hostname                      = "www.example.com"
+        hostname                      = "origin.example.com"
         http_port                     = 80
         https_port                    = 443
         ip_version                    = "IPV4"
-        max_tls_version               = "DYNAMIC"
         min_tls_version               = "DYNAMIC"
         origin_certificate            = ""
         origin_sni                    = true
@@ -47,19 +39,7 @@ data "akamai_property_rules_builder" "full_mtls_workflow_rule_default" {
     }
     behavior {
       cp_code {
-        value {
-          id = akamai_cp_code.cp_code.id
-        }
-      }
-    }
-    behavior {
-      cache_key_query_params {
-        behavior = "IGNORE_ALL"
-      }
-    }
-    behavior {
-      http3 {
-        enable = true
+        enable_default_content_provider_code = true
       }
     }
     behavior {
@@ -74,7 +54,7 @@ data "akamai_property_rules_builder" "full_mtls_workflow_rule_default" {
 }
 
 data "akamai_property_rules_builder" "full_mtls_workflow_rule_m_tls_settings_enforcement_base" {
-  rules_v2024_02_12 {
+  rules_v2026_02_16 {
     name                  = "mTLS Settings Enforcement – Base"
     criteria_must_satisfy = "any"
     criterion {
@@ -102,14 +82,12 @@ data "akamai_property_rules_builder" "full_mtls_workflow_rule_m_tls_settings_enf
 }
 
 data "akamai_property_rules_builder" "full_mtls_workflow_rule_m_tls_settings_enforcement_custom" {
-  rules_v2024_02_12 {
+  rules_v2026_02_16 {
     name                  = "Client Certificate Settings – Custom"
     criteria_must_satisfy = "all"
     criterion {
       client_certificate {
-        enforce_mtls           = true
-        is_certificate_present = true
-        is_certificate_valid   = "INVALID"
+        enforce_mtls = "FAIL"
       }
     }
     behavior {
@@ -118,11 +96,6 @@ data "akamai_property_rules_builder" "full_mtls_workflow_rule_m_tls_settings_enf
         enable                                      = true
         enable_client_certificate_validation_status = true
         enable_complete_client_certificate          = true
-      }
-    }
-    behavior {
-      log_custom {
-        log_custom_log_field = false
       }
     }
   }

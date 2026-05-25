@@ -11,6 +11,10 @@
 */
 
 
+data "akamai_contract" "contract" {
+  group_name = var.group_name
+}
+
 resource "tls_private_key" "example_key" {
   algorithm = "RSA"
   rsa_bits  = 2048
@@ -35,14 +39,14 @@ resource "tls_self_signed_cert" "ca_certificate" {
 }
 
 resource "akamai_mtlstruststore_ca_set" "test_ca_set" {
-  name                = "Example CA Set Name"
-  description         = "Full workflow with CPS and PAPI description"
+  name                = var.certificate_name
+  description         = var.certificate_description
   allow_insecure_sha1 = false
-  version_description = "Full workflow with CPS and PAPI version description"
+  version_description = var.certificate_version_description
   certificates = [
     {
       certificate_pem = tls_self_signed_cert.ca_certificate.cert_pem
-      description     = "Full workflow with CPS and PAPI certificate description"
+      description     = var.certificate_description
     }
   ]
 }

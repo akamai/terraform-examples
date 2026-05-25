@@ -3,13 +3,17 @@
 *
 */
 
+data "akamai_contract" "contract" {
+  group_name = var.group_name
+}
+
 resource "akamai_networklist_network_list" "ip_block_list" {
   name        = "${var.prefix} - IP Block List"
   type        = "IP"
   description = "IP block list for config ${var.prefix}"
   mode        = "APPEND"
-  contract_id = var.contract_id
-  group_id    = var.group_id
+  contract_id = data.akamai_contract.contract.id
+  group_id    = trim(data.akamai_contract.contract.group_id, "_grp")
   list        = var.ip_block_list
 }
 
@@ -18,8 +22,8 @@ resource "akamai_networklist_network_list" "ip_block_list_exceptions" {
   type        = "IP"
   description = "Block list exceptions for config ${var.prefix}"
   mode        = "APPEND"
-  contract_id = var.contract_id
-  group_id    = var.group_id
+  contract_id = data.akamai_contract.contract.id
+  group_id    = trim(data.akamai_contract.contract.group_id, "_grp")
   list        = var.ip_block_list_exceptions
 }
 
@@ -28,8 +32,8 @@ resource "akamai_networklist_network_list" "geo_block_list" {
   type        = "GEO"
   description = "Geo block list for config ${var.prefix}"
   mode        = "APPEND"
-  contract_id = var.contract_id
-  group_id    = var.group_id
+  contract_id = data.akamai_contract.contract.id
+  group_id    = trim(data.akamai_contract.contract.group_id, "_grp")
   list        = var.geo_block_list
 }
 
@@ -38,8 +42,8 @@ resource "akamai_networklist_network_list" "security_bypass_list" {
   type        = "IP"
   description = "Block list exceptions for config ${var.prefix}"
   mode        = "APPEND"
-  contract_id = var.contract_id
-  group_id    = var.group_id
+  contract_id = data.akamai_contract.contract.id
+  group_id    = trim(data.akamai_contract.contract.group_id, "_grp")
   list        = var.security_bypass_list
 }
 
@@ -48,8 +52,8 @@ resource "akamai_networklist_network_list" "rate_bypass_list" {
   type        = "IP"
   description = "Rate Control Bypass List for config ${var.prefix}"
   mode        = "APPEND"
-  contract_id = var.contract_id
-  group_id    = var.group_id
+  contract_id = data.akamai_contract.contract.id
+  group_id    = trim(data.akamai_contract.contract.group_id, "_grp")
   list        = var.rate_bypass_list
 }
 
@@ -58,106 +62,106 @@ resource "akamai_networklist_network_list" "pragma_exceptions" {
   type        = "IP"
   description = "Pragma header removal exceptions for config ${var.prefix}"
   mode        = "APPEND"
-  contract_id = var.contract_id
-  group_id    = var.group_id
+  contract_id = data.akamai_contract.contract.id
+  group_id    = trim(data.akamai_contract.contract.group_id, "_grp")
   list        = var.pragma_exceptions
 }
 
 
-## Staging activations
-resource "akamai_networklist_activations" "ip_block_list_staging" {
-  network_list_id     = akamai_networklist_network_list.ip_block_list.network_list_id
-  network             = "STAGING"
-  sync_point          = akamai_networklist_network_list.ip_block_list.sync_point
-  notes               = "Automated Terraform push"
-  notification_emails = [var.email]
-}
+# ## Staging activations
+# resource "akamai_networklist_activations" "ip_block_list_staging" {
+#   network_list_id     = akamai_networklist_network_list.ip_block_list.network_list_id
+#   network             = "STAGING"
+#   sync_point          = akamai_networklist_network_list.ip_block_list.sync_point
+#   notes               = "Automated Terraform push"
+#   notification_emails = var.emails
+# }
 
-resource "akamai_networklist_activations" "ip_block_list_exceptions_staging" {
-  network_list_id     = akamai_networklist_network_list.ip_block_list_exceptions.network_list_id
-  network             = "STAGING"
-  sync_point          = akamai_networklist_network_list.ip_block_list_exceptions.sync_point
-  notes               = "Automated Terraform push"
-  notification_emails = [var.email]
-}
+# resource "akamai_networklist_activations" "ip_block_list_exceptions_staging" {
+#   network_list_id     = akamai_networklist_network_list.ip_block_list_exceptions.network_list_id
+#   network             = "STAGING"
+#   sync_point          = akamai_networklist_network_list.ip_block_list_exceptions.sync_point
+#   notes               = "Automated Terraform push"
+#   notification_emails = var.emails
+# }
 
-resource "akamai_networklist_activations" "geo_block_list_staging" {
-  network_list_id     = akamai_networklist_network_list.geo_block_list.network_list_id
-  network             = "STAGING"
-  sync_point          = akamai_networklist_network_list.geo_block_list.sync_point
-  notes               = "Automated Terraform push"
-  notification_emails = [var.email]
-}
+# resource "akamai_networklist_activations" "geo_block_list_staging" {
+#   network_list_id     = akamai_networklist_network_list.geo_block_list.network_list_id
+#   network             = "STAGING"
+#   sync_point          = akamai_networklist_network_list.geo_block_list.sync_point
+#   notes               = "Automated Terraform push"
+#   notification_emails = var.emails
+# }
 
-resource "akamai_networklist_activations" "security_bypass_list_staging" {
-  network_list_id     = akamai_networklist_network_list.security_bypass_list.network_list_id
-  network             = "STAGING"
-  sync_point          = akamai_networklist_network_list.security_bypass_list.sync_point
-  notes               = "Automated Terraform push"
-  notification_emails = [var.email]
-}
+# resource "akamai_networklist_activations" "security_bypass_list_staging" {
+#   network_list_id     = akamai_networklist_network_list.security_bypass_list.network_list_id
+#   network             = "STAGING"
+#   sync_point          = akamai_networklist_network_list.security_bypass_list.sync_point
+#   notes               = "Automated Terraform push"
+#   notification_emails = var.emails
+# }
 
-resource "akamai_networklist_activations" "rate_bypass_list_staging" {
-  network_list_id     = akamai_networklist_network_list.rate_bypass_list.network_list_id
-  network             = "STAGING"
-  sync_point          = akamai_networklist_network_list.rate_bypass_list.sync_point
-  notes               = "Automated Terraform push"
-  notification_emails = [var.email]
-}
+# resource "akamai_networklist_activations" "rate_bypass_list_staging" {
+#   network_list_id     = akamai_networklist_network_list.rate_bypass_list.network_list_id
+#   network             = "STAGING"
+#   sync_point          = akamai_networklist_network_list.rate_bypass_list.sync_point
+#   notes               = "Automated Terraform push"
+#   notification_emails = var.emails
+# }
 
-resource "akamai_networklist_activations" "pragma_exceptions_staging" {
-  network_list_id     = akamai_networklist_network_list.pragma_exceptions.network_list_id
-  network             = "STAGING"
-  sync_point          = akamai_networklist_network_list.pragma_exceptions.sync_point
-  notes               = "Automated Terraform push"
-  notification_emails = [var.email]
-}
+# resource "akamai_networklist_activations" "pragma_exceptions_staging" {
+#   network_list_id     = akamai_networklist_network_list.pragma_exceptions.network_list_id
+#   network             = "STAGING"
+#   sync_point          = akamai_networklist_network_list.pragma_exceptions.sync_point
+#   notes               = "Automated Terraform push"
+#   notification_emails = var.emails
+# }
 
-## Production activations
-resource "akamai_networklist_activations" "ip_block_list_production" {
-  network_list_id     = akamai_networklist_network_list.ip_block_list.network_list_id
-  network             = "PRODUCTION"
-  sync_point          = akamai_networklist_network_list.ip_block_list.sync_point
-  notes               = "Automated Terraform push"
-  notification_emails = [var.email]
-}
+# ## Production activations
+# resource "akamai_networklist_activations" "ip_block_list_production" {
+#   network_list_id     = akamai_networklist_network_list.ip_block_list.network_list_id
+#   network             = "PRODUCTION"
+#   sync_point          = akamai_networklist_network_list.ip_block_list.sync_point
+#   notes               = "Automated Terraform push"
+#   notification_emails = var.emails
+# }
 
-resource "akamai_networklist_activations" "ip_block_list_exceptions_production" {
-  network_list_id     = akamai_networklist_network_list.ip_block_list_exceptions.network_list_id
-  network             = "PRODUCTION"
-  sync_point          = akamai_networklist_network_list.ip_block_list_exceptions.sync_point
-  notes               = "Automated Terraform push"
-  notification_emails = [var.email]
-}
+# resource "akamai_networklist_activations" "ip_block_list_exceptions_production" {
+#   network_list_id     = akamai_networklist_network_list.ip_block_list_exceptions.network_list_id
+#   network             = "PRODUCTION"
+#   sync_point          = akamai_networklist_network_list.ip_block_list_exceptions.sync_point
+#   notes               = "Automated Terraform push"
+#   notification_emails = var.emails
+# }
 
-resource "akamai_networklist_activations" "geo_block_list_production" {
-  network_list_id     = akamai_networklist_network_list.geo_block_list.network_list_id
-  network             = "PRODUCTION"
-  sync_point          = akamai_networklist_network_list.geo_block_list.sync_point
-  notes               = "Automated Terraform push"
-  notification_emails = [var.email]
-}
+# resource "akamai_networklist_activations" "geo_block_list_production" {
+#   network_list_id     = akamai_networklist_network_list.geo_block_list.network_list_id
+#   network             = "PRODUCTION"
+#   sync_point          = akamai_networklist_network_list.geo_block_list.sync_point
+#   notes               = "Automated Terraform push"
+#   notification_emails = var.emails
+# }
 
-resource "akamai_networklist_activations" "security_bypass_list_production" {
-  network_list_id     = akamai_networklist_network_list.security_bypass_list.network_list_id
-  network             = "PRODUCTION"
-  sync_point          = akamai_networklist_network_list.security_bypass_list.sync_point
-  notes               = "Automated Terraform push"
-  notification_emails = [var.email]
-}
+# resource "akamai_networklist_activations" "security_bypass_list_production" {
+#   network_list_id     = akamai_networklist_network_list.security_bypass_list.network_list_id
+#   network             = "PRODUCTION"
+#   sync_point          = akamai_networklist_network_list.security_bypass_list.sync_point
+#   notes               = "Automated Terraform push"
+#   notification_emails = var.emails
+# }
 
-resource "akamai_networklist_activations" "rate_bypass_list_production" {
-  network_list_id     = akamai_networklist_network_list.rate_bypass_list.network_list_id
-  network             = "PRODUCTION"
-  sync_point          = akamai_networklist_network_list.rate_bypass_list.sync_point
-  notes               = "Automated Terraform push"
-  notification_emails = [var.email]
-}
+# resource "akamai_networklist_activations" "rate_bypass_list_production" {
+#   network_list_id     = akamai_networklist_network_list.rate_bypass_list.network_list_id
+#   network             = "PRODUCTION"
+#   sync_point          = akamai_networklist_network_list.rate_bypass_list.sync_point
+#   notes               = "Automated Terraform push"
+#   notification_emails = var.emails
+# }
 
-resource "akamai_networklist_activations" "pragma_exceptions_production" {
-  network_list_id     = akamai_networklist_network_list.pragma_exceptions.network_list_id
-  network             = "PRODUCTION"
-  sync_point          = akamai_networklist_network_list.pragma_exceptions.sync_point
-  notes               = "Automated Terraform push"
-  notification_emails = [var.email]
-}
+# resource "akamai_networklist_activations" "pragma_exceptions_production" {
+#   network_list_id     = akamai_networklist_network_list.pragma_exceptions.network_list_id
+#   network             = "PRODUCTION"
+#   sync_point          = akamai_networklist_network_list.pragma_exceptions.sync_point
+#   notes               = "Automated Terraform push"
+#   notification_emails = var.emails
+# }

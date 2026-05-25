@@ -1,16 +1,11 @@
-variable "contract_id" {
+variable "group_name" {
   type        = string
-  description = "Contract ID for property/config creation"
+  description = "Group name for property/config creation"
 }
 
-variable "group_id" {
-  type        = string
-  description = "Group ID for property/config creation"
-}
-
-variable "email" {
-  type        = string
-  description = "Email address used for activations"
+variable "emails" {
+  type        = list(string)
+  description = "Email addresses used for activations"
 }
 
 variable "prefix" {

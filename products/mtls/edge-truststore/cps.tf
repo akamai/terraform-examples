@@ -23,8 +23,8 @@
 
 resource "akamai_cps_third_party_enrollment" "enrollment" {
   depends_on                            = [akamai_mtlstruststore_ca_set_activation.ca_set_activation_staging]
-  contract_id                           = "C-0N7RAC7"
-  common_name                           = "*.example.com"
+  contract_id                           = data.akamai_contract.contract.id
+  common_name                           = var.common_name
   secure_network                        = "enhanced-tls"
   sni_only                              = true
   acknowledge_pre_verification_warnings = true

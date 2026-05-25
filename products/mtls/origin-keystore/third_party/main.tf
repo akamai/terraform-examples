@@ -18,13 +18,16 @@
  * A successful operation creates a third-party client certificate, CP code, edge hostname, property, rules, and property activation.
 */
 
+data "akamai_contract" "contract" {
+  group_name = var.group_name
+}
 
 resource "akamai_mtlskeystore_client_certificate_third_party" "third_party_cert" {
-  certificate_name    = "Certificate Name"
-  contract_id         = "C-0N7RAC7"
+  certificate_name    = var.certificate_name
+  contract_id         = data.akamai_contract.contract.id
   geography           = "CORE"
-  group_id            = 123
-  notification_emails = ["no-mail@akamai.com"]
+  group_id            = trimprefix(data.akamai_contract.contract.group_id, "grp_")
+  notification_emails = var.emails
   secure_network      = "STANDARD_TLS"
   versions = {
     version_1 = {},
@@ -78,29 +81,14 @@ resource "tls_locally_signed_cert" "signed_cert" {
   ]
 }
 
-resource "akamai_cp_code" "cp_code" {
-  contract_id = "C-0N7RAC7"
-  group_id    = 123
-  product_id  = "prd_SPM"
-  name        = "CP-Code-Name"
-}
-
-resource "akamai_edge_hostname" "hostname" {
-  product_id    = "prd_SPM"
-  contract_id   = "C-0N7RAC7"
-  group_id      = 123
-  ip_behavior   = "IPV6_COMPLIANCE"
-  edge_hostname = "www.test-hostname.example.com"
-}
-
 resource "akamai_property" "property" {
-  name        = "Property-Name"
-  contract_id = "C-0N7RAC7"
-  group_id    = 123
-  product_id  = "prd_SPM"
+  name        = var.property_name
+  contract_id = data.akamai_contract.contract.id
+  group_id    = trimprefix(data.akamai_contract.contract.group_id, "grp_")
+  product_id  = var.product_id
   hostnames {
-    cname_from             = "www.test-hostname-from.example.com"
-    cname_to               = akamai_edge_hostname.hostname.edge_hostname
+    cname_from             = var.hostname
+    cname_to               = var.edge_hostname
     cert_provisioning_type = "CPS_MANAGED"
   }
   rule_format = data.akamai_property_rules_builder.rule_default.rule_format
@@ -110,65 +98,8 @@ resource "akamai_property" "property" {
 resource "akamai_property_activation" "activation_production" {
   depends_on                     = [akamai_mtlskeystore_client_certificate_upload.upload]
   property_id                    = akamai_property.property.id
-  contact                        = ["nomail@nomail-akamai.com"]
-  version                        = 1
-  network                        = "PRODUCTION"
+  contact                        = var.emails
+  version                        = akamai_property.property.latest_version
+  network                        = var.network
   auto_acknowledge_rule_warnings = true
-}
-
-data "akamai_property_rules_builder" "rule_default" {
-  rules_v2025_04_29 {
-    name      = "default"
-    is_secure = false
-    behavior {
-      origin {
-        cache_key_hostname            = "ORIGIN_HOSTNAME"
-        compress                      = true
-        enable_true_client_ip         = true
-        forward_host_header           = "REQUEST_HOST_HEADER"
-        hostname                      = "origin-www.example.com"
-        http_port                     = 80
-        https_port                    = 443
-        ip_version                    = "IPV4"
-        origin_certificate            = ""
-        origin_sni                    = true
-        origin_type                   = "CUSTOMER"
-        ports                         = ""
-        true_client_ip_client_setting = false
-        true_client_ip_header         = "True-Client-IP"
-        verification_mode             = "PLATFORM_SETTINGS"
-      }
-    }
-    behavior {
-      caching {
-        behavior        = "MAX_AGE"
-        must_revalidate = false
-        ttl             = "0s"
-      }
-    }
-    behavior {
-      cp_code {
-        value {
-          id = akamai_cp_code.cp_code.id
-        }
-      }
-    }
-    children = [
-      data.akamai_property_rules_builder.keystore.json,
-    ]
-  }
-}
-
-data "akamai_property_rules_builder" "keystore" {
-  rules_v2025_04_29 {
-    name                  = "keystore"
-    criteria_must_satisfy = "all"
-    behavior {
-      mtls_origin_keystore {
-        auth_client_cert                = false
-        client_certificate_version_guid = data.akamai_mtlskeystore_client_certificate.third_party_ds.current.version_guid
-        enable                          = true
-      }
-    }
-  }
 }
