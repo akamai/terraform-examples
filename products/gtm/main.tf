@@ -19,13 +19,18 @@
 * comes back up.
 * 
 */
+
+data "akamai_contract" "contract" {
+  group_name = var.group_name
+}
+
 resource "akamai_gtm_domain" "example_co_uk" {
-  contract                  = var.contractid
-  group                     = var.groupid
-  name                      = "example.co.uk.akadns.net"
+  contract                  = data.akamai_contract.contract.id
+  group                     = data.akamai_contract.contract.group_id
+  name                      = var.name
   type                      = "basic"
-  comment                   = "change"
-  email_notification_list   = ["example@example.org"]
+  comment                   = var.comment
+  email_notification_list   = var.emails
   default_timeout_penalty   = 25
   load_imbalance_percentage = 10
   default_error_penalty     = 75

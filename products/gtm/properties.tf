@@ -1,36 +1,3 @@
-# The load balancer
-resource "akamai_gtm_property" "lb" {
-  domain                      = akamai_gtm_domain.example_co_uk.name
-  name                        = "lb"
-  type                        = "weighted-round-robin"
-  ipv6                        = false
-  score_aggregation_type      = "worst"
-  stickiness_bonus_percentage = 0
-  stickiness_bonus_constant   = 0
-  use_computed_targets        = false
-  balance_by_download_score   = false
-  dynamic_ttl                 = 30
-  handout_limit               = 0
-  handout_mode                = "normal"
-  failover_delay              = 0
-  failback_delay              = 0
-  ghost_demand_reporting      = false
-  traffic_target {
-    datacenter_id = akamai_gtm_datacenter.uk.datacenter_id
-    enabled       = true
-    weight        = 50
-    servers       = []
-    handout_cname = "lb-2.example.co.uk.akadns.net"
-  }
-  traffic_target {
-    datacenter_id = akamai_gtm_datacenter.Dublin.datacenter_id
-    enabled       = true
-    weight        = 50
-    servers       = []
-    handout_cname = "lb-1.example.co.uk.akadns.net"
-  }
-}
-
 # The primary/failover for Frankfurt
 resource "akamai_gtm_property" "lb-1" {
   domain                      = akamai_gtm_domain.example_co_uk.name
@@ -127,4 +94,42 @@ resource "akamai_gtm_property" "lb-2" {
     answers_required                 = false
     recursion_requested              = false
   }
+}
+
+# The load balancer
+resource "akamai_gtm_property" "lb" {
+  domain                      = akamai_gtm_domain.example_co_uk.name
+  name                        = "lb"
+  type                        = "weighted-round-robin"
+  ipv6                        = false
+  score_aggregation_type      = "worst"
+  stickiness_bonus_percentage = 0
+  stickiness_bonus_constant   = 0
+  use_computed_targets        = false
+  balance_by_download_score   = false
+  dynamic_ttl                 = 30
+  handout_limit               = 0
+  handout_mode                = "normal"
+  failover_delay              = 0
+  failback_delay              = 0
+  ghost_demand_reporting      = false
+  traffic_target {
+    datacenter_id = akamai_gtm_datacenter.Frankfurt.datacenter_id
+    enabled       = true
+    weight        = 50
+    servers       = []
+    handout_cname = "lb-2.example.co.uk.akadns.net"
+  }
+  traffic_target {
+    datacenter_id = akamai_gtm_datacenter.Dublin.datacenter_id
+    enabled       = true
+    weight        = 50
+    servers       = []
+    handout_cname = "lb-1.example.co.uk.akadns.net"
+  }
+
+  depends_on = [
+    akamai_gtm_property.lb-1,
+    akamai_gtm_property.lb-2
+  ]
 }

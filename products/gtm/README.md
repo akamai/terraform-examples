@@ -69,11 +69,13 @@ module "example" {
   	 akamai_client_secret  = <string>
   	 akamai_client_token  = <string>
   	 akamai_host  = <string>
+  	 comment  = <string>
+  	 emails  = <list(string)>
+  	 group_name  = <string>
+  	 name  = <string>
   
 	 # Optional variables
   	 akamai_account_key  = <string> | default: ""
-  	 contractid  = <string> | default: ""
-  	 groupid  = <string> | default: ""
 }
  ```
 
@@ -82,7 +84,7 @@ module "example" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 7.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
@@ -94,6 +96,7 @@ module "example" {
 | [akamai_gtm_property.lb](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/gtm_property) | resource |
 | [akamai_gtm_property.lb-1](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/gtm_property) | resource |
 | [akamai_gtm_property.lb-2](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/gtm_property) | resource |
+| [akamai_contract.contract](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/contract) | data source |
 
 ## Modules
 
@@ -107,9 +110,11 @@ No modules.
 | <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
 | <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
 | <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
+| <a name="input_comment"></a> [comment](#input\_comment) | A comment to add to the GTM domain. | `string` | n/a | yes |
+| <a name="input_emails"></a> [emails](#input\_emails) | A list of email addresses to notify when changes are made to the GTM domain. | `list(string)` | n/a | yes |
+| <a name="input_group_name"></a> [group\_name](#input\_group\_name) | The name of the Akamai group. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | The name of the GTM Domain. | `string` | n/a | yes |
 | <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
-| <a name="input_contractid"></a> [contractid](#input\_contractid) | Value unknown at the time of import. Please update. | `string` | `""` | no |
-| <a name="input_groupid"></a> [groupid](#input\_groupid) | Value unknown at the time of import. Please update. | `string` | `""` | no |
 
 ## Outputs
 
