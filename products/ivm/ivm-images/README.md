@@ -1,4 +1,4 @@
-An example of how to manage Image Manager video policy with Terraform
+An example of how to manage an Image Manager configuration using Terraform
 
 ## Providers
 
@@ -24,13 +24,13 @@ An example of how to manage Image Manager video policy with Terraform
 
 | Name | Description |
 |------|-------------|
-| <a name="output_video_policyset_id"></a> [video\_policyset\_id](#output\_video\_policyset\_id) | n/a |
+| <a name="output_image_policyset_id"></a> [image\_policyset\_id](#output\_image\_policyset\_id) | n/a |
 
 <!-- BEGIN_TF_DOCS -->
 
-# Image Manager Video Policy Module
+# Image Manager Module
 
-An example of how to manage Image Manager video policy with Terraform
+An example of how to manage an Image Manager configuration using Terraform
 
 # Usage
 Basic usage of this module is as follows:
@@ -59,14 +59,14 @@ module "example" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 7.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [akamai_imaging_policy_set.videos](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/imaging_policy_set) | resource |
-| [akamai_imaging_policy_video.policy](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/imaging_policy_video) | resource |
+| [akamai_imaging_policy_image.policy](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/imaging_policy_image) | resource |
+| [akamai_imaging_policy_set.images](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/imaging_policy_set) | resource |
 
 ## Modules
 
@@ -90,7 +90,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_video_policyset_id"></a> [video\_policyset\_id](#output\_video\_policyset\_id) | n/a |
+| <a name="output_image_policyset_id"></a> [image\_policyset\_id](#output\_image\_policyset\_id) | n/a |
 
 ## Resources
 - [Akamai API Credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials)
