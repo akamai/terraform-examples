@@ -1,6 +1,6 @@
-variable "group_id" {
+variable "group_name" {
   type        = string
-  description = "The group id that contains your cloudlet"
+  description = "The name of the group for the Edgeworker"
 }
 
 variable "name" {

@@ -33,6 +33,11 @@ Here is an example of how to provision an Edgeworker, create the tarball,
 deploy the bundle to Akamai and activate. If the bundle changes, a new
 tarball will be created and a new version of the Edgeworker will activate
 
+Cross-platform support for the tarball creation is included, using PowerShell on
+Windows and sh on other platforms. The local-exec provisioner will run on the machine
+where Terraform is being executed, so make sure you have the necessary permissions to
+create files in the working directory.
+
 # Usage
 Basic usage of this module is as follows:
 
@@ -45,7 +50,7 @@ module "example" {
   	 akamai_client_secret  = <string>
   	 akamai_client_token  = <string>
   	 akamai_host  = <string>
-  	 group_id  = <string>
+  	 group_name  = <string>
   	 name  = <string>
   
 	 # Optional variables
@@ -58,7 +63,7 @@ module "example" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 7.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
@@ -67,6 +72,7 @@ module "example" {
 | [akamai_edgeworker.edgeworker](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/edgeworker) | resource |
 | [akamai_edgeworkers_activation.edgeworker](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/edgeworkers_activation) | resource |
 | [null_resource.bundle](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [akamai_contract.contract](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/contract) | data source |
 
 ## Modules
 
@@ -80,7 +86,7 @@ No modules.
 | <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
 | <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
 | <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
-| <a name="input_group_id"></a> [group\_id](#input\_group\_id) | The group id that contains your cloudlet | `string` | n/a | yes |
+| <a name="input_group_name"></a> [group\_name](#input\_group\_name) | The name of the group for the Edgeworker | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The name of the Edgeworker | `string` | n/a | yes |
 | <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
 
