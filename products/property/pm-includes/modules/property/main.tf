@@ -5,12 +5,6 @@
 * This allows the individual microservices development teams to manage their own includes
 * without having to share state with this centrally managed property
 */
-resource "akamai_cp_code" "default" {
-  name        = var.property_name
-  contract_id = var.contract_id
-  group_id    = var.group_id
-  product_id  = var.product_id
-}
 
 resource "akamai_edge_hostname" "edgehostname_edgesuite_net" {
   contract_id   = var.contract_id
@@ -50,10 +44,10 @@ resource "akamai_property_activation" "property-staging" {
 }
 
 # NOTE: Be careful when removing this resource as you can disable traffic
-#resource "akamai_property_activation" "property-production" {
-#  property_id                    = akamai_property.property.id
-#  contact                        = var.contacts
-#  version                        = akamai_property.property.latest_version
-#  network                        = "PRODUCTION"
-#  auto_acknowledge_rule_warnings = true
-#}
+resource "akamai_property_activation" "property-production" {
+  property_id                    = akamai_property.property.id
+  contact                        = var.contacts
+  version                        = akamai_property.property.latest_version
+  network                        = "PRODUCTION"
+  auto_acknowledge_rule_warnings = true
+}

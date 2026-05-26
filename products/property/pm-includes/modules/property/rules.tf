@@ -1,33 +1,28 @@
 
 data "akamai_property_rules_builder" "property_rule_default" {
-  rules_v2024_08_13 {
+  rules_v2026_02_16 {
     name      = "default"
-    is_secure = true
+    is_secure = false
     uuid      = "default"
     behavior {
       origin {
-        cache_key_hostname = "ORIGIN_HOSTNAME"
-        compress           = false
-        custom_certificate_authorities {}
-        custom_certificates {}
-        custom_valid_cn_values           = ["{{Origin Hostname}}", "{{Forward Host Header}}", "a248.e.akamai.net", "www.wheep.co.uk", ]
-        enable_true_client_ip            = true
-        forward_host_header              = "ORIGIN_HOSTNAME"
-        hostname                         = "origin.example.org"
-        http_port                        = 80
-        https_port                       = 443
-        ip_version                       = "IPV4"
-        min_tls_version                  = "DYNAMIC"
-        origin_certificate               = ""
-        origin_certs_to_honor            = "COMBO"
-        origin_sni                       = true
-        origin_type                      = "CUSTOMER"
-        ports                            = ""
-        standard_certificate_authorities = ["akamai-permissive", ]
-        tls_version_title                = ""
-        true_client_ip_client_setting    = false
-        true_client_ip_header            = "True-Client-IP"
-        verification_mode                = "CUSTOM"
+        cache_key_hostname            = "ORIGIN_HOSTNAME"
+        compress                      = true
+        enable_true_client_ip         = true
+        forward_host_header           = "REQUEST_HOST_HEADER"
+        hostname                      = "origin-central.example.com"
+        http_port                     = 80
+        https_port                    = 443
+        ip_version                    = "IPV4"
+        min_tls_version               = "DYNAMIC"
+        origin_certificate            = ""
+        origin_sni                    = true
+        origin_type                   = "CUSTOMER"
+        ports                         = ""
+        tls_version_title             = ""
+        true_client_ip_client_setting = false
+        true_client_ip_header         = "True-Client-IP"
+        verification_mode             = "PLATFORM_SETTINGS"
       }
     }
     behavior {
@@ -49,9 +44,7 @@ data "akamai_property_rules_builder" "property_rule_default" {
     }
     behavior {
       cp_code {
-        value {
-          id = akamai_cp_code.default.id
-        }
+        enable_default_content_provider_code = true
       }
     }
     behavior {
@@ -91,7 +84,7 @@ data "akamai_property_rules_builder" "property_rule_default" {
 }
 
 data "akamai_property_rules_builder" "property_rule_performance" {
-  rules_v2024_08_13 {
+  rules_v2026_02_16 {
     name                  = "Performance"
     criteria_must_satisfy = "all"
     behavior {
@@ -108,7 +101,7 @@ data "akamai_property_rules_builder" "property_rule_performance" {
 }
 
 data "akamai_property_rules_builder" "property_rule_http_-_https" {
-  rules_v2024_08_13 {
+  rules_v2026_02_16 {
     name                  = "HTTP > HTTPS"
     criteria_must_satisfy = "all"
     criterion {
@@ -130,7 +123,7 @@ data "akamai_property_rules_builder" "property_rule_http_-_https" {
 }
 
 data "akamai_property_rules_builder" "property_rule_caching" {
-  rules_v2024_08_13 {
+  rules_v2026_02_16 {
     name                  = "Caching"
     criteria_must_satisfy = "all"
     children = [
@@ -141,7 +134,7 @@ data "akamai_property_rules_builder" "property_rule_caching" {
 }
 
 data "akamai_property_rules_builder" "property_rule_static_html" {
-  rules_v2024_08_13 {
+  rules_v2026_02_16 {
     name                  = "Static html"
     criteria_must_satisfy = "all"
     criterion {
@@ -163,7 +156,7 @@ data "akamai_property_rules_builder" "property_rule_static_html" {
 }
 
 data "akamai_property_rules_builder" "property_rule_css" {
-  rules_v2024_08_13 {
+  rules_v2026_02_16 {
     name                  = "css"
     criteria_must_satisfy = "all"
     criterion {
@@ -193,7 +186,7 @@ data "akamai_property_rules_builder" "property_rule_css" {
 }
 
 data "akamai_property_rules_builder" "includes" {
-  rules_v2024_08_13 {
+  rules_v2026_02_16 {
     name                  = "Includes"
     criteria_must_satisfy = "all"
     children = [
@@ -204,7 +197,7 @@ data "akamai_property_rules_builder" "includes" {
 
 data "akamai_property_rules_builder" "include" {
   for_each = var.includes
-  rules_v2024_08_13 {
+  rules_v2026_02_16 {
     name                  = data.akamai_property_include.include[each.key].name
     criteria_must_satisfy = "all"
     criterion {

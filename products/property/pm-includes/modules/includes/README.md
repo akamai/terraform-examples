@@ -35,14 +35,15 @@ module "example" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | >= 7.1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
 | [akamai_property_include.test_include](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/property_include) | resource |
+| [akamai_property_include_activation.test_include_production](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/property_include_activation) | resource |
 | [akamai_property_include_activation.test_include_staging](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/property_include_activation) | resource |
 
 ## Modules

@@ -18,6 +18,19 @@ Basic usage of this module is as follows:
 ```hcl
 module "example" {
   	 source  = "<module-location>"
+  
+	 # Required variables
+  	 akamai_access_token  = <string>
+  	 akamai_client_secret  = <string>
+  	 akamai_client_token  = <string>
+  	 akamai_host  = <string>
+  	 contacts  = <list(string)>
+  	 group_name  = <string>
+  	 include_name  = <string>
+  	 product_id  = <string>
+  
+	 # Optional variables
+  	 akamai_account_key  = <string> | default: ""
 }
  ```
 
@@ -25,14 +38,15 @@ module "example" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | >= 7.1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [akamai_cp_code.cp_code](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/cp_code) | resource |
+| [akamai_contract.contract](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/contract) | data source |
+| [akamai_property_rules_builder.include_rule_offload](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/property_rules_builder) | data source |
 | [akamai_property_rules_builder.test_include_rule_default](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/property_rules_builder) | data source |
 
 ## Modules
@@ -43,7 +57,17 @@ module "example" {
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_akamai_access_token"></a> [akamai\_access\_token](#input\_akamai\_access\_token) | Akamai access token | `string` | n/a | yes |
+| <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
+| <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
+| <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
+| <a name="input_contacts"></a> [contacts](#input\_contacts) | A list of contacts who will be contacted when this config is deployed | `list(string)` | n/a | yes |
+| <a name="input_group_name"></a> [group\_name](#input\_group\_name) | Group name | `string` | n/a | yes |
+| <a name="input_include_name"></a> [include\_name](#input\_include\_name) | Name for your include | `string` | n/a | yes |
+| <a name="input_product_id"></a> [product\_id](#input\_product\_id) | Name of the required product | `string` | n/a | yes |
+| <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
 
 ## Outputs
 

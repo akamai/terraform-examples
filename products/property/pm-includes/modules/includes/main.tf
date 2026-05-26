@@ -18,8 +18,6 @@ resource "akamai_property_include" "test_include" {
   type        = "MICROSERVICES"
   rule_format = var.rule_format
   rules       = var.rules
-  #rule_format = data.akamai_property_rules_builder.test_include_rule_default.rule_format
-  #rules       = data.akamai_property_rules_builder.test_include_rule_default.json
 }
 
 resource "akamai_property_include_activation" "test_include_staging" {
@@ -32,15 +30,15 @@ resource "akamai_property_include_activation" "test_include_staging" {
   notify_emails                  = var.contacts
 }
 
-#resource "akamai_property_include_activation" "test_include_production" {
-#  contract_id = akamai_property_include.test_include.contract_id
-#  group_id = akamai_property_include.test_include.group_id
-#  include_id = akamai_property_include.test_include.id
-#  network = "PRODUCTION"
-#  auto_acknowledge_rule_warnings = true
-#  version = akamai_property_include.test_include.latest_version
-#  notify_emails = var.contacts
-#}
+resource "akamai_property_include_activation" "test_include_production" {
+  contract_id                    = akamai_property_include.test_include.contract_id
+  group_id                       = akamai_property_include.test_include.group_id
+  include_id                     = akamai_property_include.test_include.id
+  network                        = "PRODUCTION"
+  auto_acknowledge_rule_warnings = true
+  version                        = akamai_property_include.test_include.latest_version
+  notify_emails                  = var.contacts
+}
 
 output "id" {
   value = akamai_property_include.test_include.id

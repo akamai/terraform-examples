@@ -30,16 +30,16 @@ module "example" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | >= 7.0.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [akamai_cp_code.default](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/cp_code) | resource |
 | [akamai_edge_hostname.edgehostname_edgesuite_net](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/edge_hostname) | resource |
 | [akamai_property.property](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/property) | resource |
+| [akamai_property_activation.property-production](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/property_activation) | resource |
 | [akamai_property_activation.property-staging](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/property_activation) | resource |
 | [akamai_property_include.include](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/property_include) | data source |
 | [akamai_property_rules_builder.include](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/property_rules_builder) | data source |

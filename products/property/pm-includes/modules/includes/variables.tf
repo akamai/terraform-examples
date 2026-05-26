@@ -31,4 +31,3 @@ variable "rules" {
   type        = string
   description = "The json rule tree as returned by the akamai_property_rules_builder"
 }
-

@@ -12,20 +12,17 @@
 * include id from this state file when they apply their changes.
 */
 
-locals {
-  include_name = "new-include"
-  contacts     = ["user@example.org"]
-  contract_id  = "ctr_1-1NC95D"
-  group_id     = "grp_91533"
-  product_id   = "prd_Fresca"
+data "akamai_contract" "contract" {
+  group_name = var.group_name
 }
 
 module "include" {
   source       = "../modules/includes"
-  contract_id  = local.contract_id
-  group_id     = local.group_id
-  contacts     = local.contacts
-  include_name = local.include_name
+  contract_id  = data.akamai_contract.contract.id
+  group_id     = data.akamai_contract.contract.group_id
+  product_id   = var.product_id
+  contacts     = var.contacts
+  include_name = var.include_name
   rule_format  = data.akamai_property_rules_builder.test_include_rule_default.rule_format
   rules        = data.akamai_property_rules_builder.test_include_rule_default.json
 }
