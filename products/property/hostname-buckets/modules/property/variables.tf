@@ -14,11 +14,6 @@ variable "product_id" {
   description = "Name of the required product"
 }
 
-variable "include_name" {
-  type        = string
-  description = "Name for your include"
-}
-
 variable "property_name" {
   type        = string
   description = "Name for your property"

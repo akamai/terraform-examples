@@ -103,7 +103,7 @@ data "akamai_property_hostnames" "hostnames" {
   # We have to look at the property but not until we've attached the bucket hostnames
   depends_on = [
     akamai_property_hostname_bucket.bucket-hostname-bucket-staging,
-    akamai_property_hostname_bucket.bucket-hostname-bucket-production
+    #akamai_property_hostname_bucket.bucket-hostname-bucket-production
   ]
 }
 

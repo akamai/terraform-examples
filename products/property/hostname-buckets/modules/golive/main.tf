@@ -15,8 +15,12 @@ data "akamai_property_hostnames" "hostnames" {
   property_id = data.akamai_property.property.id
 }
 
+locals {
+  hostname_cert_status = data.akamai_property_hostnames.hostnames.hostname_bucket
+}
+
 output "status" {
-  value = data.akamai_property_hostnames.hostnames.hostnames
+  value = local.hostname_cert_status
 }
 
 resource "akamai_dns_record" "golive" {
@@ -31,7 +35,7 @@ resource "akamai_dns_record" "golive" {
   lifecycle {
     precondition {
       condition = anytrue([
-        for hostname in data.akamai_property_hostnames.hostnames.hostnames :
+        for hostname in local.hostname_cert_status :
         alltrue([
           for cert in hostname.cert_status : cert.production_status == "DEPLOYED"
         ])

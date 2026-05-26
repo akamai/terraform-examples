@@ -17,7 +17,6 @@ module "example" {
   	 contract_id  = <string>
   	 group_id  = <string>
   	 hostnames  = <list(string)>
-  	 include_name  = <string>
   	 property_name  = <string>
   
 	 # Optional variables
@@ -36,8 +35,8 @@ module "example" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | >= 7.1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
@@ -103,7 +102,6 @@ No modules.
 | <a name="input_contract_id"></a> [contract\_id](#input\_contract\_id) | Contract ID | `string` | n/a | yes |
 | <a name="input_group_id"></a> [group\_id](#input\_group\_id) | Group ID | `string` | n/a | yes |
 | <a name="input_hostnames"></a> [hostnames](#input\_hostnames) | A list of hostnames to include in this configuration | `list(string)` | n/a | yes |
-| <a name="input_include_name"></a> [include\_name](#input\_include\_name) | Name for your include | `string` | n/a | yes |
 | <a name="input_property_name"></a> [property\_name](#input\_property\_name) | Name for your property | `string` | n/a | yes |
 | <a name="input_compliance_record"></a> [compliance\_record](#input\_compliance\_record) | For Akamai internal change management process | <pre>object({<br/>    reason           = string<br/>    peer_reviewed_by = optional(string)<br/>    customer_email   = optional(string)<br/>    unit_tested      = optional(bool)<br/>  })</pre> | `null` | no |
 | <a name="input_notes"></a> [notes](#input\_notes) | Change notes for the bucket activation | `string` | `"Updated by Terraform"` | no |

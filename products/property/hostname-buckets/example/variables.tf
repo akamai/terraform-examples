@@ -1,11 +1,6 @@
-variable "contract_id" {
+variable "group_name" {
   type        = string
-  description = "Contract ID"
-}
-
-variable "group_id" {
-  type        = string
-  description = "Group ID"
+  description = "Group name"
 }
 
 variable "product_id" {
@@ -48,16 +43,6 @@ variable "compliance_record" {
 variable "hostnames" {
   type        = list(string)
   description = "A list of hostnames to include in this configuration"
-}
-
-variable "hostnames" {
-  type        = list(string)
-  description = "A list of hostnames to create challenges for. Unfortunately this is needed because Terraform wants to know how many records it's creating at plan time and challenges map isn't know until run time"
-}
-
-variable "challenges" {
-  type        = map(string)
-  description = "A map of challenge hostnames to their CNAME targets"
 }
 
 variable "zone" {
