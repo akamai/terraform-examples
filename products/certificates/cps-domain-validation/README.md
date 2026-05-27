@@ -21,25 +21,26 @@ locals {
     postal_code      = "TST123"
     country_code     = "GB"
   }
-  contract_id = "ctr_1-1NC95D"
-  common_name = "test999.example.org"
-  sans        = ["test998.example.org"]
-
+  contract_id    = var.contract_id
+  common_name    = var.hostname
+  sans           = [var.hostname]
+  secure_network = (var.enhanced_tls == true) ? "enhanced-tls" : "standard-tls"
 }
 
 module "enrollment" {
-  source        = "../modules/enrollment"
-  contract_id   = local.contract_id
-  common_name   = local.common_name
-  sans          = local.sans
-  admin_contact = local.contact_details
-  tech_contact  = merge(local.contact_details, { email = "noreply@akamai.com" }) # Override the tech contact
-  organization  = local.contact_details
+  source         = "../modules/enrollment"
+  contract_id    = local.contract_id
+  common_name    = local.common_name
+  sans           = local.sans
+  secure_network = local.secure_network
+  admin_contact  = local.contact_details
+  tech_contact   = merge(local.contact_details, { email = "noreply@akamai.com" }) # Override the tech contact
+  organization   = local.contact_details
 }
 
 module "dns" {
   source     = "../modules/dns"
-  zone       = "example.org"
+  zone       = var.dns_zone
   challenges = module.enrollment.dns_challenges
   hostnames  = module.enrollment.hostnames
 }
@@ -82,6 +83,10 @@ No resources.
 | <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
 | <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
 | <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
+| <a name="input_contract_id"></a> [contract\_id](#input\_contract\_id) | Contract ID for certificate creation | `string` | n/a | yes |
+| <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | DNS zone for the hostname | `string` | n/a | yes |
+| <a name="input_enhanced_tls"></a> [enhanced\_tls](#input\_enhanced\_tls) | Whether to deploy the certificate on the enhanced TLS network | `bool` | n/a | yes |
+| <a name="input_hostname"></a> [hostname](#input\_hostname) | Hostname to include in the certificate | `string` | n/a | yes |
 | <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
 
 ## Outputs

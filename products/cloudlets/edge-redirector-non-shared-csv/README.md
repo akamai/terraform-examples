@@ -11,11 +11,11 @@ An example is shown below. Please refer to the example directory in this git rep
 ```hcl
 module "example" {
   source                = "../modules/er"
-  csv                   = file("redirects.csv")
-  group_id              = "19293"
-  policy_name           = "ertest_tf"
-  associated_properties = ["test.example.org", "test2.example.org"]
-  #env = "production"
+  csv                   = file(var.csv)
+  group_id              = var.group_id
+  policy_name           = var.policy_name
+  associated_properties = var.associated_properties
+  env                   = var.env
 }
 ```
 
@@ -24,7 +24,7 @@ module "example" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 7.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
@@ -46,10 +46,10 @@ No resources.
 | <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
 | <a name="input_associated_properties"></a> [associated\_properties](#input\_associated\_properties) | The properties that are associated with this cloudlet policy | `list(string)` | n/a | yes |
 | <a name="input_csv"></a> [csv](#input\_csv) | The CSV file is similar to one that you'd download from Control Center GUI and should have the following headings:-<pre>ruleName,matchURL,useRelativeUrl,redirectURL,statusCode</pre>In addition, it should be passed to the module as follows:-<pre>csv = file(\"redirects.csv\")</pre> | `string` | n/a | yes |
+| <a name="input_env"></a> [env](#input\_env) | The environment to which this should be deployed | `string` | n/a | yes |
 | <a name="input_group_id"></a> [group\_id](#input\_group\_id) | The group id that contains your cloudlet | `string` | n/a | yes |
 | <a name="input_policy_name"></a> [policy\_name](#input\_policy\_name) | The name of the cloudlet policy | `string` | n/a | yes |
 | <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
-| <a name="input_env"></a> [env](#input\_env) | The environment to which this should be deployed | `string` | `"staging"` | no |
 
 ## Outputs
 

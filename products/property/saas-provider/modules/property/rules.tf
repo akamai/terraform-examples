@@ -329,7 +329,7 @@ data "akamai_property_rules_builder" "saas_config_rule_adaptive_acceleration" {
         enable_push               = true
         enable_ro                 = false
         preload_enable            = true
-        source                    = "mPulse"
+        source                    = "MPULSE"
         title_http2_server_push   = ""
         title_preconnect          = ""
         title_preload             = ""

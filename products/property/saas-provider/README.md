@@ -1,99 +1,68 @@
-<!-- BEGIN_TF_DOCS -->
+# SaaS Provider
 
-# Property Manager: SaaS Provider
+This example shows a use-case where a SaaS provider runs a single Akamai delivery property and adds customer hostnames to it on an ad-hoc basis. Each time new hostnames are onboarded, the configuration provisions SBD (Secure by Default) certificates and creates the ACME DNS challenge records. The property is deliberately **not** activated to production at this stage — production activation is deferred to the go-live step once the certificates have deployed.
 
-This modules shows a use-case where a SaaS provider will have a single property for
-their application and customer hostnames get added on an adhoc basis. This module will
-create the Property Manager configuration, add the list of hostnames to it, and return
-a map of challenges for validating the certificate for each hostname. The map key is
-the acme challenge "hostname" and the value is the "target".
-
-This modules deliberately does not activate the Property Manager configuration to
-production because it's likely you're going to want to delay that until the certificate
-has deployed
-
-# Example
-An example is shown below. Please refer to the example directory in this git repo for further details
-```hcl
-locals {
-  property_name = "saas-test4.example.org"
-  edge_hostname = "saas-test4.example.org"
-  zone          = "example.org"
-  hostnames     = ["saas-test4-1.example.org", "saas-test4-2.example.org"]
-  contacts      = ["example@example.org"]
-  contract_id   = "ctr_1-1NC95D"
-  group_id      = "grp_91533"
-}
-
-module "delivery" {
-  source        = "../modules/property"
-  contract_id   = local.contract_id
-  group_id      = local.group_id
-  property_name = local.property_name
-  edge_hostname = local.edge_hostname
-  hostnames     = local.hostnames
-  contacts      = local.contacts
-
-  # Akamai internal compliance process
-  compliance_record = var.compliance_record
-}
-
-module "dns" {
-  source     = "../modules/dns"
-  zone       = local.zone
-  hostnames  = module.delivery.hostnames
-  challenges = module.delivery.challenges
-}
+## Repository structure
 
 ```
+saas-provider/
+├── example/    # Step 1 — creates the property, SBD certificate challenges, and DNS ACME records
+├── golive/     # Step 2 — updates DNS to CNAME hostnames to the Akamai edge hostname (run once certs are ready)
+└── modules/    # Reusable modules consumed by example/ and golive/
+    ├── property/
+    ├── dns/
+    └── golive/
+```
 
-## Requirements
+## Workflow
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 7.0 |
+### Step 1 — Deploy the property (`example/`)
 
-## Resources
+This Terraform configuration creates:
+- The Akamai delivery property with the list of customer hostnames
+- SBD certificate challenges for each hostname
+- DNS ACME validation records
 
-No resources.
+```bash
+cd example/
+terraform init
+terraform apply
+```
+
+After `apply` completes, the SBD certificates will begin provisioning. Wait approximately **8 minutes** before proceeding to Step 2.
+
+### Step 2 — Go live (`golive/`)
+
+This is a **separate Terraform execution**. It updates DNS to CNAME each hostname to the Akamai edge hostname and activates the property to production. A precondition verifies that the SBD certificates are fully deployed before allowing the DNS change to proceed.
+
+> If the precondition fails, the certificates are still provisioning — wait a short while and re-run.
+
+```bash
+cd golive/
+terraform init
+terraform apply
+```
+
+#### Required variables
+
+| Name | Description |
+|------|-------------|
+| `property_name` | Name of the property (must match Step 1) |
+| `edge_hostname` | The Akamai edge hostname (e.g. `example.org.edgesuite.net`) |
+| `hostnames` | List of customer hostnames to CNAME to the edge hostname |
+| `zone` | The DNS zone being updated |
 
 ## Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_delivery"></a> [delivery](#module\_delivery) | ../modules/property | n/a |
-| <a name="module_dns"></a> [dns](#module\_dns) | ../modules/dns | n/a |
-
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_akamai_access_token"></a> [akamai\_access\_token](#input\_akamai\_access\_token) | Akamai access token | `string` | n/a | yes |
-| <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
-| <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
-| <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
-| <a name="input_challenges"></a> [challenges](#input\_challenges) | A map of challenge hostnames to their CNAME targets | `map(string)` | n/a | yes |
-| <a name="input_contacts"></a> [contacts](#input\_contacts) | A list of contacts who will be contacted when this config is deployed | `list(string)` | n/a | yes |
-| <a name="input_contract_id"></a> [contract\_id](#input\_contract\_id) | Contract ID | `string` | n/a | yes |
-| <a name="input_edge_hostname"></a> [edge\_hostname](#input\_edge\_hostname) | Your Edge Hostname (without .edgesuite.net domain suffix) | `string` | n/a | yes |
-| <a name="input_group_id"></a> [group\_id](#input\_group\_id) | Group ID | `string` | n/a | yes |
-| <a name="input_hostnames"></a> [hostnames](#input\_hostnames) | A list of hostnames to create challenges for. Unfortunately this is needed because Terraform wants to know how many records it's creating at plan time and challenges map isn't know until run time | `list(string)` | n/a | yes |
-| <a name="input_property_name"></a> [property\_name](#input\_property\_name) | Name for your property | `string` | n/a | yes |
-| <a name="input_zone"></a> [zone](#input\_zone) | The DNS zone that we're adding the challenge records | `string` | n/a | yes |
-| <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
-| <a name="input_compliance_record"></a> [compliance\_record](#input\_compliance\_record) | For Akamai internal change management process | <pre>object({<br/>    reason           = string<br/>    peer_reviewed_by = optional(string)<br/>    customer_email   = optional(string)<br/>    unit_tested      = optional(bool)<br/>  })</pre> | `null` | no |
-| <a name="input_product_id"></a> [product\_id](#input\_product\_id) | Name of the required product | `string` | `"prd_Fresca"` | no |
-
-## Outputs
-
-No outputs.
+| Module | Path | Description |
+|--------|------|-------------|
+| `property` | `modules/property/` | Creates the Akamai delivery property and stages it (no production activation) |
+| `dns` | `modules/dns/` | Creates DNS ACME challenge records for SBD certificate validation |
+| `golive` | `modules/golive/` | CNAMEs hostnames to the edge hostname and activates to production once certs are ready |
 
 ## Resources
 - [Akamai API Credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials)
 - [Akamai Terraform Provider](https://techdocs.akamai.com/terraform/docs)
 - [Akamai CLI for Terraform](https://github.com/akamai/cli-terraform)
-- [Linode Object Storage](https://www.linode.com/lp/object-storage/)
-- [Akamai Developer Youtube Channel](https://www.youtube.com/c/AkamaiDeveloper)
-- [Akamai Github](https://github.com/akamai)
-<!-- END_TF_DOCS -->
+- [Akamai Developer YouTube Channel](https://www.youtube.com/c/AkamaiDeveloper)
+- [Akamai GitHub](https://github.com/akamai)

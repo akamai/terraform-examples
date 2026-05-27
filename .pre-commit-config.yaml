@@ -64,11 +64,9 @@ repos:
           pwsh -NoProfile -Command "
           $paths = @(
             './products/client-lists/example',
-            './products/certificates/domain-validation/example',
-            './products/certificates/third-party/example',
-            './products/cloudlets/edge-redirector-csv/example',
-            './products/property/hostname-buckets/example',
-            './products/property/saas-provider/example'
+            './products/certificates/cps-domain-validation/example',
+            './products/certificates/cps-third-party/example',
+            './products/cloudlets/edge-redirector-non-shared-csv/example'
           );
           foreach ($path in $paths) {
             $configPath = Join-Path (Split-Path $path -Parent) '.terraform-docs.yaml';

@@ -1,4 +1,4 @@
-header-from: ../modules/main.tf
+header-from: ../modules/client-lists/main.tf
 footer-from: ""
 formatter: markdown table
 recursive:

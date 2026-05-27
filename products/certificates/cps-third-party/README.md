@@ -29,13 +29,15 @@ locals {
 }
 
 module "example" {
-  source        = "../modules/third-party"
-  contract_id   = "AK12345"
-  common_name   = "www.example.org"
-  sans          = ["www.example.com", "www.example.net"]
-  tech_contact  = local.contact_details
-  admin_contact = local.contact_details
-  organization  = local.contact_details
+  source         = "../modules/third-party"
+  config_section = var.config_section
+  contract_id    = var.contract_id
+  common_name    = var.common_name
+  sans           = var.sans
+  secure_network = var.secure_network
+  tech_contact   = merge(local.contact_details, { email = "noreply@akamai.com" }) # Override the tech contact
+  admin_contact  = local.contact_details
+  organization   = local.contact_details
 }
 
 ```
@@ -45,7 +47,7 @@ module "example" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 7.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
@@ -61,17 +63,11 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_admin_contact"></a> [admin\_contact](#input\_admin\_contact) | An object containing admin contact details for the certificate | <pre>object({<br/>    first_name       = string<br/>    last_name        = string<br/>    organization     = string<br/>    email            = string<br/>    phone            = string<br/>    address_line_one = string<br/>    address_line_two = string<br/>    city             = string<br/>    region           = string<br/>    postal_code      = string<br/>    country_code     = string<br/>  })</pre> | n/a | yes |
-| <a name="input_akamai_access_token"></a> [akamai\_access\_token](#input\_akamai\_access\_token) | Akamai access token | `string` | n/a | yes |
-| <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
-| <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
-| <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
 | <a name="input_common_name"></a> [common\_name](#input\_common\_name) | The common name on the certificate | `string` | n/a | yes |
 | <a name="input_contract_id"></a> [contract\_id](#input\_contract\_id) | The contract id that contains your certificate | `string` | n/a | yes |
-| <a name="input_organization"></a> [organization](#input\_organization) | An object containing organization details for the certificate | <pre>object({<br/>    organization     = string<br/>    unit             = string<br/>    phone            = string<br/>    address_line_one = string<br/>    address_line_two = string<br/>    city             = string<br/>    region           = string<br/>    postal_code      = string<br/>    country_code     = string<br/>  })</pre> | n/a | yes |
 | <a name="input_sans"></a> [sans](#input\_sans) | A list of san names | `list(string)` | n/a | yes |
-| <a name="input_tech_contact"></a> [tech\_contact](#input\_tech\_contact) | An object containing tech contact details for the certificate | <pre>object({<br/>    first_name       = string<br/>    last_name        = string<br/>    organization     = string<br/>    email            = string<br/>    phone            = string<br/>    address_line_one = string<br/>    address_line_two = string<br/>    city             = string<br/>    region           = string<br/>    postal_code      = string<br/>    country_code     = string<br/>  })</pre> | n/a | yes |
-| <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
+| <a name="input_config_section"></a> [config\_section](#input\_config\_section) | EdgeRC section. Change this to switch between accounts, assuming your section has an account\_id member | `string` | `"default"` | no |
+| <a name="input_edgerc_path"></a> [edgerc\_path](#input\_edgerc\_path) | Path to .edgerc file. Defaults to ~/.edgerc | `string` | `"~/.edgerc"` | no |
 | <a name="input_secure_network"></a> [secure\_network](#input\_secure\_network) | The network to assign to. Can be either "standard-tls" or "enhanced-tls" | `string` | `"standard-tls"` | no |
 
 ## Outputs
