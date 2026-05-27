@@ -1,3 +1,4 @@
+group_name     = "PROD"
 group_id       = "123456"
 contract_id    = "1-2AB34C"
 default_origin = "origin.example.com"

@@ -1,4 +1,6 @@
-property_name = "test-property"
+contract_id   = "ctr_W-XXXXXX"
+group_id      = "grp_12345"
+property_name = "example-property"
 
 hostnames = {
   "test1.example.com" = { cert_provisioning_type = "DEFAULT" }

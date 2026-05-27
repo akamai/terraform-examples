@@ -60,7 +60,7 @@ No resources.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_aap"></a> [aap](#module\_aap) | ../../../products/aapasm | n/a |
-| <a name="module_certificate"></a> [certificate](#module\_certificate) | ../../../products/certificate/dv | n/a |
+| <a name="module_certificate"></a> [certificate](#module\_certificate) | ../../../products/certificates/cps-domain-validation-simple | n/a |
 | <a name="module_network-lists"></a> [network-lists](#module\_network-lists) | ../../../products/network-lists | n/a |
 | <a name="module_property"></a> [property](#module\_property) | ../../../products/property/rules-as-hcl | n/a |
 

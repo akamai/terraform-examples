@@ -47,6 +47,8 @@ module "example" {
   	 akamai_client_secret  = <string>
   	 akamai_client_token  = <string>
   	 akamai_host  = <string>
+  	 contract_id  = <string>
+  	 group_id  = <string>
   	 hostnames  = <map(object({
     cert_provisioning_type = string
   }))>
@@ -58,9 +60,7 @@ module "example" {
   	 contact  = <list(string)> | default: [
   "noreply@akamai.com"
 ]
-  	 contract_id  = <string> | default: "ctr_1-5C13O8"
   	 enable_cert_validation  = <bool> | default: true
-  	 group_id  = <string> | default: "grp_315963"
   	 product_id  = <string> | default: "prd_Fresca"
 }
  ```
@@ -96,14 +96,14 @@ No modules.
 | <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
 | <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
 | <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
+| <a name="input_contract_id"></a> [contract\_id](#input\_contract\_id) | The ID of the Akamai contract. | `string` | n/a | yes |
+| <a name="input_group_id"></a> [group\_id](#input\_group\_id) | The ID of the Akamai group. | `string` | n/a | yes |
 | <a name="input_hostnames"></a> [hostnames](#input\_hostnames) | Map of hostnames to their cert\_provisioning\_type. Key is cname\_from; cname\_to is derived as <hostname>.edgekey.net. | <pre>map(object({<br/>    cert_provisioning_type = string<br/>  }))</pre> | n/a | yes |
-| <a name="input_property_name"></a> [property\_name](#input\_property\_name) | n/a | `string` | n/a | yes |
+| <a name="input_property_name"></a> [property\_name](#input\_property\_name) | The name of the property. | `string` | n/a | yes |
 | <a name="input_activation_network"></a> [activation\_network](#input\_activation\_network) | n/a | `string` | `"STAGING"` | no |
 | <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
 | <a name="input_contact"></a> [contact](#input\_contact) | List of email addresses to notify on property activation. | `list(string)` | <pre>[<br/>  "noreply@akamai.com"<br/>]</pre> | no |
-| <a name="input_contract_id"></a> [contract\_id](#input\_contract\_id) | n/a | `string` | `"ctr_1-5C13O8"` | no |
 | <a name="input_enable_cert_validation"></a> [enable\_cert\_validation](#input\_enable\_cert\_validation) | n/a | `bool` | `true` | no |
-| <a name="input_group_id"></a> [group\_id](#input\_group\_id) | n/a | `string` | `"grp_315963"` | no |
 | <a name="input_product_id"></a> [product\_id](#input\_product\_id) | n/a | `string` | `"prd_Fresca"` | no |
 
 ## Outputs

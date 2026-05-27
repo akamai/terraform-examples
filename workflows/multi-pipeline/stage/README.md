@@ -19,6 +19,7 @@ module "example" {
   	 default_origin  = <string>
   	 email  = <string>
   	 group_id  = <string>
+  	 group_name  = <string>
   	 hostname  = <string>
   	 project_name  = <string>
   
@@ -60,7 +61,7 @@ No resources.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_aap"></a> [aap](#module\_aap) | ../../../products/aapasm | n/a |
-| <a name="module_certificate"></a> [certificate](#module\_certificate) | ../../../products/certificate/dv | n/a |
+| <a name="module_certificate"></a> [certificate](#module\_certificate) | ../../../products/certificates/cps-domain-validation-simple | n/a |
 | <a name="module_network-lists"></a> [network-lists](#module\_network-lists) | ../../../products/network-lists | n/a |
 | <a name="module_property"></a> [property](#module\_property) | ../../../products/property/rules-as-hcl | n/a |
 
@@ -77,6 +78,7 @@ No resources.
 | <a name="input_default_origin"></a> [default\_origin](#input\_default\_origin) | Default origin server for all properties | `string` | n/a | yes |
 | <a name="input_email"></a> [email](#input\_email) | Email address used for activations | `string` | n/a | yes |
 | <a name="input_group_id"></a> [group\_id](#input\_group\_id) | Group ID for property/config creation | `string` | n/a | yes |
+| <a name="input_group_name"></a> [group\_name](#input\_group\_name) | Group name for property/config creation | `string` | n/a | yes |
 | <a name="input_hostname"></a> [hostname](#input\_hostname) | Hostname to include in configs/properties | `string` | n/a | yes |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Name of the overall project. Used to name various resources. Should only contain letters, numbers and underscores | `string` | n/a | yes |
 | <a name="input_edgerc"></a> [edgerc](#input\_edgerc) | EdgeRC file location | `string` | `"~/.edgerc"` | no |

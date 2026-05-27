@@ -8,17 +8,15 @@ locals {
 }
 
 module "certificate" {
-  source       = "../../../products/certificate/dv"
+  source       = "../../../products/certificates/cps-domain-validation-simple"
   contract_id  = var.contract_id
-  group_id     = var.group_id
   hostname     = var.hostname
   enhanced_tls = var.enhanced_tls
 }
 
 module "network-lists" {
   source                   = "../../../products/network-lists"
-  contract_id              = var.contract_id
-  group_id                 = var.group_id
+  group_name               = var.group_name
   prefix                   = local.sanitized_project_name
   ip_block_list            = var.ip_block_list
   ip_block_list_exceptions = var.ip_block_list_exceptions
@@ -26,18 +24,17 @@ module "network-lists" {
   security_bypass_list     = var.security_bypass_list
   rate_bypass_list         = var.rate_bypass_list
   pragma_exceptions        = var.pragma_exceptions
-  email                    = var.email
+  emails                   = [var.email]
 }
 
 module "property" {
   source                 = "../../../products/property/rules-as-hcl"
   property_name          = var.project_name
-  contract_id            = var.contract_id
-  group_id               = var.group_id
+  group_name             = var.group_name
   product_id             = var.product_id
   hostname               = var.hostname
   rule_format            = var.rule_format
-  email                  = var.email
+  contacts               = [var.email]
   default_origin         = var.default_origin
   sure_route_test_object = var.sure_route_test_object
   td_region              = var.td_region

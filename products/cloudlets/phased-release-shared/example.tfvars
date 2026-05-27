@@ -1,0 +1,6 @@
+#config_section = "default"
+group_id      = "12345"
+name          = "example_pr_bluegreen"
+cloudlet_code = "CD"
+description   = "Change Notes"
+env           = "staging"

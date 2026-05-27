@@ -27,6 +27,11 @@ variable "group_id" {
   description = "Group ID for property/config creation"
 }
 
+variable "group_name" {
+  type        = string
+  description = "Group name for property/config creation"
+}
+
 variable "product_id" {
   type        = string
   description = "Property Manager product"

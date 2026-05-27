@@ -1,15 +1,16 @@
 variable "contract_id" {
-  type    = string
-  default = "ctr_1-5C13O8"
+  type        = string
+  description = "The ID of the Akamai contract."
 }
 
 variable "group_id" {
-  type    = string
-  default = "grp_315963"
+  type        = string
+  description = "The ID of the Akamai group."
 }
 
 variable "property_name" {
-  type = string
+  type        = string
+  description = "The name of the property."
 }
 
 variable "product_id" {

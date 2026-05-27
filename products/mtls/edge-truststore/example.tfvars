@@ -1,0 +1,10 @@
+#config_section = "default"
+group_name                      = "Example Testing"
+certificate_name                = "Example-Testing-Certificate"
+certificate_description         = "Full workflow with CPS and PAPI description"
+certificate_version_description = "Full workflow with CPS and PAPI version description"
+common_name                     = "truststore-test.example.com"
+emails                          = ["user@example.com"]
+property_name                   = "Example-Testing-Certificate"
+hostname                        = "mtls-keystore.example.com"
+network                         = "STAGING"
