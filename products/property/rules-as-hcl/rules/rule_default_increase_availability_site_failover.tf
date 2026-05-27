@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_site_failover" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Site failover"
     comments              = "Specify how edge servers respond when the origin is not available."
     criteria_must_satisfy = "any"

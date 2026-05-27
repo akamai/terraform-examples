@@ -16,10 +16,9 @@ module "example" {
   	 akamai_client_secret  = <string>
   	 akamai_client_token  = <string>
   	 akamai_host  = <string>
-  	 contract_id  = <string>
+  	 contacts  = <list(string)>
   	 default_origin  = <string>
-  	 email  = <string>
-  	 group_id  = <number>
+  	 group_name  = <string>
   	 hostname  = <string>
   	 property_name  = <string>
   
@@ -39,7 +38,7 @@ module "example" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 7.0 |
+| <a name="requirement_akamai"></a> [akamai](#requirement\_akamai) | ~> 10.0 |
 
 ## Resources
 
@@ -49,6 +48,7 @@ module "example" {
 | [akamai_property.property](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/property) | resource |
 | [akamai_property_activation.production](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/property_activation) | resource |
 | [akamai_property_activation.staging](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/property_activation) | resource |
+| [akamai_contract.contract](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/contract) | data source |
 | [akamai_property_rules_template.rules](https://registry.terraform.io/providers/akamai/akamai/latest/docs/data-sources/property_rules_template) | data source |
 
 ## Modules
@@ -63,10 +63,9 @@ No modules.
 | <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
 | <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
 | <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
-| <a name="input_contract_id"></a> [contract\_id](#input\_contract\_id) | Contract ID | `string` | n/a | yes |
+| <a name="input_contacts"></a> [contacts](#input\_contacts) | Notification emails for activations | `list(string)` | n/a | yes |
 | <a name="input_default_origin"></a> [default\_origin](#input\_default\_origin) | Default origin server for all properties | `string` | n/a | yes |
-| <a name="input_email"></a> [email](#input\_email) | Notification email address for activation command | `string` | n/a | yes |
-| <a name="input_group_id"></a> [group\_id](#input\_group\_id) | Group ID | `number` | n/a | yes |
+| <a name="input_group_name"></a> [group\_name](#input\_group\_name) | Group name | `string` | n/a | yes |
 | <a name="input_hostname"></a> [hostname](#input\_hostname) | hostname for your property | `string` | n/a | yes |
 | <a name="input_property_name"></a> [property\_name](#input\_property\_name) | Name for your property | `string` | n/a | yes |
 | <a name="input_activate_latest_on_production"></a> [activate\_latest\_on\_production](#input\_activate\_latest\_on\_production) | n/a | `bool` | `false` | no |

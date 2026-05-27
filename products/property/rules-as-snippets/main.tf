@@ -5,6 +5,10 @@
 *
 */
 
+data "akamai_contract" "contract" {
+  group_name = var.group_name
+}
+
 data "akamai_property_rules_template" "rules" {
   template_file = abspath("${path.module}/rules/main.json")
   variables {
@@ -15,21 +19,21 @@ data "akamai_property_rules_template" "rules" {
   variables {
     name  = "default_cpcode"
     value = parseint(replace(akamai_cp_code.default.id, "cpc_", ""), 10)
-    type  = "string"
+    type  = "number"
   }
 }
 
 resource "akamai_cp_code" "default" {
   name        = var.property_name
-  contract_id = var.contract_id
-  group_id    = var.group_id
+  contract_id = data.akamai_contract.contract.id
+  group_id    = data.akamai_contract.contract.group_id
   product_id  = var.product_id
 }
 
 resource "akamai_property" "property" {
   name        = var.property_name
-  contract_id = var.contract_id
-  group_id    = var.group_id
+  contract_id = data.akamai_contract.contract.id
+  group_id    = data.akamai_contract.contract.group_id
   product_id  = var.product_id
   hostnames {
     cname_from             = var.hostname
@@ -44,7 +48,7 @@ resource "akamai_property" "property" {
 # NOTE: Be careful when removing this resource as you can disable traffic
 resource "akamai_property_activation" "staging" {
   property_id                    = akamai_property.property.id
-  contact                        = [var.email]
+  contact                        = var.contacts
   version                        = var.activate_latest_on_staging ? akamai_property.property.latest_version : akamai_property.property.staging_version
   network                        = "STAGING"
   auto_acknowledge_rule_warnings = true
@@ -53,7 +57,7 @@ resource "akamai_property_activation" "staging" {
 # NOTE: Be careful when removing this resource as you can disable traffic
 resource "akamai_property_activation" "production" {
   property_id                    = akamai_property.property.id
-  contact                        = [var.email]
+  contact                        = var.contacts
   version                        = var.activate_latest_on_production ? akamai_property.property.latest_version : akamai_property.property.production_version
   network                        = "PRODUCTION"
   auto_acknowledge_rule_warnings = true

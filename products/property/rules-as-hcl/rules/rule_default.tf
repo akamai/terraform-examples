@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_default" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name      = "default"
     is_secure = false
     comments  = "The Default Rule template contains all the necessary and recommended behaviors. Rules are evaluated from top to bottom and the last matching rule wins."

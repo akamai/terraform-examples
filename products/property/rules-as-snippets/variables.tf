@@ -1,11 +1,6 @@
-variable "contract_id" {
+variable "group_name" {
   type        = string
-  description = "Contract ID"
-}
-
-variable "group_id" {
-  type        = number
-  description = "Group ID"
+  description = "Group name"
 }
 
 variable "property_name" {
@@ -41,9 +36,9 @@ variable "sure_route_test_object" {
   default     = "/akamai/testobject.html"
 }
 
-variable "email" {
-  type        = string
-  description = "Notification email address for activation command"
+variable "contacts" {
+  type        = list(string)
+  description = "Notification emails for activations"
 }
 
 variable "notes" {

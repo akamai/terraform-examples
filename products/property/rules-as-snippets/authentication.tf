@@ -8,6 +8,22 @@ the lines below, but make sure to comment out the environment variables section.
 
 - Environment variables
 
+Option A: Akamai native environment variables
+
+The Akamai provider natively reads the following environment variables without requiring any provider block arguments.
+These always take precedence over a .edgerc file:
+
+  AKAMAI_ACCESS_TOKEN
+  AKAMAI_CLIENT_SECRET
+  AKAMAI_CLIENT_TOKEN
+  AKAMAI_HOST
+
+If you need to use a named section (e.g. "papi"), use the AKAMAI_<SECTION>_* prefix (e.g. AKAMAI_PAPI_ACCESS_TOKEN)
+and add `config_section = "<section>"` to the provider block. Without that argument the provider defaults to
+reading the "default" section, so the AKAMAI_* (no section prefix) variables are the simplest choice.
+
+Option B: Terraform TF_VAR_* environment variables
+
 In this option we use Terraform variables containing the four key elements of your Akamai API credential: host, access token, client token
 and client secret. There is also support for a fifth option, account_key, which can be used if you have access to multiple accounts and
 your API client has account switching capability.

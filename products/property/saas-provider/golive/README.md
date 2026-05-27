@@ -8,6 +8,15 @@ Basic usage of this module is as follows:
 ```hcl
 module "example" {
   	 source  = "<module-location>"
+  
+	 # Required variables
+  	 akamai_access_token  = <string>
+  	 akamai_client_secret  = <string>
+  	 akamai_client_token  = <string>
+  	 akamai_host  = <string>
+  
+	 # Optional variables
+  	 akamai_account_key  = <string> | default: ""
 }
  ```
 
@@ -30,7 +39,13 @@ No resources.
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_akamai_access_token"></a> [akamai\_access\_token](#input\_akamai\_access\_token) | Akamai access token | `string` | n/a | yes |
+| <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
+| <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
+| <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
+| <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
 
 ## Outputs
 

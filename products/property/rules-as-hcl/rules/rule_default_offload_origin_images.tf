@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_images" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Images"
     comments              = "Override the default caching behavior for images."
     criteria_must_satisfy = "any"

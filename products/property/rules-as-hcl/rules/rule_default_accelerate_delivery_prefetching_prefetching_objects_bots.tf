@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_bots" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Bots"
     comments              = "Disable prefetching for specific clients identifying themselves as bots and crawlers. This avoids requesting unnecessary resources from the origin."
     criteria_must_satisfy = "all"

@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "saas_config_rule_default" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name      = "default"
     is_secure = false
     comments  = "The Default Rule template contains all the necessary and recommended behaviors. Rules are evaluated from top to bottom and the last matching rule wins."
@@ -37,7 +37,7 @@ data "akamai_property_rules_builder" "saas_config_rule_default" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_augment_insights" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Augment insights"
     comments              = "Control the settings related to monitoring and reporting. This gives you additional visibility into your traffic and audiences."
     criteria_must_satisfy = "all"
@@ -51,7 +51,7 @@ data "akamai_property_rules_builder" "saas_config_rule_augment_insights" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_accelerate_delivery" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Accelerate delivery"
     comments              = "Control the settings related to improving the performance of delivering objects to your users."
     criteria_must_satisfy = "all"
@@ -65,7 +65,7 @@ data "akamai_property_rules_builder" "saas_config_rule_accelerate_delivery" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_offload_origin" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Offload origin"
     comments              = "Control the settings related to caching content at the edge and in the browser. As a result, fewer requests go to your origin, fewer bytes leave your data centers, and your assets are closer to your users."
     criteria_must_satisfy = "all"
@@ -138,7 +138,7 @@ data "akamai_property_rules_builder" "saas_config_rule_offload_origin" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_strengthen_security" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Strengthen security"
     comments              = "Control the settings that minimize the information your website shares with clients and malicious entities to reduce your exposure to threats."
     criteria_must_satisfy = "all"
@@ -152,7 +152,7 @@ data "akamai_property_rules_builder" "saas_config_rule_strengthen_security" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_increase_availability" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Increase availability"
     comments              = "Control how to respond when your origin or third parties are slow or even down to minimize the negative impact on user experience."
     criteria_must_satisfy = "all"
@@ -166,7 +166,7 @@ data "akamai_property_rules_builder" "saas_config_rule_increase_availability" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_minimize_payload" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Minimize payload"
     comments              = "Control the settings that reduce the size of the delivered content and decrease the number of bytes sent by your properties. This allows you to cut down the network overhead of your website or API."
     criteria_must_satisfy = "all"
@@ -177,7 +177,7 @@ data "akamai_property_rules_builder" "saas_config_rule_minimize_payload" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_traffic_reporting" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Traffic reporting"
     comments              = "Identify your main traffic segments so you can granularly zoom in your traffic statistics like hits, bandwidth, offload, response codes, and errors."
     criteria_must_satisfy = "all"
@@ -192,7 +192,7 @@ data "akamai_property_rules_builder" "saas_config_rule_traffic_reporting" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_m_pulse_rum" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "mPulse RUM"
     comments              = "Collect and analyze real-user data to monitor the performance of your website."
     criteria_must_satisfy = "all"
@@ -211,7 +211,7 @@ data "akamai_property_rules_builder" "saas_config_rule_m_pulse_rum" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_geolocation" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Geolocation"
     comments              = "Receive data about a user's geolocation and connection speed in a request header. If you change cached content based on the values of the X-Akamai-Edgescape request header, contact your account representative."
     criteria_must_satisfy = "all"
@@ -230,7 +230,7 @@ data "akamai_property_rules_builder" "saas_config_rule_geolocation" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_log_delivery" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Log delivery"
     comments              = "Specify the level of detail you want to be logged in your Log Delivery Service reports. Log User-Agent Header to obtain detailed information in the Traffic by Browser and OS report."
     criteria_must_satisfy = "all"
@@ -250,7 +250,7 @@ data "akamai_property_rules_builder" "saas_config_rule_log_delivery" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_origin_connectivity" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Origin connectivity"
     comments              = "Optimize the connection between edge and origin."
     criteria_must_satisfy = "all"
@@ -264,7 +264,7 @@ data "akamai_property_rules_builder" "saas_config_rule_origin_connectivity" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_protocol_optimizations" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Protocol optimizations"
     comments              = "Serve your website using modern and fast protocols."
     criteria_must_satisfy = "all"
@@ -304,7 +304,7 @@ data "akamai_property_rules_builder" "saas_config_rule_protocol_optimizations" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_prefetching" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Prefetching"
     comments              = "Instruct edge servers to retrieve embedded resources before the browser requests them."
     criteria_must_satisfy = "all"
@@ -316,7 +316,7 @@ data "akamai_property_rules_builder" "saas_config_rule_prefetching" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_adaptive_acceleration" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Adaptive acceleration"
     comments              = "Automatically and continuously apply performance optimizations to your website using machine learning."
     criteria_must_satisfy = "all"
@@ -340,7 +340,7 @@ data "akamai_property_rules_builder" "saas_config_rule_adaptive_acceleration" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_prefetching_objects" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Prefetching objects"
     comments              = "Define for which HTML pages prefetching should be enabled."
     criteria_must_satisfy = "all"
@@ -356,7 +356,7 @@ data "akamai_property_rules_builder" "saas_config_rule_prefetching_objects" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_prefetchable_objects" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Prefetchable objects"
     comments              = "Define which resources should be prefetched."
     criteria_must_satisfy = "all"
@@ -376,7 +376,7 @@ data "akamai_property_rules_builder" "saas_config_rule_prefetchable_objects" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_bots" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Bots"
     comments              = "Disable prefetching for specific clients identifying themselves as bots and crawlers. This avoids requesting unnecessary resources from the origin."
     criteria_must_satisfy = "all"
@@ -397,7 +397,7 @@ data "akamai_property_rules_builder" "saas_config_rule_bots" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_css_and_java_script" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "CSS and JavaScript"
     comments              = "Override the default caching behavior for CSS and JavaScript"
     criteria_must_satisfy = "any"
@@ -419,7 +419,7 @@ data "akamai_property_rules_builder" "saas_config_rule_css_and_java_script" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_fonts" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Fonts"
     comments              = "Override the default caching behavior for fonts."
     criteria_must_satisfy = "any"
@@ -441,7 +441,7 @@ data "akamai_property_rules_builder" "saas_config_rule_fonts" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_images" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Images"
     comments              = "Override the default caching behavior for images."
     criteria_must_satisfy = "any"
@@ -463,7 +463,7 @@ data "akamai_property_rules_builder" "saas_config_rule_images" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_files" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Files"
     comments              = "Override the default caching behavior for files. Files containing Personal Identified Information (PII) should require Edge authentication or not be cached at all."
     criteria_must_satisfy = "any"
@@ -485,7 +485,7 @@ data "akamai_property_rules_builder" "saas_config_rule_files" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_other_static_objects" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Other static objects"
     comments              = "Override the default caching behavior for other static objects."
     criteria_must_satisfy = "any"
@@ -507,7 +507,7 @@ data "akamai_property_rules_builder" "saas_config_rule_other_static_objects" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_html_pages" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "HTML pages"
     comments              = "Override the default caching behavior for HTML pages cached on edge servers."
     criteria_must_satisfy = "all"
@@ -534,7 +534,7 @@ data "akamai_property_rules_builder" "saas_config_rule_html_pages" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_redirects" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Redirects"
     comments              = "Configure caching for HTTP redirects. The redirect is cached for the same TTL as a 200 HTTP response when this feature is enabled."
     criteria_must_satisfy = "all"
@@ -547,7 +547,7 @@ data "akamai_property_rules_builder" "saas_config_rule_redirects" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_post_responses" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "POST responses"
     comments              = "Define when HTTP POST requests should be cached. You should enable it under a criteria match."
     criteria_must_satisfy = "all"
@@ -560,7 +560,7 @@ data "akamai_property_rules_builder" "saas_config_rule_post_responses" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_graph_ql" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "GraphQL"
     comments              = "Define when your GraphQL queries should be cached."
     criteria_must_satisfy = "all"
@@ -581,7 +581,7 @@ data "akamai_property_rules_builder" "saas_config_rule_graph_ql" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_uncacheable_objects" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Uncacheable objects"
     comments              = "Configure the default client caching behavior for uncacheable content at the edge."
     criteria_must_satisfy = "all"
@@ -600,7 +600,7 @@ data "akamai_property_rules_builder" "saas_config_rule_uncacheable_objects" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_allowed_methods" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Allowed methods"
     comments              = "Allow the use of HTTP methods. Consider enabling additional methods under a path match for increased origin security."
     criteria_must_satisfy = "all"
@@ -620,7 +620,7 @@ data "akamai_property_rules_builder" "saas_config_rule_allowed_methods" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_obfuscate_debug_info" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Obfuscate debug info"
     comments              = "Do not expose back-end information unless the request contains the Pragma debug header."
     criteria_must_satisfy = "all"
@@ -633,7 +633,7 @@ data "akamai_property_rules_builder" "saas_config_rule_obfuscate_debug_info" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_obfuscate_backend_info" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Obfuscate backend info"
     comments              = "Do not expose back-end information unless the request contains an additional secret header. Regularly change the criteria to use a specific unique value for the secret header."
     criteria_must_satisfy = "all"
@@ -665,7 +665,7 @@ data "akamai_property_rules_builder" "saas_config_rule_obfuscate_backend_info" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_hsts" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "HSTS"
     comments              = "Require all browsers to connect to your site using HTTPS."
     criteria_must_satisfy = "all"
@@ -678,7 +678,7 @@ data "akamai_property_rules_builder" "saas_config_rule_hsts" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_post" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "POST"
     comments              = "Allow use of the POST HTTP request method."
     criteria_must_satisfy = "all"
@@ -692,7 +692,7 @@ data "akamai_property_rules_builder" "saas_config_rule_post" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_options" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "OPTIONS"
     comments              = "Allow use of the OPTIONS HTTP request method."
     criteria_must_satisfy = "all"
@@ -705,7 +705,7 @@ data "akamai_property_rules_builder" "saas_config_rule_options" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_put" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "PUT"
     comments              = "Allow use of the PUT HTTP request method."
     criteria_must_satisfy = "all"
@@ -718,7 +718,7 @@ data "akamai_property_rules_builder" "saas_config_rule_put" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_delete" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "DELETE"
     comments              = "Allow use of the DELETE HTTP request method."
     criteria_must_satisfy = "all"
@@ -731,7 +731,7 @@ data "akamai_property_rules_builder" "saas_config_rule_delete" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_patch" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "PATCH"
     comments              = "Allow use of the PATCH HTTP request method."
     criteria_must_satisfy = "all"
@@ -744,7 +744,7 @@ data "akamai_property_rules_builder" "saas_config_rule_patch" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_simulate_failover" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Simulate failover"
     comments              = "Simulate an origin connection problem and test the site failover configuration on the CDN staging network."
     criteria_must_satisfy = "all"
@@ -773,7 +773,7 @@ data "akamai_property_rules_builder" "saas_config_rule_simulate_failover" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_site_failover" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Site failover"
     comments              = "Specify how edge servers respond when the origin is not available."
     criteria_must_satisfy = "any"
@@ -791,7 +791,7 @@ data "akamai_property_rules_builder" "saas_config_rule_site_failover" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_origin_health" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Origin health"
     comments              = "Monitor the health of your origin by tracking unsuccessful IP connection attempts."
     criteria_must_satisfy = "all"
@@ -806,7 +806,7 @@ data "akamai_property_rules_builder" "saas_config_rule_origin_health" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_script_management" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Script management"
     comments              = "Enable Script Management to minimize performance and availability impacts from third-party JavaScripts."
     criteria_must_satisfy = "all"
@@ -819,7 +819,7 @@ data "akamai_property_rules_builder" "saas_config_rule_script_management" {
 }
 
 data "akamai_property_rules_builder" "saas_config_rule_compressible_objects" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Compressible objects"
     comments              = "Serve gzip compressed content for text-based formats."
     criteria_must_satisfy = "all"

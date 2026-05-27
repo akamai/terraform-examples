@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_simulate_failover" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Simulate failover"
     comments              = "Simulate an origin connection problem and test the site failover configuration on the CDN staging network."
     criteria_must_satisfy = "all"

@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_m_pulse_rum" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "mPulse RUM"
     comments              = "Collect and analyze real-user data to monitor the performance of your website."
     criteria_must_satisfy = "all"

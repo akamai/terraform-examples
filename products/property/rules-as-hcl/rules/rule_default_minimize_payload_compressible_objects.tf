@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_compressible_objects" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Compressible objects"
     comments              = "Serve gzip compressed content for text-based formats."
     criteria_must_satisfy = "all"

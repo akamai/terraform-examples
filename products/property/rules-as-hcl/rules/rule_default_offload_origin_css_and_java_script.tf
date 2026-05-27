@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_css_and_java_script" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "CSS and JavaScript"
     comments              = "Override the default caching behavior for CSS and JavaScript"
     criteria_must_satisfy = "any"

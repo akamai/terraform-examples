@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_obfuscate_backend_info" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Obfuscate backend info"
     comments              = "Do not expose back-end information unless the request contains an additional secret header. Regularly change the criteria to use a specific unique value for the secret header."
     criteria_must_satisfy = "all"

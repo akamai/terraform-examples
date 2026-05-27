@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_files" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Files"
     comments              = "Override the default caching behavior for files. Files containing Personal Identified Information (PII) should require Edge authentication or not be cached at all."
     criteria_must_satisfy = "any"

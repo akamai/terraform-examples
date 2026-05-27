@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_protocol_optimizations" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Protocol optimizations"
     comments              = "Serve your website using modern and fast protocols."
     criteria_must_satisfy = "all"

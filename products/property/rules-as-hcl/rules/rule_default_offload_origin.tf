@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_offload_origin" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Offload origin"
     comments              = "Control the settings related to caching content at the edge and in the browser. As a result, fewer requests go to your origin, fewer bytes leave your data centers, and your assets are closer to your users."
     criteria_must_satisfy = "all"

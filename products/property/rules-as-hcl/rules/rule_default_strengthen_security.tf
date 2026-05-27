@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_strengthen_security" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Strengthen security"
     comments              = "Control the settings that minimize the information your website shares with clients and malicious entities to reduce your exposure to threats."
     criteria_must_satisfy = "all"

@@ -1,6 +1,6 @@
 
 data "akamai_property_rules_builder" "rule_log_delivery" {
-  rules_v2025_01_13 {
+  rules_v2026_02_16 {
     name                  = "Log delivery"
     comments              = "Specify the level of detail you want to be logged in your Log Delivery Service reports. Log User-Agent Header to obtain detailed information in the Traffic by Browser and OS report."
     criteria_must_satisfy = "all"

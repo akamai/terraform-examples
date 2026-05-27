@@ -5,6 +5,11 @@
 *
 */
 
+
+data "akamai_contract" "contract" {
+  group_name = var.group_name
+}
+
 locals {
   ivm_images_cpcodes_count    = var.include_ivm_images ? 1 : 0
   production_version          = akamai_property.property.production_version != null ? akamai_property.property.production_version : 0
@@ -15,21 +20,23 @@ locals {
 
 resource "akamai_cp_code" "default" {
   name        = var.property_name
-  contract_id = var.contract_id
-  group_id    = var.group_id
+  contract_id = data.akamai_contract.contract.id
+  group_id    = data.akamai_contract.contract.group_id
   product_id  = var.product_id
 }
+
 resource "akamai_cp_code" "ivm_images_pristine" {
   name        = "${var.property_name}-ivm-pristine"
-  contract_id = var.contract_id
-  group_id    = var.group_id
+  contract_id = data.akamai_contract.contract.id
+  group_id    = data.akamai_contract.contract.group_id
   product_id  = var.product_id
   count       = local.ivm_images_cpcodes_count
 }
+
 resource "akamai_cp_code" "ivm_images_derivative" {
   name        = "${var.property_name}-ivm-derivative"
-  contract_id = var.contract_id
-  group_id    = var.group_id
+  contract_id = data.akamai_contract.contract.id
+  group_id    = data.akamai_contract.contract.group_id
   product_id  = var.product_id
   count       = local.ivm_images_cpcodes_count
 }
@@ -46,8 +53,8 @@ module "rules" {
 
 resource "akamai_property" "property" {
   name        = var.property_name
-  contract_id = var.contract_id
-  group_id    = var.group_id
+  contract_id = data.akamai_contract.contract.id
+  group_id    = data.akamai_contract.contract.group_id
   product_id  = var.product_id
   hostnames {
     cname_from             = var.hostname
@@ -62,7 +69,7 @@ resource "akamai_property" "property" {
 # NOTE: Be careful when removing this resource as you can disable traffic
 resource "akamai_property_activation" "staging" {
   property_id                    = akamai_property.property.id
-  contact                        = [var.email]
+  contact                        = var.contacts
   version                        = var.activate_latest_on_staging ? akamai_property.property.latest_version : local.staging_version
   network                        = "STAGING"
   auto_acknowledge_rule_warnings = true
@@ -72,9 +79,9 @@ resource "akamai_property_activation" "staging" {
 # NOTE: Be careful when removing this resource as you can disable traffic
 resource "akamai_property_activation" "production" {
   property_id                    = akamai_property.property.id
-  contact                        = [var.email]
+  contact                        = var.contacts
   version                        = var.activate_latest_on_production ? akamai_property.property.latest_version : local.production_version
   network                        = "PRODUCTION"
   auto_acknowledge_rule_warnings = true
-  count                          = local.production_activation_count
+  #count                          = local.production_activation_count
 }
