@@ -1,5 +1,8 @@
 # Terraform Examples
 
+[![Terraform >= 1.9.0](https://img.shields.io/badge/terraform-%3E%3D_1.9.0-623CE4?logo=terraform&logoColor=white)](https://developer.hashicorp.com/terraform/downloads)
+[![Akamai Provider ~> 10.0](https://img.shields.io/badge/akamai_provider-~%3E_10.0-009BDE?logo=akamai&logoColor=white)](https://registry.terraform.io/providers/akamai/akamai/latest)
+
 A collection of ready-to-use [Akamai Terraform Provider](https://techdocs.akamai.com/terraform/docs/) examples covering a wide range of products and use-cases. Each example can be run independently and is intended to help you get started quickly.
 
 > **Looking for production-ready templates?** Visit [terraform-templates](https://github.com/akamai/terraform-templates) for fully automated, multi-environment templates with deployment pipelines.
@@ -10,7 +13,7 @@ A collection of ready-to-use [Akamai Terraform Provider](https://techdocs.akamai
 
 - [Terraform](https://developer.hashicorp.com/terraform/downloads) >= 1.9.0
 - [Akamai Terraform Provider](https://registry.terraform.io/providers/akamai/akamai/latest)
-- [Akamai API credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials) configured in `~/.edgerc`
+- [Akamai API credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials)
 
 ## Repository Structure
 
@@ -25,7 +28,7 @@ workflows/   # CI/CD workflow examples (GitHub Actions, multi-pipeline, PowerShe
 
 | Directory | Description |
 |-----------|-------------|
-| [`products/aap/`](products/aap/) | App & API Protector (AAP) — creates a security config with SIEM, Client Reputation and Slow Post |
+| [`products/aap/`](products/aap/) | App & API Protector (AAP) |
 | [`products/aapasm/`](products/aapasm/) | App & API Protector with Advanced Security Module (AAPASM) |
 | [`products/api-definitions/api/`](products/api-definitions/api/) | API Definitions lifecycle using a raw JSON descriptor |
 | [`products/api-definitions/openapi/`](products/api-definitions/openapi/) | API Definitions lifecycle from an OpenAPI 3.0 spec |
