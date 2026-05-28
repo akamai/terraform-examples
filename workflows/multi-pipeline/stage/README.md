@@ -62,6 +62,7 @@ No resources.
 |------|--------|---------|
 | <a name="module_aap"></a> [aap](#module\_aap) | ../../../products/aapasm | n/a |
 | <a name="module_certificate"></a> [certificate](#module\_certificate) | ../../../products/certificates/cps-domain-validation-simple | n/a |
+| <a name="module_domain_ownership_pre_validation"></a> [domain\_ownership\_pre\_validation](#module\_domain\_ownership\_pre\_validation) | ../../../products/domain-ownership/pre-validation | n/a |
 | <a name="module_network-lists"></a> [network-lists](#module\_network-lists) | ../../../products/network-lists | n/a |
 | <a name="module_property"></a> [property](#module\_property) | ../../../products/property/rules-as-hcl | n/a |
 

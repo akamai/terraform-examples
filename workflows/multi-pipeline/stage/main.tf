@@ -5,6 +5,12 @@
 
 locals {
   sanitized_project_name = replace(replace(var.project_name, "-", "_"), " ", "_")
+  dom_hostname           = { var.hostname = { validation_scope = "HOST" } }
+}
+
+module "domain_ownership_pre_validation" {
+  source    = "../../../products/domain-ownership/pre-validation"
+  hostnames = local.dom_hostname
 }
 
 module "certificate" {
