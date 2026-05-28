@@ -6,31 +6,26 @@
  * A successful operation creates a property with a hostname bound to the cloud certificate, and activates that property on the `STAGING` and `PRODUCTION` environments.
 */
 
-
-data "akamai_property_rules_template" "rules" {
-  template_file = abspath("${path.module}/property-snippets/main.json")
-}
-
 resource "akamai_property" "test" {
-  name        = "test-property-name"
-  contract_id = "C-0N7RAC7"
-  group_id    = "grp_123"
-  product_id  = "prd_12345"
+  name        = var.property_name
+  contract_id = data.akamai_contract.contract.id
+  group_id    = data.akamai_contract.contract.group_id
+  product_id  = "Fresca"
   hostnames {
-    cname_from             = "test.example.com"
-    cname_to               = "test.example.com.edgekey.net"
+    cname_from             = var.hostname
+    cname_to               = var.edge_hostname
     cert_provisioning_type = "CCM"
     ccm_certificates {
       rsa_cert_id = akamai_cloudcertificates_upload_signed_certificate.upload.certificate_id
     }
   }
   rule_format = data.akamai_property_rules_builder.rule_default.rule_format
-  rules       = data.akamai_property_rules_template.rule_default.json
+  rules       = data.akamai_property_rules_builder.rule_default.json
 }
 
 resource "akamai_property_activation" "test-staging" {
   property_id                    = akamai_property.test.id
-  contact                        = ["test@example.com"]
+  contact                        = var.contacts
   version                        = akamai_property.test.latest_version
   network                        = "STAGING"
   auto_acknowledge_rule_warnings = false
@@ -38,7 +33,7 @@ resource "akamai_property_activation" "test-staging" {
 
 resource "akamai_property_activation" "test-production" {
   property_id                    = akamai_property.test.id
-  contact                        = ["test@example.com"]
+  contact                        = var.contacts
   version                        = akamai_property.test.latest_version
   network                        = "PRODUCTION"
   auto_acknowledge_rule_warnings = false

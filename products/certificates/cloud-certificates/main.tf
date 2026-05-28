@@ -11,17 +11,20 @@
  * Use the certificate ID from the `akamai_cloudcertificates_upload_signed_certificate` resource to bind the signed certificate with the hostname in the `akamai_property` resource.
 */
 
+data "akamai_contract" "contract" {
+  group_name = var.group_name
+}
 
 resource "akamai_cloudcertificates_certificate" "test" {
-  base_name      = "example-base-name"
-  contract_id    = "C-0N7RAC7"
-  group_id       = "grp_123"
+  base_name      = var.common_name
+  contract_id    = data.akamai_contract.contract.id
+  group_id       = data.akamai_contract.contract.group_id
   key_size       = "2048"
   key_type       = "RSA"
-  secure_network = "ENHANCED_TLS"
-  sans           = ["test.example.com", "www.test2.example.com"]
+  secure_network = var.secure_network
+  sans           = var.sans
   subject = {
-    common_name  = "test.example.com"
+    common_name  = var.common_name
     organization = "Test Organization"
     state        = "Massachusetts"
     locality     = "Cambridge"
@@ -34,7 +37,7 @@ resource "tls_private_key" "key" {
   rsa_bits  = 2048
 }
 
-resource "tls_self_signed_cert" "cert" {
+resource "tls_self_signed_cert" "ca_cert" {
   depends_on            = [tls_private_key.key]
   private_key_pem       = tls_private_key.key.private_key_pem
   validity_period_hours = 8760
@@ -55,7 +58,7 @@ resource "tls_locally_signed_cert" "signed_cert" {
   depends_on            = [tls_private_key.key]
   ca_private_key_pem    = tls_private_key.key.private_key_pem
   cert_request_pem      = akamai_cloudcertificates_certificate.test.csr_pem
-  ca_cert_pem           = tls_self_signed_cert.cert.cert_pem
+  ca_cert_pem           = tls_self_signed_cert.ca_cert.cert_pem
   validity_period_hours = 8760
   allowed_uses = [
     "cert_signing",
