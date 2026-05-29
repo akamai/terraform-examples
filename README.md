@@ -12,7 +12,7 @@ A collection of ready-to-use [Akamai Terraform Provider](https://techdocs.akamai
 ## Prerequisites
 
 - [Terraform](https://developer.hashicorp.com/terraform/downloads) >= 1.9.0
-- [Akamai Terraform Provider](https://registry.terraform.io/providers/akamai/akamai/latest)
+- [Akamai Terraform Provider](https://registry.terraform.io/providers/akamai/akamai/latest) ~> 10.0 
 - [Akamai API credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials)
 
 ## Repository Structure
