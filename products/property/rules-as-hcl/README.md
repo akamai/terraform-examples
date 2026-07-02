@@ -26,6 +26,7 @@ module "example" {
   	 activate_latest_on_production  = <bool> | default: false
   	 activate_latest_on_staging  = <bool> | default: true
   	 akamai_account_key  = <string> | default: ""
+  	 include_external_rules  = <list(string)> | default: []
   	 include_ivm_images  = <bool> | default: false
   	 ivm_images_policyset  = <string> | default: ""
   	 notes  = <string> | default: "Updated by Terraform"
@@ -77,6 +78,7 @@ module "example" {
 | <a name="input_activate_latest_on_production"></a> [activate\_latest\_on\_production](#input\_activate\_latest\_on\_production) | n/a | `bool` | `false` | no |
 | <a name="input_activate_latest_on_staging"></a> [activate\_latest\_on\_staging](#input\_activate\_latest\_on\_staging) | n/a | `bool` | `true` | no |
 | <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
+| <a name="input_include_external_rules"></a> [include\_external\_rules](#input\_include\_external\_rules) | Include an external rules file. This is useful for including rules from other modules or external sources. | `list(string)` | `[]` | no |
 | <a name="input_include_ivm_images"></a> [include\_ivm\_images](#input\_include\_ivm\_images) | Boolean to control inclusion of Image Manager (Images) behaviour | `bool` | `false` | no |
 | <a name="input_ivm_images_policyset"></a> [ivm\_images\_policyset](#input\_ivm\_images\_policyset) | IVM (Images) policy set ID from IVM module. If include\_ivm\_images is true then this is required. | `string` | `""` | no |
 | <a name="input_notes"></a> [notes](#input\_notes) | Version notes for property changes | `string` | `"Updated by Terraform"` | no |

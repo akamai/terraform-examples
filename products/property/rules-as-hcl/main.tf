@@ -49,6 +49,7 @@ module "rules" {
   ivm_images_derivative_cp_code = var.include_ivm_images ? parseint(replace(akamai_cp_code.ivm_images_derivative[0].id, "cpc_", ""), 10) : 0
   ivm_images_pristine_cp_code   = var.include_ivm_images ? parseint(replace(akamai_cp_code.ivm_images_pristine[0].id, "cpc_", ""), 10) : 0
   ivm_images_policyset          = var.ivm_images_policyset
+  include_external_rules        = var.include_external_rules
 }
 
 resource "akamai_property" "property" {

@@ -37,3 +37,9 @@ variable "ivm_images_derivative_cp_code" {
   default     = 0
   description = "Derivative CP Code ID for Image & Video Manager (Images)"
 }
+
+variable "include_external_rules" {
+  type        = list(string)
+  description = "Include an external rules file. This is useful for including rules from other modules or external sources."
+  default     = []
+}

@@ -14,6 +14,7 @@ module "example" {
   	 default_origin  = <string>
   
 	 # Optional variables
+  	 include_external_rules  = <list(string)> | default: []
   	 include_ivm_images  = <bool> | default: false
   	 ivm_images_derivative_cp_code  = <number> | default: 0
   	 ivm_images_policyset  = <string> | default: "NONE"
@@ -87,6 +88,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_default_cpcode"></a> [default\_cpcode](#input\_default\_cpcode) | ID for default CP Code behavior | `number` | n/a | yes |
 | <a name="input_default_origin"></a> [default\_origin](#input\_default\_origin) | Default origin hostname | `string` | n/a | yes |
+| <a name="input_include_external_rules"></a> [include\_external\_rules](#input\_include\_external\_rules) | Include an external rules file. This is useful for including rules from other modules or external sources. | `list(string)` | `[]` | no |
 | <a name="input_include_ivm_images"></a> [include\_ivm\_images](#input\_include\_ivm\_images) | Boolean flag to include Image Manager (Images) rule | `bool` | `false` | no |
 | <a name="input_ivm_images_derivative_cp_code"></a> [ivm\_images\_derivative\_cp\_code](#input\_ivm\_images\_derivative\_cp\_code) | Derivative CP Code ID for Image & Video Manager (Images) | `number` | `0` | no |
 | <a name="input_ivm_images_policyset"></a> [ivm\_images\_policyset](#input\_ivm\_images\_policyset) | Image & Video Manager (Images) Policy Set | `string` | `"NONE"` | no |

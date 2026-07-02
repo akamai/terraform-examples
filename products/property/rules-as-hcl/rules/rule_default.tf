@@ -35,7 +35,7 @@ data "akamai_property_rules_builder" "rule_default" {
         autodv = ""
       }
     }
-    children = compact([
+    children = compact(concat([
       data.akamai_property_rules_builder.rule_augment_insights.json,
       data.akamai_property_rules_builder.rule_accelerate_delivery.json,
       data.akamai_property_rules_builder.rule_offload_origin.json,
@@ -43,6 +43,8 @@ data "akamai_property_rules_builder" "rule_default" {
       data.akamai_property_rules_builder.rule_increase_availability.json,
       data.akamai_property_rules_builder.rule_minimize_payload.json,
       var.include_ivm_images ? data.akamai_property_rules_builder.property_rule_image_and_video_manager_-_images-.json : null,
-    ])
+      ],
+      var.include_external_rules
+    ))
   }
 }

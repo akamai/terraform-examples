@@ -14,7 +14,7 @@ data "akamai_cloudlets_application_load_balancer_match_rule" "match_rules_alb" {
     match_url      = ""
     matches_always = false
     forward_settings {
-      origin_id = "demo_LB_ID"
+      origin_id = var.alb_load_balancers["load_balancer-a"].id
     }
     disabled = false
   }
@@ -34,7 +34,7 @@ data "akamai_cloudlets_application_load_balancer_match_rule" "match_rules_alb" {
     match_url      = ""
     matches_always = false
     forward_settings {
-      origin_id = "demo_LB_ID_2"
+      origin_id = var.alb_load_balancers["load_balancer-b"].id
     }
     disabled = false
   }

@@ -62,6 +62,7 @@ variable "activate_latest_on_production" {
   type    = bool
   default = false
 }
+
 variable "include_ivm_images" {
   type        = bool
   description = "Boolean to control inclusion of Image Manager (Images) behaviour"
@@ -72,4 +73,10 @@ variable "ivm_images_policyset" {
   type        = string
   description = "IVM (Images) policy set ID from IVM module. If include_ivm_images is true then this is required."
   default     = ""
+}
+
+variable "include_external_rules" {
+  type        = list(string)
+  description = "Include an external rules file. This is useful for including rules from other modules or external sources."
+  default     = []
 }
