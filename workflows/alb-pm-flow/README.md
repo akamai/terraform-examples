@@ -5,10 +5,10 @@
 This directory is used in STAGE 1 and STAGE 3 of the full onboarding workflow.
 Stage 2 (ALB setup) lives in the sibling ../alb/ directory.
 
-─────────────────────────────────────────────────────────────────────────────
-STAGE 1 — Initial Property and ALB Setup
-─────────────────────────────────────────────────────────────────────────────
+## STAGE 1 — Initial Property and ALB Setup
+  ```
   terraform apply
+  ```
 
   1. Creates the property via the rules-as-hcl module.
   2. Adds conditional origins to the property rules. Conditional origins are
@@ -17,25 +17,23 @@ STAGE 1 — Initial Property and ALB Setup
      rules-as-hcl/rules sub-module before applying.
   3. Activates the property to Akamai Staging/Production.
 
-─────────────────────────────────────────────────────────────────────────────
-STAGE 1 Continued — ALB Setup
-─────────────────────────────────────────────────────────────────────────────
+## STAGE 1 Continued — ALB Setup
 
   4. Creates the ALB cloudlet policy with match rules.
   5. Creates load balancers using the conditional origin IDs defined in the
      Stage 1 property rules (origin\_id\_1 and origin\_id\_2 must match exactly).
   6. Activates the ALB policy and load balancers to staging/production.
 
-  After Stage 1 completes, note the alb\_cloudlet\_policy\_id from the output.
+After Stage 1 completes, note the alb\_cloudlet\_policy\_id from the output.
 This will be used in Stage 2 to add the ALB behavior to the property rules.
 
-─────────────────────────────────────────────────────────────────────────────
-STAGE 2 — Add ALB Behavior (new property onboarding only)
-─────────────────────────────────────────────────────────────────────────────
+## STAGE 2 — Add ALB Behavior (new property onboarding only)
   Uncomment the alb\_cloudlet\_policy\_id and set the value from the previous output
   (policy ID) in your tfvars file, then run:
 
+  ```
   terraform apply
+  ```
 
   1. Updates the property rules to include the ALB cloudlet behavior pointing
      to the policy created in Stage 2.
