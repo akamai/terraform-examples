@@ -1,6 +1,6 @@
 <!-- BEGIN_TF_DOCS -->
 
-# ALB + Property Manager Workflow — Property Stage
+# ALB + Property Manager Workflow
 
 This directory is used in STAGE 1 and STAGE 3 of the full onboarding workflow.
 Stage 2 (ALB setup) lives in the sibling ../alb/ directory.
