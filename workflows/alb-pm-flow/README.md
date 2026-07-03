@@ -2,8 +2,7 @@
 
 # ALB + Property Manager Workflow
 
-This directory is used in STAGE 1 and STAGE 3 of the full onboarding workflow.
-Stage 2 (ALB setup) lives in the sibling ../alb/ directory.
+Deploys a Property Manager property with conditional origins and an Application Load Balancer (ALB) cloudlet policy. Leverages the rules-as-hcl module to create the property and the application-load-balancer module to create the ALB policy and load balancers.
 
 ## STAGE 1 — Initial Property and ALB Setup
   ```
