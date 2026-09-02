@@ -18,6 +18,7 @@ module "example" {
   	 dns_zone  = <string>
   	 enhanced_tls  = <bool>
   	 hostname  = <string>
+  	 sans  = <list(string)>
   
 	 # Optional variables
   	 akamai_account_key  = <string> | default: ""
@@ -55,6 +56,7 @@ No resources.
 | <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | DNS zone for the hostname | `string` | n/a | yes |
 | <a name="input_enhanced_tls"></a> [enhanced\_tls](#input\_enhanced\_tls) | Whether to deploy the certificate on the enhanced TLS network | `bool` | n/a | yes |
 | <a name="input_hostname"></a> [hostname](#input\_hostname) | Hostname to include in the certificate | `string` | n/a | yes |
+| <a name="input_sans"></a> [sans](#input\_sans) | SANs to include in the certificate | `list(string)` | n/a | yes |
 | <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
 
 ## Outputs
@@ -62,6 +64,7 @@ No resources.
 | Name | Description |
 |------|-------------|
 | <a name="output_dns_challenges"></a> [dns\_challenges](#output\_dns\_challenges) | n/a |
+| <a name="output_enrollment_id"></a> [enrollment\_id](#output\_enrollment\_id) | n/a |
 
 ## Resources
 - [Akamai API Credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials)

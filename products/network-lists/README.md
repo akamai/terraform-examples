@@ -10,16 +10,13 @@ module "example" {
   	 source  = "<module-location>"
   
 	 # Required variables
-  	 akamai_access_token  = <string>
-  	 akamai_client_secret  = <string>
-  	 akamai_client_token  = <string>
-  	 akamai_host  = <string>
   	 emails  = <list(string)>
   	 group_name  = <string>
   	 prefix  = <string>
   
 	 # Optional variables
-  	 akamai_account_key  = <string> | default: ""
+  	 config_section  = <string> | default: "default"
+  	 edgerc_path  = <string> | default: "~/.edgerc"
   	 geo_block_list  = <list(any)> | default: []
   	 ip_block_list  = <list(any)> | default: []
   	 ip_block_list_exceptions  = <list(any)> | default: []
@@ -56,14 +53,11 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_akamai_access_token"></a> [akamai\_access\_token](#input\_akamai\_access\_token) | Akamai access token | `string` | n/a | yes |
-| <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
-| <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
-| <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
 | <a name="input_emails"></a> [emails](#input\_emails) | Email addresses used for activations | `list(string)` | n/a | yes |
 | <a name="input_group_name"></a> [group\_name](#input\_group\_name) | Group name for property/config creation | `string` | n/a | yes |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | Prefix for list names | `string` | n/a | yes |
-| <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
+| <a name="input_config_section"></a> [config\_section](#input\_config\_section) | EdgeRC section. Change this to switch between accounts, assuming your section has an account\_id member | `string` | `"default"` | no |
+| <a name="input_edgerc_path"></a> [edgerc\_path](#input\_edgerc\_path) | Path to .edgerc file. Defaults to ~/.edgerc | `string` | `"~/.edgerc"` | no |
 | <a name="input_geo_block_list"></a> [geo\_block\_list](#input\_geo\_block\_list) | Geo Block List Geos | `list(any)` | `[]` | no |
 | <a name="input_ip_block_list"></a> [ip\_block\_list](#input\_ip\_block\_list) | IP Block List IPs | `list(any)` | `[]` | no |
 | <a name="input_ip_block_list_exceptions"></a> [ip\_block\_list\_exceptions](#input\_ip\_block\_list\_exceptions) | IP Block List Exceptions IPs | `list(any)` | `[]` | no |

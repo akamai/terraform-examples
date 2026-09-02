@@ -28,7 +28,7 @@ locals {
   }
 }
 
-module "example" {
+module "certificate-third-party" {
   source         = "../modules/third-party"
   config_section = var.config_section
   contract_id    = var.contract_id
@@ -40,6 +40,14 @@ module "example" {
   organization   = local.contact_details
 }
 
+resource "akamai_edge_hostname" "edge_hostname" {
+  product_id    = "prd_Fresca"
+  contract_id   = var.contract_id
+  group_id      = "71960"
+  edge_hostname = "${var.common_name}.edgekey.net"
+  certificate   = module.certificate-third-party.certificate_id
+  ip_behavior   = "IPV6_COMPLIANCE"
+}
 ```
 
 ## Requirements
@@ -51,13 +59,15 @@ module "example" {
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [akamai_edge_hostname.edge_hostname](https://registry.terraform.io/providers/akamai/akamai/latest/docs/resources/edge_hostname) | resource |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_example"></a> [example](#module\_example) | ../modules/third-party | n/a |
+| <a name="module_certificate-third-party"></a> [certificate-third-party](#module\_certificate-third-party) | ../modules/third-party | n/a |
 
 ## Inputs
 

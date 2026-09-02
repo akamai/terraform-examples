@@ -3,6 +3,11 @@ variable "hostname" {
   description = "Hostname to include in the certificate"
 }
 
+variable "sans" {
+  type        = list(string)
+  description = "SANs to include in the certificate"
+}
+
 variable "dns_zone" {
   type        = string
   description = "DNS zone for the hostname"

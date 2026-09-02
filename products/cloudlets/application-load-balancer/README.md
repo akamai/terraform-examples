@@ -12,10 +12,6 @@ module "example" {
   	 source  = "<module-location>"
   
 	 # Required variables
-  	 akamai_access_token  = <string>
-  	 akamai_client_secret  = <string>
-  	 akamai_client_token  = <string>
-  	 akamai_host  = <string>
   	 alb_lb_data_centers  = <map(object({
     origin_id                    = string
     load_balancer_hostname       = string
@@ -33,7 +29,8 @@ module "example" {
   	 policy_name  = <string>
   
 	 # Optional variables
-  	 akamai_account_key  = <string> | default: ""
+  	 config_section  = <string> | default: "default"
+  	 edgerc_path  = <string> | default: "~/.edgerc"
   	 env  = <string> | default: "staging"
 }
  ```
@@ -65,17 +62,14 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_akamai_access_token"></a> [akamai\_access\_token](#input\_akamai\_access\_token) | Akamai access token | `string` | n/a | yes |
-| <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
-| <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
-| <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
 | <a name="input_alb_lb_data_centers"></a> [alb\_lb\_data\_centers](#input\_alb\_lb\_data\_centers) | Map of ALB configuration parameters | <pre>map(object({<br/>    origin_id                    = string<br/>    load_balancer_hostname       = string<br/>    load_balancer_liveness_hosts = list(string)<br/>  }))</pre> | n/a | yes |
 | <a name="input_alb_load_balancers"></a> [alb\_load\_balancers](#input\_alb\_load\_balancers) | Map of load balancer configurations | <pre>map(object({<br/>    id                  = string<br/>    description         = string<br/>    version_description = string<br/>    balancing_type      = string<br/>  }))</pre> | n/a | yes |
 | <a name="input_associated_properties"></a> [associated\_properties](#input\_associated\_properties) | List of associated properties for the Cloudlet policy | `list(string)` | n/a | yes |
 | <a name="input_description"></a> [description](#input\_description) | Cloudlet version description | `string` | n/a | yes |
 | <a name="input_group_id"></a> [group\_id](#input\_group\_id) | Group ID for the Cloudlet policy | `string` | n/a | yes |
 | <a name="input_policy_name"></a> [policy\_name](#input\_policy\_name) | Cloudlet Policy Name | `string` | n/a | yes |
-| <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
+| <a name="input_config_section"></a> [config\_section](#input\_config\_section) | EdgeRC section. Change this to switch between accounts, assuming your section has an account\_id member | `string` | `"default"` | no |
+| <a name="input_edgerc_path"></a> [edgerc\_path](#input\_edgerc\_path) | Path to .edgerc file. Defaults to ~/.edgerc | `string` | `"~/.edgerc"` | no |
 | <a name="input_env"></a> [env](#input\_env) | n/a | `string` | `"staging"` | no |
 
 ## Outputs

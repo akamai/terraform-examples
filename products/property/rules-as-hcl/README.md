@@ -12,10 +12,6 @@ module "example" {
   	 source  = "<module-location>"
   
 	 # Required variables
-  	 akamai_access_token  = <string>
-  	 akamai_client_secret  = <string>
-  	 akamai_client_token  = <string>
-  	 akamai_host  = <string>
   	 contacts  = <list(string)>
   	 default_origin  = <string>
   	 group_name  = <string>
@@ -25,7 +21,8 @@ module "example" {
 	 # Optional variables
   	 activate_latest_on_production  = <bool> | default: false
   	 activate_latest_on_staging  = <bool> | default: true
-  	 akamai_account_key  = <string> | default: ""
+  	 config_section  = <string> | default: "default"
+  	 edgerc_path  = <string> | default: "~/.edgerc"
   	 include_external_rules  = <list(string)> | default: []
   	 include_ivm_images  = <bool> | default: false
   	 ivm_images_policyset  = <string> | default: ""
@@ -66,10 +63,6 @@ module "example" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_akamai_access_token"></a> [akamai\_access\_token](#input\_akamai\_access\_token) | Akamai access token | `string` | n/a | yes |
-| <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
-| <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
-| <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
 | <a name="input_contacts"></a> [contacts](#input\_contacts) | Notification emails for activations | `list(string)` | n/a | yes |
 | <a name="input_default_origin"></a> [default\_origin](#input\_default\_origin) | Default origin server for all properties | `string` | n/a | yes |
 | <a name="input_group_name"></a> [group\_name](#input\_group\_name) | Group name | `string` | n/a | yes |
@@ -77,7 +70,8 @@ module "example" {
 | <a name="input_property_name"></a> [property\_name](#input\_property\_name) | Name for your property | `string` | n/a | yes |
 | <a name="input_activate_latest_on_production"></a> [activate\_latest\_on\_production](#input\_activate\_latest\_on\_production) | n/a | `bool` | `false` | no |
 | <a name="input_activate_latest_on_staging"></a> [activate\_latest\_on\_staging](#input\_activate\_latest\_on\_staging) | n/a | `bool` | `true` | no |
-| <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
+| <a name="input_config_section"></a> [config\_section](#input\_config\_section) | EdgeRC section. Change this to switch between accounts, assuming your section has an account\_id member | `string` | `"default"` | no |
+| <a name="input_edgerc_path"></a> [edgerc\_path](#input\_edgerc\_path) | Path to .edgerc file. Defaults to ~/.edgerc | `string` | `"~/.edgerc"` | no |
 | <a name="input_include_external_rules"></a> [include\_external\_rules](#input\_include\_external\_rules) | Include an external rules file. This is useful for including rules from other modules or external sources. | `list(string)` | `[]` | no |
 | <a name="input_include_ivm_images"></a> [include\_ivm\_images](#input\_include\_ivm\_images) | Boolean to control inclusion of Image Manager (Images) behaviour | `bool` | `false` | no |
 | <a name="input_ivm_images_policyset"></a> [ivm\_images\_policyset](#input\_ivm\_images\_policyset) | IVM (Images) policy set ID from IVM module. If include\_ivm\_images is true then this is required. | `string` | `""` | no |

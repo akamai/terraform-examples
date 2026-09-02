@@ -91,3 +91,7 @@ resource "akamai_cps_upload_certificate" "upload_cert" {
     default = "1h"
   }
 }
+
+output "certificate_id" {
+  value = akamai_cps_third_party_enrollment.enrollment.id
+}

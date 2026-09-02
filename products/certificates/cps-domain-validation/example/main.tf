@@ -15,7 +15,7 @@ locals {
   }
   contract_id    = var.contract_id
   common_name    = var.hostname
-  sans           = [var.hostname]
+  sans           = var.sans
   secure_network = (var.enhanced_tls == true) ? "enhanced-tls" : "standard-tls"
 }
 
@@ -41,8 +41,16 @@ module "validation" {
   source        = "../modules/validation"
   enrollment_id = module.enrollment.enrollment_id
   hostnames     = module.dns.hostnames
+
+  depends_on = [
+    module.dns
+  ]
 }
 
 output "dns_challenges" {
   value = module.enrollment.dns_challenges
+}
+
+output "enrollment_id" {
+  value = module.enrollment.enrollment_id
 }

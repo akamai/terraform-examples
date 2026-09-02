@@ -36,16 +36,13 @@ module "example" {
   	 source  = "<module-location>"
   
 	 # Required variables
-  	 akamai_access_token  = <string>
-  	 akamai_client_secret  = <string>
-  	 akamai_client_token  = <string>
-  	 akamai_host  = <string>
   	 hostnames  = <map(object({
     validation_scope = string
   }))>
   
 	 # Optional variables
-  	 akamai_account_key  = <string> | default: ""
+  	 config_section  = <string> | default: "default"
+  	 edgerc_path  = <string> | default: "~/.edgerc"
 }
  ```
 
@@ -74,12 +71,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_akamai_access_token"></a> [akamai\_access\_token](#input\_akamai\_access\_token) | Akamai access token | `string` | n/a | yes |
-| <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
-| <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
-| <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
 | <a name="input_hostnames"></a> [hostnames](#input\_hostnames) | Map of hostnames to their validation\_scope. Key is domain\_name. | <pre>map(object({<br/>    validation_scope = string<br/>  }))</pre> | n/a | yes |
-| <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
+| <a name="input_config_section"></a> [config\_section](#input\_config\_section) | EdgeRC section. Change this to switch between accounts, assuming your section has an account\_id member | `string` | `"default"` | no |
+| <a name="input_edgerc_path"></a> [edgerc\_path](#input\_edgerc\_path) | Path to .edgerc file. Defaults to ~/.edgerc | `string` | `"~/.edgerc"` | no |
 
 ## Outputs
 

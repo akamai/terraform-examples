@@ -102,7 +102,9 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_certificate_id"></a> [certificate\_id](#output\_certificate\_id) | n/a |
 
 ## Resources
 - [Akamai API Credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials)

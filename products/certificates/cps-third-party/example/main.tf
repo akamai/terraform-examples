@@ -15,7 +15,7 @@ locals {
   }
 }
 
-module "example" {
+module "certificate-third-party" {
   source         = "../modules/third-party"
   config_section = var.config_section
   contract_id    = var.contract_id
@@ -27,3 +27,11 @@ module "example" {
   organization   = local.contact_details
 }
 
+resource "akamai_edge_hostname" "edge_hostname" {
+  product_id    = "prd_Fresca"
+  contract_id   = var.contract_id
+  group_id      = "71960"
+  edge_hostname = "${var.common_name}.edgekey.net"
+  certificate   = module.certificate-third-party.certificate_id
+  ip_behavior   = "IPV6_COMPLIANCE"
+}

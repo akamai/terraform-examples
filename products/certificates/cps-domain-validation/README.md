@@ -23,7 +23,7 @@ locals {
   }
   contract_id    = var.contract_id
   common_name    = var.hostname
-  sans           = [var.hostname]
+  sans           = var.sans
   secure_network = (var.enhanced_tls == true) ? "enhanced-tls" : "standard-tls"
 }
 
@@ -49,10 +49,18 @@ module "validation" {
   source        = "../modules/validation"
   enrollment_id = module.enrollment.enrollment_id
   hostnames     = module.dns.hostnames
+
+  depends_on = [
+    module.dns
+  ]
 }
 
 output "dns_challenges" {
   value = module.enrollment.dns_challenges
+}
+
+output "enrollment_id" {
+  value = module.enrollment.enrollment_id
 }
 ```
 
@@ -87,6 +95,7 @@ No resources.
 | <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | DNS zone for the hostname | `string` | n/a | yes |
 | <a name="input_enhanced_tls"></a> [enhanced\_tls](#input\_enhanced\_tls) | Whether to deploy the certificate on the enhanced TLS network | `bool` | n/a | yes |
 | <a name="input_hostname"></a> [hostname](#input\_hostname) | Hostname to include in the certificate | `string` | n/a | yes |
+| <a name="input_sans"></a> [sans](#input\_sans) | SANs to include in the certificate | `list(string)` | n/a | yes |
 | <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
 
 ## Outputs
@@ -94,6 +103,7 @@ No resources.
 | Name | Description |
 |------|-------------|
 | <a name="output_dns_challenges"></a> [dns\_challenges](#output\_dns\_challenges) | n/a |
+| <a name="output_enrollment_id"></a> [enrollment\_id](#output\_enrollment\_id) | n/a |
 
 ## Resources
 - [Akamai API Credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials)

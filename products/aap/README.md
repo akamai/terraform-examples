@@ -20,10 +20,6 @@ module "example" {
   	 source  = "<module-location>"
   
 	 # Required variables
-  	 akamai_access_token  = <string>
-  	 akamai_client_secret  = <string>
-  	 akamai_client_token  = <string>
-  	 akamai_host  = <string>
   	 config_description  = <string>
   	 config_name  = <string>
   	 contract_id  = <string>
@@ -39,7 +35,8 @@ module "example" {
   	 security_bypass_list_id  = <string>
   
 	 # Optional variables
-  	 akamai_account_key  = <string> | default: ""
+  	 config_section  = <string> | default: "default"
+  	 edgerc_path  = <string> | default: "~/.edgerc"
   	 enable_client_rep  = <bool> | default: true
   	 enable_siem  = <bool> | default: true
   	 enable_slow_post  = <bool> | default: true
@@ -70,10 +67,6 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_akamai_access_token"></a> [akamai\_access\_token](#input\_akamai\_access\_token) | Akamai access token | `string` | n/a | yes |
-| <a name="input_akamai_client_secret"></a> [akamai\_client\_secret](#input\_akamai\_client\_secret) | Akamai client secret | `string` | n/a | yes |
-| <a name="input_akamai_client_token"></a> [akamai\_client\_token](#input\_akamai\_client\_token) | Akamai client token | `string` | n/a | yes |
-| <a name="input_akamai_host"></a> [akamai\_host](#input\_akamai\_host) | Akamai host | `string` | n/a | yes |
 | <a name="input_config_description"></a> [config\_description](#input\_config\_description) | n/a | `string` | n/a | yes |
 | <a name="input_config_name"></a> [config\_name](#input\_config\_name) | n/a | `string` | n/a | yes |
 | <a name="input_contract_id"></a> [contract\_id](#input\_contract\_id) | n/a | `string` | n/a | yes |
@@ -87,7 +80,8 @@ No resources.
 | <a name="input_pragma_exceptions_id"></a> [pragma\_exceptions\_id](#input\_pragma\_exceptions\_id) | Pragma Removal Exceptions IPs Network List ID | `string` | n/a | yes |
 | <a name="input_rate_bypass_list_id"></a> [rate\_bypass\_list\_id](#input\_rate\_bypass\_list\_id) | Rate Control Bypass List IPs Network List ID | `string` | n/a | yes |
 | <a name="input_security_bypass_list_id"></a> [security\_bypass\_list\_id](#input\_security\_bypass\_list\_id) | Security Bypass List IPs Network List ID | `string` | n/a | yes |
-| <a name="input_akamai_account_key"></a> [akamai\_account\_key](#input\_akamai\_account\_key) | Akamai account key (optional) | `string` | `""` | no |
+| <a name="input_config_section"></a> [config\_section](#input\_config\_section) | EdgeRC section. Change this to switch between accounts, assuming your section has an account\_id member | `string` | `"default"` | no |
+| <a name="input_edgerc_path"></a> [edgerc\_path](#input\_edgerc\_path) | Path to .edgerc file. Defaults to ~/.edgerc | `string` | `"~/.edgerc"` | no |
 | <a name="input_enable_client_rep"></a> [enable\_client\_rep](#input\_enable\_client\_rep) | On/Off option for Client Reputation feature | `bool` | `true` | no |
 | <a name="input_enable_siem"></a> [enable\_siem](#input\_enable\_siem) | On/Off option for SIEM feature | `bool` | `true` | no |
 | <a name="input_enable_slow_post"></a> [enable\_slow\_post](#input\_enable\_slow\_post) | On/Off option for Slow Post feature | `bool` | `true` | no |
